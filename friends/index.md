@@ -1,19 +1,20 @@
-# Index
+# 友情链接
 
 
-<!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->
----
-<!-- You can define additional content below for this page. -->
-## Base info
-```yaml
-- nickname: Lruihao
-  avatar: https://lruihao.cn/images/avatar.jpg
-  url: https://lruihao.cn
-  discription: Lruihao's Note
-```
+> 1. 基本信息
+>
+>    ```yaml
+>    - nickname: Anthony
+>      avatar: https://anthonysun256.github.io/images/avatar.jpg
+>      url: https://anthonysun256.github.io
+>      discription: Anthony's blog
+>    ```
 
-## Friendly Reminder
-> 1. If you want to exchange link, please leave a comment in the above format. (personal non-commercial blogs / websites only)
-> 2. Warn: Website failure, stop maintenance and improper content may be cancelled!
-> 3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
+ ## 友情提醒
+>
+>    2. 互换友链请按以上格式在评论留言。（仅限个人非商业博客/网站）
+>
+>    3. 提醒：网站失效、停止维护、内容不当都可能被取消连接！
+>
+>    3. 那些不尊重他人劳动成果，转载不加出处的，或恶意行为的网站，还请您不要来进行交换了。
 
