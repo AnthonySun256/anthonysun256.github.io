@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>开发技巧 - 分类 - Anthony&#39;s Blog</title>
+    <link>https://anthonysun256.github.io/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/</link>
+    <description>开发技巧 - 分类 - Anthony&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>originsun@126.com (Anthony)</managingEditor>
+      <webMaster>originsun@126.com (Anthony)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</lastBuildDate><atom:link href="https://anthonysun256.github.io/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/" rel="self" type="application/rss+xml" /><item>
+  <title>Docker配合VSC开发最佳实践</title>
+  <link>https://anthonysun256.github.io/docker-with-vsc_best-practice/</link>
+  <pubDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</pubDate>
+  <author>Anthony</author>
+  <guid>https://anthonysun256.github.io/docker-with-vsc_best-practice/</guid>
+  <description><![CDATA[在写了，在写了。。。]]></description>
+</item></channel>
+</rss>
