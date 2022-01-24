@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Anthony&#39;s Blog</title>
-    <link>https://AnthonySun256.github.io/</link>
-    <description>一个随意的技术博客</description>
+    <title>Docker - 标签 - Anthony&#39;s Blog</title>
+    <link>https://AnthonySun256.github.io/tags/docker/</link>
+    <description>Docker - 标签 - Anthony&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>originsun@126.com (Anthony)</managingEditor>
-      <webMaster>originsun@126.com (Anthony)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</lastBuildDate>
-      <atom:link href="https://AnthonySun256.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
+      <webMaster>originsun@126.com (Anthony)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</lastBuildDate><atom:link href="https://AnthonySun256.github.io/tags/docker/" rel="self" type="application/rss+xml" /><item>
   <title>Docker配合VSC开发最佳实践</title>
   <link>https://AnthonySun256.github.io/docker-with-vsc_best-practice/</link>
   <pubDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</pubDate>

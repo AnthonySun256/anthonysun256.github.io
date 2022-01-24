@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>Docker配合VSC开发最佳实践 - Anthony&#39;s Blog</title><meta name="author" content="Anthony: #">
+<meta name="description" content="在写了" />
+<meta name="keywords" content="Docker" /><meta itemprop="name" content="Docker配合VSC开发最佳实践">
+<meta itemprop="description" content="在写了"><meta itemprop="datePublished" content="2022-01-23T16:28:25+00:00" />
+<meta itemprop="dateModified" content="2022-01-24T03:10:50+00:00" />
+<meta itemprop="wordCount" content="3"><meta itemprop="image" content="https://AnthonySun256.github.io/logo.png"/>
+<meta itemprop="keywords" content="Docker,VSCode," /><meta property="og:title" content="Docker配合VSC开发最佳实践" />
+<meta property="og:description" content="在写了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" /><meta property="og:image" content="https://AnthonySun256.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-23T16:28:25+00:00" />
+<meta property="article:modified_time" content="2022-01-24T03:10:50+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://AnthonySun256.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Docker配合VSC开发最佳实践"/>
+<meta name="twitter:description" content="在写了"/>
+<meta name="application-name" content="Anthony&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Anthony&#39;s blog"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#252627"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.2a4fac315e6fcbfcde3ab5e799cd49ecd778838cf27902c7300e76683ec37cce.css" integrity="sha256-Kk&#43;sMV5vy/zeOrXnmc1J7Nd4g4zyeQLHMA52aD7DfM4="><link rel="stylesheet" href="/css/style.min.b686c426cef0b56d0999b9ef5d39a53b7d675a66008f4d6933e9ccfd50c99804.css" integrity="sha256-tobEJs7wtW0JmbnvXTmlO31nWmYAj01pM&#43;nM/VDJmAQ="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.b91971f7c680736978dee82f8654b5d080ec979fbe441474d805785c1f88b43d.css" integrity="sha256-uRlx98aAc2l43ugvhlS10IDsl5&#43;&#43;RBR02AV4XB&#43;ItD0="><link rel="stylesheet" href="/lib/animate/animate.min.4c055e6d0d9ba2b8f1be4719110e92c1b9499ed0759f0d1c48fccd16a7b31dcf.css" integrity="sha256-TAVebQ2borjxvkcZEQ6SwblJntB1nw0cSPzNFqezHc8="><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Docker配合VSC开发最佳实践",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/AnthonySun256.github.io\/docker-with-vsc_best-practice\/"
+    },"genre": "posts","keywords": "Docker, VSCode","wordcount":  3 ,
+    "url": "https:\/\/AnthonySun256.github.io\/docker-with-vsc_best-practice\/","datePublished": "2022-01-23T16:28:25+00:00","dateModified": "2022-01-24T03:10:50+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+      "@type": "Organization",
+      "name": "Anthony"},"author": {
+        "@type": "Person",
+        "name": "Anthony"
+      },"description": ""
+  }
+  </script></head>
+  <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Anthony&#39;s Blog"><span class="header-title-text">Anthony&#39;s blog</span></a><span class="header-subtitle">和你分享我的所见所闻</span></div>
+    <div class="menu">
+      <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/friends/" title="友情链接"> 友链 </a><a class="menu-item" href="/about/" title="博主简介"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fas fa-search fa-fw"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fas fa-times-circle fa-fw"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fas fa-spinner fa-fw fa-spin"></i>
+            </span>
+          </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+          <i class="fas fa-adjust fa-fw"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header><header class="mobile" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Anthony&#39;s Blog"><span class="header-title-text">Anthony&#39;s blog</span></a><span class="header-subtitle">和你分享我的所见所闻</span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="menu" id="menu-mobile"><div class="search-wrapper">
+          <div class="search mobile" id="search-mobile">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+              <i class="fas fa-search fa-fw"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+              <i class="fas fa-times-circle fa-fw"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-mobile">
+              <i class="fas fa-spinner fa-fw fa-spin"></i>
+            </span>
+          </div>
+          <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+            取消
+          </a>
+        </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/friends/" title="友情链接">友链</a><a class="menu-item" href="/about/" title="博主简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+        <i class="fas fa-adjust fa-fw"></i>
+      </a></div>
+  </div>
+</header>
+<div class="search-dropdown desktop">
+  <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+  <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+        <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Docker配合VSC开发最佳实践</h1><h2 class="single-subtitle">使用 VSCode 与 Docker 加速开发</h2><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a
+  href="#"
+  
+    title="Author"
+  
+  
+  
+    rel=" author"
+  
+  
+  
+    class=" author"
+  
+  
+><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/"><i class="far fa-folder fa-fw"></i>开发技巧</a></span></div>
+      <div class="post-meta-line"><span title=2022-01-23&#32;16:28:25>
+            <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-23" >2022-01-23</time>
+          </span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3 字&nbsp;
+        <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+    </div><div class="content" id="content"><p>在写了</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2022-01-24&#32;03:10:50>更新于 2022-01-24</span>
+      </div>
+      <div class="post-info-license"></div>
+    </div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span>
+              <a class="link-to-markdown" href="/docker-with-vsc_best-practice/index.md" target="_blank">阅读原始文档</a>
+            </span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" data-title="Docker配合VSC开发最佳实践" data-hashtags="Docker,VSCode"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" data-hashtag="Docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" data-title="Docker配合VSC开发最佳实践"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" data-title="Docker配合VSC开发最佳实践"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://AnthonySun256.github.io/docker-with-vsc_best-practice/" data-title="Docker配合VSC开发最佳实践"><i class="fab fa-weibo fa-fw"></i></a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/vscode/">VSCode</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"></div>
+</div>
+</article></div>
+      </main><footer class="footer">
+    <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt 0.2.12"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt</a>
+        </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="#" target="_blank">Anthony</a></span><span class="footer-divider"></span><span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div></div>
+  </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+        <i class="fas fa-arrow-up fa-fw"></i>
+      </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+        <i class="fas fa-comment fa-fw"></i>
+      </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.b38ee65d6456beb2d034bf554505f4ca47e421548b7cd26e8a7805fd2673b6c3.css" integrity="sha256-s47mXWRWvrLQNL9VRQX0ykfkIVSLfNJuingF/SZztsM="><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.efcd9994416f8ef0e9904c0ebc34d39ab92f5fe72a60224553434d3a818b25e5.js" integrity="sha256-782ZlEFvjvDpkEwOvDTTmrkvX&#43;cqYCJFU0NNOoGLJeU=" defer></script><script type="text/javascript" src="/lib/lunr/lunr.min.3969fd501ca613f74bdbad1a160052d405621dc1ebe6e69ae8b8ee1b87321612.js" integrity="sha256-OWn9UBymE/dL260aFgBS1AViHcHr5uaa6LjuG4cyFhI=" defer></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.d73a55668c9df0f2cbb2b14c7d57d14b50f71837e9d511144b75347e84c12ff8.js" integrity="sha256-1zpVZoyd8PLLsrFMfVfRS1D3GDfp1REUS3U0foTBL/g=" defer></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.e9abb2f5c7c0f738290cd8a5ff2ce1cf5deac6942f44ce5dd89c9ab1ae27006a.js" integrity="sha256-6auy9cfA9zgpDNil/yzhz13qxpQvRM5d2Jyasa4nAGo=" defer></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.e76fb8d9f216898822b92b5be7fc0b3085b9a3685b14089d64a10935e83a08c5.js" integrity="sha256-52&#43;42fIWiYgiuStb5/wLMIW5o2hbFAidZKEJNeg6CMU=" async defer></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.0c4d9db673dd19489cfa134ab15ef8b9237ae72aaa65d8490d55658442b3a2d3.js" integrity="sha256-DE2dtnPdGUic&#43;hNKsV74uSN65yqqZdhJDVVlhEKzotM=" defer></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.72ceb0f87691041e9e0bea2f2468b9aa3ed544e8f7f6dc9f76d8c8f997699e41.js" integrity="sha256-cs6w&#43;HaRBB6eC&#43;ovJGi5qj7VROj39tyfdtjI&#43;ZdpnkE=" defer></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.5b0e82e9a1ae0b52d07a52da1eb4640da77eb3ca7e78c3a428c1f3b712858d3c.js" integrity="sha256-Ww6C6aGuC1LQelLaHrRkDad&#43;s8p&#43;eMOkKMHztxKFjTw=" defer></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.e13c416d636e63fe34bb68ff15694645a79b4ae6be1d74890fca98956ca7fb68.js" integrity="sha256-4TxBbWNuY/40u2j/FWlGRaebSua&#43;HXSJD8qYlWyn&#43;2g=" defer></script><script type="text/javascript" src="/lib/sharer/sharer.min.8fe10eb615eb163a20f795484430a012805ec7c8c11df52df54ddb7a46084254.js" integrity="sha256-j&#43;EOthXrFjog95VIRDCgEoBex8jBHfUt9U3bekYIQlQ=" async defer></script><script type="text/javascript" src="/lib/pangu/pangu.min.bc530d67a12c4370e6bb794fc7f9aef5955d8d4b13c6fbb6dbc1f73006b76063.js" integrity="sha256-vFMNZ6EsQ3Dmu3lPx/mu9ZVdjUsTxvu228H3MAa3YGM=" defer></script><script type="text/javascript" src="/lib/watermark/watermark.min.3aa89adf18b45b2fd56d3fe0b68c097e06071ff23a7ece2c11eee3df23e5d3ae.js" integrity="sha256-Oqia3xi0Wy/VbT/gtowJfgYHH/I6fs4sEe7j3yPl064="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.f8aa69e4bbb54989a86d93848a9cfbb4de497b23e211b13bdb53c087b27382fc.js" integrity="sha256-&#43;Kpp5Lu1SYmobZOEipz7tN5JeyPiEbE721PAh7Jzgvw=" defer></script><script type="text/javascript" src="/js/_custom.min.df739882b37cc196454b7351badaba231d4b8976f594d0791315131bea716700.js" integrity="sha256-33OYgrN8wZZFS3NRutq6Ix1LiXb1lNB5ExUTG&#43;pxZwA=" defer></script><script type="text/javascript">
+
+(() => {if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.min.js', { scope: '/' })
+        .then(function (registration) {
+          
+        })
+        .catch(function (error) {
+          console.error('error: ', error);
+        });
+      navigator.serviceWorker.ready.then(function (registration) {
+        
+      });
+    }new Watermark({
+        content: "\u003ci class=\"fa-stack fa-xs logo-icon\"\u003e\u003ci class=\"fas fa-bug fa-stack-1x\"\u003e\u003c/i\u003e\u003ci class=\"fas fa-ban fa-stack-2x\"\u003e\u003c/i\u003e\u003c/i\u003e Author: AnthonySuen" || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',
+        appendTo:  null  || '.wrapper>.main',
+        opacity:  0.02 ,
+        width:  null ,
+        height:  23 ,
+        rowSpacing:  null ,
+        colSpacing:  null ,
+        rotate:  null ,
+        fontSize:  null 
+      });document.addEventListener('DOMContentLoaded', () => {
+    
+    pangu.autoSpacingPage();
+  });
+
+})();
+</script>
+</body>
+</html>
