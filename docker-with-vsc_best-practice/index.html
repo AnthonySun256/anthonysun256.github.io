@@ -9,14 +9,14 @@
 <meta name="description" content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python" />
 <meta name="keywords" content="Docker" /><meta itemprop="name" content="Docker配合VSC开发最佳实践">
 <meta itemprop="description" content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python"><meta itemprop="datePublished" content="2022-01-23T16:28:25+00:00" />
-<meta itemprop="dateModified" content="2022-01-25T11:52:21+00:00" />
-<meta itemprop="wordCount" content="1297"><meta itemprop="image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
+<meta itemprop="dateModified" content="2022-01-25T12:02:56+00:00" />
+<meta itemprop="wordCount" content="1505"><meta itemprop="image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
 <meta itemprop="keywords" content="Docker,VSCode," /><meta property="og:title" content="Docker配合VSC开发最佳实践" />
 <meta property="og:description" content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/" /><meta property="og:image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-23T16:28:25+00:00" />
-<meta property="article:modified_time" content="2022-01-25T11:52:21+00:00" />
+<meta property="article:modified_time" content="2022-01-25T12:02:56+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png"/>
@@ -37,8 +37,8 @@
               "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/images\/vscode-docker.png",
               "width":  700 ,
               "height":  267 
-            }],"genre": "posts","keywords": "Docker, VSCode","wordcount":  1297 ,
-    "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished": "2022-01-23T16:28:25+00:00","dateModified": "2022-01-25T11:52:21+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            }],"genre": "posts","keywords": "Docker, VSCode","wordcount":  1505 ,
+    "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished": "2022-01-23T16:28:25+00:00","dateModified": "2022-01-25T12:02:56+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
       "@type": "Organization",
       "name": "Anthony"},"author": {
         "@type": "Person",
@@ -131,8 +131,8 @@
 ><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/"><i class="far fa-folder fa-fw"></i>开发技巧</a></span></div>
       <div class="post-meta-line"><span title=2022-01-23&#32;16:28:25>
             <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-23" >2022-01-23</time>
-          </span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1297 字&nbsp;
-        <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+          </span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1505 字&nbsp;
+        <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
     </div><div class="featured-image"><img
     class="lazyload"
     src="/svg/loading.min.svg"
@@ -154,6 +154,8 @@
         <li><a href="#vscode-与-docker-结合">VSCode 与 Docker 结合</a></li>
       </ul>
     </li>
+    <li><a href="#docker-学习">Docker 学习</a></li>
+    <li><a href="#vscode-连接-container">VSCode 连接 Container</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><h2 id="前言">前言</h2>
@@ -246,11 +248,56 @@
 <h3 id="vscode-与-docker-结合">VSCode 与 Docker 结合</h3>
 <p>VSCode 是什么相信我不必多言，依托于其 Remote Container 插件，我们可以快速地（真的很快🚀）连接到 Docker 容器中去，实现在<strong>本地编写程序，一键容器中调试运行</strong>——而这一切跟你直接在宿主机上开发几乎一模一样。而用虚拟机的话光是不同屏幕之间切换以及文件同步之类的操作就够惹人烦了。</p>
 <p>再者，配合 VSCode 原生的 launch 和 task 配置并绑定相应段快捷键，我们可以节省很多应用编译时需要进行的操作（比如输入编译指令、清理目录等）</p>
+<h2 id="docker-学习">Docker 学习</h2>
+<p>Docker 网络上的教程有很多，我相信我很难讲出比现有课程更好的效果，在这里我只推荐我认为讲的最好的一个课程，<strong>内容精简实践性强</strong>，大概花上两个下午就能学完。</p>
+<p><a
+  href="https://www.bilibili.com/video/BV1og4y1q7M4"
+  
+  
+    
+    target="_blank"
+  
+  
+    rel="noopener noreffer"
+  
+  
+  
+  
+>【狂神说Java】Docker最新超详细版教程通俗易懂</a></p>
+<div class="bilibili"><iframe src="//player.bilibili.com/player.html?bvid=BV1og4y1q7M4&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe></div>
+
+<p>以及进阶版：</p>
+<p><a
+  href="https://www.bilibili.com/video/BV1kv411q7Qc"
+  
+  
+    
+    target="_blank"
+  
+  
+    rel="noopener noreffer"
+  
+  
+  
+  
+>【狂神说Java】Docker进阶篇超详细版教程通俗易懂</a></p>
+<div class="bilibili"><iframe src="//player.bilibili.com/player.html?bvid=BV1kv411q7Qc&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe></div>
+
+<p>学完了这两门课程我相信你基本上能够熟练地是使用 Docker 了，下一节我们来说如何让 VSCode 连接 Docker 环境</p>
+<h2 id="vscode-连接-container">VSCode 连接 Container</h2>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fas fa-exclamation-triangle fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">在进行本节内容之前请先确保你已经学会了 Docker 相关知识</div>
+    </div>
+  </div>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title=2022-01-25&#32;11:52:21>更新于 2022-01-25</span>
+        <span title=2022-01-25&#32;12:02:56>更新于 2022-01-25</span>
       </div>
       <div class="post-info-license"></div>
     </div>

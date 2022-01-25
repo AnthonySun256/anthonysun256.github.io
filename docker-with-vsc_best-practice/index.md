@@ -77,3 +77,25 @@ VSCode 是什么相信我不必多言，依托于其 Remote Container 插件，�
 
 再者，配合 VSCode 原生的 launch 和 task 配置并绑定相应段快捷键，我们可以节省很多应用编译时需要进行的操作（比如输入编译指令、清理目录等）
 
+## Docker 学习
+
+Docker 网络上的教程有很多，我相信我很难讲出比现有课程更好的效果，在这里我只推荐我认为讲的最好的一个课程，**内容精简实践性强**，大概花上两个下午就能学完。
+
+[【狂神说Java】Docker最新超详细版教程通俗易懂](https://www.bilibili.com/video/BV1og4y1q7M4)
+
+{{<bilibili BV1og4y1q7M4>}}
+
+以及进阶版：
+
+[【狂神说Java】Docker进阶篇超详细版教程通俗易懂](https://www.bilibili.com/video/BV1kv411q7Qc)
+
+{{<bilibili BV1kv411q7Qc>}}
+
+学完了这两门课程我相信你基本上能够熟练地是使用 Docker 了，下一节我们来说如何让 VSCode 连接 Docker 环境
+
+## VSCode 连接 Container
+
+{{< admonition warning "注意">}}
+在进行本节内容之前请先确保你已经学会了 Docker 相关知识
+{{< /admonition >}}
+
