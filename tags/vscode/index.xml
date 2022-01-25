@@ -10,6 +10,6 @@
   <pubDate>Sun, 23 Jan 2022 16:28:25 &#43;0000</pubDate>
   <author>Anthony</author>
   <guid>https://anthonysun256.github.io/docker-with-vsc_best-practice/</guid>
-  <description><![CDATA[在写了，在写了。。。]]></description>
+  <description><![CDATA[为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。 如果在本机上直接配置 Python 环境]]></description>
 </item></channel>
 </rss>

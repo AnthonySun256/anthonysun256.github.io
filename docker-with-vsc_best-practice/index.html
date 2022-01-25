@@ -6,23 +6,22 @@
     <meta name="robots" content="noodp" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <title>Docker配合VSC开发最佳实践 - Anthony&#39;s Blog</title><meta name="author" content="Anthony: https://anthonysun256.github.io">
-<meta name="description" content="在写了，在写了。。。" />
+<meta name="description" content="为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。 如果在本机上直接配置 Python 环境" />
 <meta name="keywords" content="Docker" /><meta itemprop="name" content="Docker配合VSC开发最佳实践">
-<meta itemprop="description" content="在写了，在写了。。。"><meta itemprop="datePublished" content="2022-01-23T16:28:25+00:00" />
-<meta itemprop="dateModified" content="2022-01-25T06:22:07+00:00" />
-<meta itemprop="wordCount" content="10"><meta itemprop="image" content="https://anthonysun256.github.io/logo.png"/>
+<meta itemprop="description" content="为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。 如果在本机上直接配置 Python 环境"><meta itemprop="datePublished" content="2022-01-23T16:28:25+00:00" />
+<meta itemprop="dateModified" content="2022-01-25T09:26:42+00:00" />
+<meta itemprop="wordCount" content="652"><meta itemprop="image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
 <meta itemprop="keywords" content="Docker,VSCode," /><meta property="og:title" content="Docker配合VSC开发最佳实践" />
-<meta property="og:description" content="在写了，在写了。。。" />
+<meta property="og:description" content="为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。 如果在本机上直接配置 Python 环境" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/" /><meta property="og:image" content="https://anthonysun256.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/" /><meta property="og:image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-23T16:28:25+00:00" />
-<meta property="article:modified_time" content="2022-01-25T06:22:07+00:00" />
+<meta property="article:modified_time" content="2022-01-25T09:26:42+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://anthonysun256.github.io/logo.png"/>
-
+<meta name="twitter:image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png"/>
 <meta name="twitter:title" content="Docker配合VSC开发最佳实践"/>
-<meta name="twitter:description" content="在写了，在写了。。。"/>
+<meta name="twitter:description" content="为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。 如果在本机上直接配置 Python 环境"/>
 <meta name="application-name" content="Anthony&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="Anthony&#39;s blog"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#252627"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://anthonysun256.github.io/docker-with-vsc_best-practice/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css" integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH&#43;KuXHiZWODptY5K8NF4="><link rel="stylesheet" href="/css/style.min.b686c426cef0b56d0999b9ef5d39a53b7d675a66008f4d6933e9ccfd50c99804.css" integrity="sha256-tobEJs7wtW0JmbnvXTmlO31nWmYAj01pM&#43;nM/VDJmAQ="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel="stylesheet" href="/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css" integrity="sha256-PHcOkPmOshsMBC&#43;vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type="application/ld+json">
   {
@@ -33,8 +32,13 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/"
-    },"genre": "posts","keywords": "Docker, VSCode","wordcount":  10 ,
-    "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished": "2022-01-23T16:28:25+00:00","dateModified": "2022-01-25T06:22:07+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+    },"image": [{
+              "@type": "ImageObject",
+              "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/images\/vscode-docker.png",
+              "width":  700 ,
+              "height":  267 
+            }],"genre": "posts","keywords": "Docker, VSCode","wordcount":  652 ,
+    "url": "https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished": "2022-01-23T16:28:25+00:00","dateModified": "2022-01-25T09:26:42+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
       "@type": "Organization",
       "name": "Anthony"},"author": {
         "@type": "Person",
@@ -103,7 +107,10 @@
   <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-        <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Docker配合VSC开发最佳实践</h1><h2 class="single-subtitle">使用 VSCode 与 Docker 加速开发</h2><div class="post-meta">
+        <div class="container"><div class="toc" id="toc-auto">
+      <h2 class="toc-title">目录</h2>
+      <div class="toc-content" id="toc-content-auto"></div>
+    </div><article class="page single"><h1 class="single-title animated flipInX">Docker配合VSC开发最佳实践</h1><h2 class="single-subtitle">使用 VSCode 与 Docker 加速开发</h2><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a
   href="https://anthonysun256.github.io"
   
@@ -124,14 +131,71 @@
 ><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/"><i class="far fa-folder fa-fw"></i>开发技巧</a></span></div>
       <div class="post-meta-line"><span title=2022-01-23&#32;16:28:25>
             <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-23" >2022-01-23</time>
-          </span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10 字&nbsp;
-        <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
-    </div><div class="content" id="content"><p>在写了，在写了。。。</p>
+          </span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 652 字&nbsp;
+        <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+    </div><div class="featured-image"><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/docker-with-vsc_best-practice/images/vscode-docker.png"
+    data-srcset="/docker-with-vsc_best-practice/images/vscode-docker.png, /docker-with-vsc_best-practice/images/vscode-docker.png 1.5x, /docker-with-vsc_best-practice/images/vscode-docker.png 2x"
+    data-sizes="auto"
+    alt="/docker-with-vsc_best-practice/images/vscode-docker.png"
+    title="/docker-with-vsc_best-practice/images/vscode-docker.png" /></div><div class="details toc" id="toc-static" kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fas fa-angle-right"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么我们需要虚拟环境">为什么我们需要虚拟环境？</a></li>
+    <li><a href="#docker-vs-其他虚拟环境应用">Docker VS 其他虚拟环境应用</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="为什么我们需要虚拟环境">为什么我们需要虚拟环境？</h2>
+<p>很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。</p>
+<p>如果在本机上直接配置 Python 环境很容易出现各种问题，例如 Pytorch 和 Tensorflow 可能会同时依赖某个库的不同版本，这就会导致<strong>可能只有特定版本 Pytorch 和 Tensorflow 才有机会共存</strong>，而你在安装的时候很可能都没有意识到这个问题。直到你运行某段代码时 <strong>Python 解释器给你报了几百行的错误</strong>你才意识哪里出了点问题，但是你又不知道是什么，于是你就会<strong>花上几天的时间</strong>改代码、查资料，最后你明白是你的环境配置有问题，于是又手动清理之前安装错误的 Python 库，并尝试重新运行之前的代码。</p>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fas fa-exclamation-triangle fa-fw"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">当然，更多的时候这会开启新一个痛苦的轮回</div>
+    </div>
+  </div>
+<div class="details admonition tip">
+    <div class="details-summary admonition-title">
+      <i class="icon fas fa-lightbulb fa-fw"></i>Python 环境配置建议<i class="details-icon fas fa-angle-right fa-fw"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">所幸，现在我们可以使用 Anaconda 进行 Python 环境管理，不同的环境相互隔离以免出现冲突。conda 对于依赖的检查也比 pip 更好用，基本上不会出现依赖冲突问题</div>
+    </div>
+  </div>
+<p>这一套的流程下来我相信无论是谁也受不了，<strong>但是环境问题远不止如此</strong></p>
+<div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fas fa-list-ol fa-fw"></i>环境问题示例<i class="details-icon fas fa-angle-right fa-fw"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li>某段代码只能在你自己的电脑上运行，别人拿去用就会报错</li>
+<li>某段代码你睡了一觉后就无法运行了</li>
+<li>你辛苦配了好久的环境不好使了/需要换电脑了/需要给别人也整一份</li>
+<li>你有两项工作要做，但是这两项工作需要安装的包是冲突的，而且卸载很麻烦</li>
+<li>你安装了某个包，然后你的操作系统就出了问题，即使卸载这个包也没有用</li>
+<li>你想在 Linux 上使用 N卡 于是你按照网上的教程配置了显卡，然后你的显卡就不好使了</li>
+<li>某个古董程序只能在老版 Linux 上运行</li>
+<li>……</li>
+</ul>
+</div>
+    </div>
+  </div>
+<p>应对以上问题，我们当然可以简单的给电脑做多系统/每次重装系统/买新的电脑来解决，但更为经济的做法是<strong>使用虚拟环境</strong>。</p>
+<h2 id="docker-vs-其他虚拟环境应用">Docker VS 其他虚拟环境应用</h2>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title=2022-01-25&#32;06:22:07>更新于 2022-01-25</span>
+        <span title=2022-01-25&#32;09:26:42>更新于 2022-01-25</span>
       </div>
       <div class="post-info-license"></div>
     </div>
