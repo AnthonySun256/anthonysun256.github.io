@@ -8,20 +8,20 @@
 <meta name=description content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python">
 <meta name=keywords content="Docker"><meta itemprop=name content="Docker配合VSC开发最佳实践">
 <meta itemprop=description content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python"><meta itemprop=datePublished content="2022-01-23T16:28:25+08:00">
-<meta itemprop=dateModified content="2022-01-26T13:23:47+00:00">
-<meta itemprop=wordCount content="1691"><meta itemprop=image content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
+<meta itemprop=dateModified content="2022-01-31T04:15:42+00:00">
+<meta itemprop=wordCount content="3222"><meta itemprop=image content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
 <meta itemprop=keywords content="Docker,VSCode,"><meta property="og:title" content="Docker配合VSC开发最佳实践">
 <meta property="og:description" content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/"><meta property="og:image" content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-01-23T16:28:25+08:00">
-<meta property="article:modified_time" content="2022-01-26T13:23:47+00:00">
+<meta property="article:modified_time" content="2022-01-31T04:15:42+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://anthonysun256.github.io/docker-with-vsc_best-practice/images/vscode-docker.png">
 <meta name=twitter:title content="Docker配合VSC开发最佳实践">
 <meta name=twitter:description content="前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker-with-vsc_best-practice/><link rel=next href=https://anthonysun256.github.io/docker-proxy-complete-solution/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Docker配合VSC开发最佳实践","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/images\/vscode-docker.png","width":700,"height":267}],"genre":"posts","keywords":"Docker, VSCode","wordcount":1691,"url":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished":"2022-01-23T16:28:25+08:00","dateModified":"2022-01-26T13:23:47+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker-with-vsc_best-practice/><link rel=next href=https://anthonysun256.github.io/docker-proxy-complete-solution/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Docker配合VSC开发最佳实践","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/images\/vscode-docker.png","width":700,"height":267}],"genre":"posts","keywords":"Docker, VSCode","wordcount":3222,"url":"https:\/\/anthonysun256.github.io\/docker-with-vsc_best-practice\/","datePublished":"2022-01-23T16:28:25+08:00","dateModified":"2022-01-31T04:15:42+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -89,8 +89,8 @@
 <div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/><i class="far fa-folder fa-fw"></i>开发技巧</a></span></div>
 <div class=post-meta-line><span title="2022-01-23 16:28:25">
 <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>
-</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1691 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id=/docker-with-vsc_best-practice/ class=leancloud_visitors data-flag-title=Docker配合VSC开发最佳实践>
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3222 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;<span id=/docker-with-vsc_best-practice/ class=leancloud_visitors data-flag-title=Docker配合VSC开发最佳实践>
 <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
 </span>&nbsp;</div>
 </div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/docker-with-vsc_best-practice/images/vscode-docker.png data-srcset="/docker-with-vsc_best-practice/images/vscode-docker.png, /docker-with-vsc_best-practice/images/vscode-docker.png 1.5x, /docker-with-vsc_best-practice/images/vscode-docker.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/vscode-docker.png title=/docker-with-vsc_best-practice/images/vscode-docker.png></div><div class="details toc" id=toc-static kept=false>
@@ -113,9 +113,16 @@
 <li><a href=#vscode-连接-container>VSCode 连接 Container</a>
 <ul>
 <li><a href=#remote-containers-插件安装>Remote Containers 插件安装</a></li>
-<li><a href=#remote-containers-插件使用>Remote Containers 插件使用</a></li>
+<li><a href=#remote-containers-插件使用>Remote Containers 插件使用</a>
+<ul>
+<li><a href=#初体验>初体验</a></li>
+<li><a href=#devcontainerjson-探究>devcontainer.json 探究</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href=#显示-docker-中的图形界面>显示 Docker 中的图形界面</a></li>
+<li><a href=#结语>结语</a></li>
 </ul>
 </li>
 </ul>
@@ -248,13 +255,218 @@
 </a><figcaption class=image-caption>新图标</figcaption>
 </figure></p>
 <h3 id=remote-containers-插件使用>Remote Containers 插件使用</h3>
-<p>施工中。。。未完待续</p>
-<p>2022年1月26日</p>
+<blockquote>
+<p>严格上来讲本节内容是对 Remote-Containers 插件 <a href=https://code.visualstudio.com/docs/remote/containers target=_blank rel="noopener noreffer">官方文档</a> 的翻译与浓缩。</p>
+</blockquote>
+<h4 id=初体验>初体验</h4>
+<p>在 <a href=https://github.com/microsoft/vscode-remote-try-python target=_blank rel="noopener noreffer">https://github.com/microsoft/vscode-remote-try-python</a> 下载解压官方示例仓库并使用 VSCode 打开文件夹，您应该得到如下组织的目录：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>.
+│  .gitattributes
+│  .gitignore
+│  app.py
+│  LICENSE
+│  README.md
+│  requirements.txt
+│
+├─.devcontainer
+│      devcontainer.json
+│      Dockerfile
+│
+├─.vscode
+│      launch.json
+│
+└─static
+        index.html
+</code></pre></td></tr></table>
+</div>
+</div><p>在根目录用 VS Code 打开文件夹，然后点击左下角的图标</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/4.png title=点击图标 data-thumbnail=/docker-with-vsc_best-practice/images/4.png data-sub-html="<h2>点击新图标</h2><p>点击图标</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/4.png data-srcset="/docker-with-vsc_best-practice/images/4.png, images/4.png 1.5x, /docker-with-vsc_best-practice/images/4.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/4.png>
+</a><figcaption class=image-caption>点击新图标</figcaption>
+</figure></p>
+<p>在弹出的窗口中选择 Reopen in Container</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/5.png title=在容器中打开 data-thumbnail=/docker-with-vsc_best-practice/images/5.png data-sub-html="<h2>在容器中打开</h2><p>在容器中打开</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/5.png data-srcset="/docker-with-vsc_best-practice/images/5.png, images/5.png 1.5x, /docker-with-vsc_best-practice/images/5.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/5.png>
+</a><figcaption class=image-caption>在容器中打开</figcaption>
+</figure></p>
+<p>VS Code 会根据 <code>.devcontainer</code> 文件夹中的 <code>Dockerfile</code> 和 <code>devcontainer.json</code> 自动拉取并配置镜像环境，点击蓝色字样（show log）可以查看当前环境构建进度</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/6.png title=点击查看当前构建过程 data-thumbnail=/docker-with-vsc_best-practice/images/6.png data-sub-html="<h2>点击查看当前构建过程</h2><p>点击查看当前构建过程</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/6.png data-srcset="/docker-with-vsc_best-practice/images/6.png, images/6.png 1.5x, /docker-with-vsc_best-practice/images/6.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/6.png>
+</a><figcaption class=image-caption>点击查看当前构建过程</figcaption>
+</figure></p>
+<p>首先 VS Code 会根据 <code>Dockerfile</code> 文件描述进行 build image 并 docker run 生成 container</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/7.png title="根据 Dockerfile 构建镜像" data-thumbnail=/docker-with-vsc_best-practice/images/7.png data-sub-html="<h2>根据 Dockerfile 构建镜像</h2><p>根据 Dockerfile 构建镜像</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/7.png data-srcset="/docker-with-vsc_best-practice/images/7.png, images/7.png 1.5x, /docker-with-vsc_best-practice/images/7.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/7.png>
+</a><figcaption class=image-caption>根据 Dockerfile 构建镜像</figcaption>
+</figure></p>
+<p>紧接着，VS Code 会根据 <code>devcontainer.json</code> 文件中的描述进行一些配置工作，比如这里会在 container <strong>首次运行</strong>的时候执行</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ pip3 install -r requirements.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>来安装运行 python 程序需要的支持库</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/8.png title=首次启动 data-thumbnail=/docker-with-vsc_best-practice/images/8.png data-sub-html="<h2>首次启动</h2><p>首次启动</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/8.png data-srcset="/docker-with-vsc_best-practice/images/8.png, images/8.png 1.5x, /docker-with-vsc_best-practice/images/8.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/8.png>
+</a><figcaption class=image-caption>首次启动</figcaption>
+</figure></p>
+<p>以及会根据 <code>devcontainer.json</code> 中的配置为我们的 container 自动安装一些插件，比如这里会提示 Pylance 需要重新加载窗口来激活：</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/9.png title="Pylance 提示" data-thumbnail=/docker-with-vsc_best-practice/images/9.png data-sub-html="<h2>Pylance 提示</h2><p>Pylance 提示</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/9.png data-srcset="/docker-with-vsc_best-practice/images/9.png, images/9.png 1.5x, /docker-with-vsc_best-practice/images/9.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/9.png>
+</a><figcaption class=image-caption>Pylance 提示</figcaption>
+</figure></p>
+<p>这里我们选择 <code>是</code> 等待窗口加载完毕后点击窗口左侧的 运行和调试功能</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/10.png title=运行与调试按钮 data-thumbnail=/docker-with-vsc_best-practice/images/10.png data-sub-html="<h2>运行与调试按钮</h2><p>运行与调试按钮</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/10.png data-srcset="/docker-with-vsc_best-practice/images/10.png, images/10.png 1.5x, /docker-with-vsc_best-practice/images/10.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/10.png>
+</a><figcaption class=image-caption>运行与调试按钮</figcaption>
+</figure></p>
+<p>点击 开始调试 ，VS Code 会自动帮我们运行这个 python 程序</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/11.png title=开始调试 data-thumbnail=/docker-with-vsc_best-practice/images/11.png data-sub-html="<h2>开始调试</h2><p>开始调试</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/11.png data-srcset="/docker-with-vsc_best-practice/images/11.png, images/11.png 1.5x, /docker-with-vsc_best-practice/images/11.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/11.png>
+</a><figcaption class=image-caption>开始调试</figcaption>
+</figure></p>
+<blockquote>
+<p>关于 VS Code 的调试功能和 Task 功能是另外的话题，我会单独讲解，这里不会深入。</p>
+</blockquote>
+<p>这时候我们发现 VS Code 帮我们自动转发了 python 程序提供的端口（真的非常方便✨）</p>
+<p><figure><a class=lightgallery href=/docker-with-vsc_best-practice/images/12.png title=端口自动转发 data-thumbnail=/docker-with-vsc_best-practice/images/12.png data-sub-html="<h2>端口自动转发</h2><p>端口自动转发</p>">
+<img class=lazyload src=/svg/loading.min.svg data-src=images/12.png data-srcset="/docker-with-vsc_best-practice/images/12.png, images/12.png 1.5x, /docker-with-vsc_best-practice/images/12.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/12.png>
+</a><figcaption class=image-caption>端口自动转发</figcaption>
+</figure></p>
+<p>点击在 浏览器中打开 即可看到这段程序提供的网页内容：</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/13.png data-srcset="/docker-with-vsc_best-practice/images/13.png, images/13.png 1.5x, /docker-with-vsc_best-practice/images/13.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/13.png title=image-20220131110010345></p>
+<p>而这一切只会花费不到五分钟（根据网速而定），而且不会对宿主机产生任何影响！</p>
+<h4 id=devcontainerjson-探究>devcontainer.json 探究</h4>
+<p>Dockerfile 在 <a href=#docker-学习>Docker 学习</a> 章节已经讲过了，这里我就不介绍了。我们主要来探究 <code>devcontain.json</code> 到底讲了什么故事。</p>
+<p>详细<strong>文档</strong>和<strong>例子</strong>请见 <a href=https://aka.ms/vscode-remote/devcontainer.json target=_blank rel="noopener noreffer">https://aka.ms/vscode-remote/devcontainer.json</a> ，这里我们主要来看一下常用的一些配置信息：</p>
+<ul>
+<li>
+<p>name</p>
+<p>当前工作空间名称，会显示在左下角<img class=lazyload src=/svg/loading.min.svg data-src=images/14.png data-srcset="/docker-with-vsc_best-practice/images/14.png, images/14.png 1.5x, /docker-with-vsc_best-practice/images/14.png 2x" data-sizes=auto alt=/docker-with-vsc_best-practice/images/14.png title=image-20220131113504859></p>
+</li>
+<li>
+<p>build</p>
+<ul>
+<li>dockerfile： 用于指定 dockerfile 文件的路径，这里是相对于 devcontainer.json 文件而言</li>
+<li>context：用于指定 docker build 时的上下文路径，这里是相对于 devcontainer.json 文件而言</li>
+<li>args：用于在 docker build 时传递参数</li>
+</ul>
+</li>
+<li>
+<p>settings</p>
+<p>用于设定容器中 settings.json 的默认值，比如这里设定了使用的 shell 路径和 python 插件的配置</p>
+</li>
+<li>
+<p>extensions</p>
+<p>用于指定在容器中安装的插件，比如这里会自动帮我们安装 pylance 插件</p>
+</li>
+<li>
+<p>portsAttributes</p>
+<p>用于设定端口属性，比如名称，映射时的行为，也可以用 <code>forwardPorts</code> 简单代替</p>
+</li>
+<li>
+<p>postCreateCommand</p>
+<p>在容器<strong>第一次启动</strong>时执行的指令，这里会自动安装依赖，<strong>只会执行这一次</strong></p>
+</li>
+<li>
+<p>remoteUser</p>
+<p>登录到容器的用户名，默认情况下是 root 用户登录，但是有时我们不想这样，可以利用这个指定远程用户名（这个用户必须存在才行）</p>
+</li>
+</ul>
+<p>此外，还有一些字段也很有用：</p>
+<ul>
+<li>
+<p>runArgs</p>
+<p>docker run 时传递的参数，用于类似设定 &ndash;network=host 等操作</p>
+</li>
+<li>
+<p>containerEnv / remoteEnv</p>
+<p>用于设定容器中的环境变量，比如设定 http_proxy 等环境变量的值</p>
+</li>
+</ul>
+<h2 id=显示-docker-中的图形界面>显示 Docker 中的图形界面</h2>
+<p>很多时候我们都需要查看 docker 中的图形界面，这里我们直接使用 X11 让 docker 中的 GUI 直接在宿主机上运行（相比于 VNC 方案更加轻量化）</p>
+<p>现成的方案有这几个：</p>
+<p><a href=https://cloud.tencent.com/developer/article/1541718 target=_blank rel="noopener noreffer">在docker中通过X11运行gui程序</a></p>
+<p><a href=http://open.daocloud.io/viz-parallel-magic/ target=_blank rel="noopener noreffer">Docker X11 穿透方案</a></p>
+<p>上面两个文章讲了原理和操作方法，下面给出如何在 VS Code 中配置</p>
+<p>首先我们在 <strong>devcontainer.json</strong> 中的 <code>runArgs</code> 字段中添加 <code>"--volume=/tmp/.X11-unix:/tmp/.X11-unix"</code> 表示挂载 x11 相关目录到容器中</p>
+<p><code>containerEnv</code> 字段中添加 <code>"DISPLAY": "${localEnv:DISPLAY}" </code> 表示设定容器中的 <code>DISPLAY</code> 环境变量与本地 <code>DISPLAY</code> 为一样的值</p>
+<p>在 Dockerfile 中添加如下内容：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=c># 来源：https://github.com/athackst/dockerfiles/blob/main/ros2/foxy.Dockerfile</span><span class=err>
+</span><span class=err></span><span class=c>################</span><span class=err>
+</span><span class=err></span><span class=c># Expose the nvidia driver to allow opengl </span><span class=err>
+</span><span class=err></span><span class=c># Dependencies for glvnd and X11.</span><span class=err>
+</span><span class=err></span><span class=c>################</span><span class=err>
+</span><span class=err></span><span class=k>RUN</span> apt-get update <span class=se>\
+</span><span class=se></span> <span class=o>&amp;&amp;</span> apt-get install -y -qq --no-install-recommends <span class=se>\
+</span><span class=se></span>  libglvnd0 <span class=se>\
+</span><span class=se></span>  libgl1 <span class=se>\
+</span><span class=se></span>  libglx0 <span class=se>\
+</span><span class=se></span>  libegl1 <span class=se>\
+</span><span class=se></span>  libxext6 <span class=se>\
+</span><span class=se></span>  libx11-6<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># Env vars for the nvidia-container-runtime.</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> NVIDIA_VISIBLE_DEVICES all<span class=err>
+</span><span class=err></span><span class=k>ENV</span> NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute<span class=err>
+</span><span class=err></span><span class=k>ENV</span> QT_X11_NO_MITSHM <span class=m>1</span><span class=err>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>至此即可完成将容器中 GUI 显示在宿主机的操作！</p>
+<h2 id=结语>结语</h2>
+<p>至此 Docker 配合 VSCode 开发的内容就讲解完毕了，如果大家觉得有哪里需要改进或者拓展的地方还请在评论区提出，我会及时回复</p>
 </div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2022-01-26 13:23:47">更新于 2022-01-26</span>
+<span title="2022-01-31 04:15:42">更新于 2022-01-31</span>
 </div>
 <div class=post-info-license></div>
 </div>

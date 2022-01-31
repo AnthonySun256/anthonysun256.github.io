@@ -114,7 +114,174 @@ Docker 网络上的教程有很多，我相信我很难讲出比现有课程更�
 
 ### Remote Containers 插件使用
 
-施工中。。。未完待续
+> 严格上来讲本节内容是对 Remote-Containers 插件 [官方文档](https://code.visualstudio.com/docs/remote/containers)  的翻译与浓缩。
 
-2022年1月26日
+#### 初体验
+
+在 https://github.com/microsoft/vscode-remote-try-python 下载解压官方示例仓库并使用 VSCode 打开文件夹，您应该得到如下组织的目录：
+
+```
+.
+│  .gitattributes
+│  .gitignore
+│  app.py
+│  LICENSE
+│  README.md
+│  requirements.txt
+│
+├─.devcontainer
+│      devcontainer.json
+│      Dockerfile
+│
+├─.vscode
+│      launch.json
+│
+└─static
+        index.html
+```
+
+在根目录用 VS Code 打开文件夹，然后点击左下角的图标
+
+![点击图标](images/4.png "点击新图标")
+
+在弹出的窗口中选择 Reopen in Container
+
+![在容器中打开](images/5.png "在容器中打开")
+
+VS Code 会根据 `.devcontainer` 文件夹中的 `Dockerfile` 和 `devcontainer.json` 自动拉取并配置镜像环境，点击蓝色字样（show log）可以查看当前环境构建进度
+
+![点击查看当前构建过程](images/6.png "点击查看当前构建过程")
+
+首先 VS Code 会根据 `Dockerfile` 文件描述进行 build image 并 docker run 生成 container
+
+
+
+![根据 Dockerfile 构建镜像](images/7.png "根据 Dockerfile 构建镜像")
+
+紧接着，VS Code 会根据 `devcontainer.json` 文件中的描述进行一些配置工作，比如这里会在 container **首次运行**的时候执行
+
+```shell
+$ pip3 install -r requirements.txt
+```
+
+来安装运行 python 程序需要的支持库
+
+![首次启动](images/8.png "首次启动")
+
+以及会根据  `devcontainer.json` 中的配置为我们的 container 自动安装一些插件，比如这里会提示 Pylance 需要重新加载窗口来激活：
+
+![Pylance 提示](images/9.png "Pylance 提示")
+
+这里我们选择 `是` 等待窗口加载完毕后点击窗口左侧的 运行和调试功能
+
+![运行与调试按钮](images/10.png "运行与调试按钮")
+
+点击 开始调试 ，VS Code 会自动帮我们运行这个 python 程序
+
+![开始调试](images/11.png "开始调试")
+
+> 关于 VS Code 的调试功能和 Task 功能是另外的话题，我会单独讲解，这里不会深入。
+
+这时候我们发现 VS Code 帮我们自动转发了 python 程序提供的端口（真的非常方便:sparkles:）
+
+![端口自动转发](images/12.png "端口自动转发")
+
+点击在 浏览器中打开 即可看到这段程序提供的网页内容：
+
+![image-20220131110010345](images/13.png)
+
+而这一切只会花费不到五分钟（根据网速而定），而且不会对宿主机产生任何影响！
+
+#### devcontainer.json 探究
+
+Dockerfile 在 [Docker 学习]({{<relref "#docker-学习">}}) 章节已经讲过了，这里我就不介绍了。我们主要来探究 `devcontain.json` 到底讲了什么故事。
+
+详细**文档**和**例子**请见 https://aka.ms/vscode-remote/devcontainer.json ，这里我们主要来看一下常用的一些配置信息：
+
+- name
+
+  当前工作空间名称，会显示在左下角![image-20220131113504859](images/14.png)
+
+- build
+
+  - dockerfile：  用于指定 dockerfile 文件的路径，这里是相对于 devcontainer.json 文件而言
+  - context：用于指定 docker build 时的上下文路径，这里是相对于 devcontainer.json 文件而言
+  - args：用于在 docker build 时传递参数
+
+- settings
+
+  用于设定容器中 settings.json 的默认值，比如这里设定了使用的 shell 路径和 python 插件的配置
+
+- extensions
+
+  用于指定在容器中安装的插件，比如这里会自动帮我们安装 pylance 插件
+
+- portsAttributes
+
+  用于设定端口属性，比如名称，映射时的行为，也可以用 `forwardPorts` 简单代替
+
+- postCreateCommand
+
+  在容器**第一次启动**时执行的指令，这里会自动安装依赖，**只会执行这一次**
+
+- remoteUser
+
+  登录到容器的用户名，默认情况下是 root 用户登录，但是有时我们不想这样，可以利用这个指定远程用户名（这个用户必须存在才行）
+
+
+
+此外，还有一些字段也很有用：
+
+- runArgs
+
+  docker run 时传递的参数，用于类似设定 --network=host 等操作
+
+- containerEnv / remoteEnv
+
+  用于设定容器中的环境变量，比如设定 http_proxy 等环境变量的值
+
+## 显示 Docker 中的图形界面
+
+很多时候我们都需要查看 docker 中的图形界面，这里我们直接使用 X11 让 docker 中的 GUI 直接在宿主机上运行（相比于 VNC 方案更加轻量化）
+
+现成的方案有这几个：
+
+[在docker中通过X11运行gui程序](https://cloud.tencent.com/developer/article/1541718)
+
+[Docker X11 穿透方案](http://open.daocloud.io/viz-parallel-magic/)
+
+上面两个文章讲了原理和操作方法，下面给出如何在 VS Code 中配置
+
+首先我们在 **devcontainer.json** 中的 `runArgs` 字段中添加 `"--volume=/tmp/.X11-unix:/tmp/.X11-unix"` 表示挂载 x11 相关目录到容器中
+
+`containerEnv` 字段中添加 `"DISPLAY": "${localEnv:DISPLAY}" `  表示设定容器中的 `DISPLAY` 环境变量与本地 `DISPLAY` 为一样的值
+
+在 Dockerfile 中添加如下内容：
+
+```dockerfile
+# 来源：https://github.com/athackst/dockerfiles/blob/main/ros2/foxy.Dockerfile
+################
+# Expose the nvidia driver to allow opengl 
+# Dependencies for glvnd and X11.
+################
+RUN apt-get update \
+ && apt-get install -y -qq --no-install-recommends \
+  libglvnd0 \
+  libgl1 \
+  libglx0 \
+  libegl1 \
+  libxext6 \
+  libx11-6
+
+# Env vars for the nvidia-container-runtime.
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+ENV QT_X11_NO_MITSHM 1
+```
+
+至此即可完成将容器中 GUI 显示在宿主机的操作！
+
+## 结语
+
+至此 Docker 配合 VSCode 开发的内容就讲解完毕了，如果大家觉得有哪里需要改进或者拓展的地方还请在评论区提出，我会及时回复
 
