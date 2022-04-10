@@ -1,0 +1,672 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>Scout mini 仿真指南 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
+<meta name=description content="
+本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友
+
+SCOUT MINI 是一款全地形高速Mini UGV，具有四轮差速驱动、独立悬挂、原地差速自转等特点，得益于自主研发的轻量级动力系统解决方案，SCOUT MINI最大速度高达10KM/H，专为前沿科学实验设计的全能型移动研究平台。">
+<meta name=keywords content="ROS,xacro,松灵机器人"><meta itemprop=name content="Scout mini 仿真指南">
+<meta itemprop=description content="
+本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友
+
+SCOUT MINI 是一款全地形高速Mini UGV，具有四轮差速驱动、独立悬挂、原地差速自转等特点，得益于自主研发的轻量级动力系统解决方案，SCOUT MINI最大速度高达10KM/H，专为前沿科学实验设计的全能型移动研究平台。"><meta itemprop=datePublished content="2022-04-10T04:37:48+00:00">
+<meta itemprop=dateModified content="2022-04-10T05:00:36+00:00">
+<meta itemprop=wordCount content="2178"><meta itemprop=image content="https://anthonysun256.github.io/scout_mini_sim/images/cover.jpg">
+<meta itemprop=keywords content="ROS,xacro,松灵机器人,"><meta property="og:title" content="Scout mini 仿真指南">
+<meta property="og:description" content="
+本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友
+
+SCOUT MINI 是一款全地形高速Mini UGV，具有四轮差速驱动、独立悬挂、原地差速自转等特点，得益于自主研发的轻量级动力系统解决方案，SCOUT MINI最大速度高达10KM/H，专为前沿科学实验设计的全能型移动研究平台。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://anthonysun256.github.io/scout_mini_sim/"><meta property="og:image" content="https://anthonysun256.github.io/scout_mini_sim/images/cover.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-04-10T04:37:48+00:00">
+<meta property="article:modified_time" content="2022-04-10T05:00:36+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://anthonysun256.github.io/scout_mini_sim/images/cover.jpg">
+<meta name=twitter:title content="Scout mini 仿真指南">
+<meta name=twitter:description content="
+本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友
+
+SCOUT MINI 是一款全地形高速Mini UGV，具有四轮差速驱动、独立悬挂、原地差速自转等特点，得益于自主研发的轻量级动力系统解决方案，SCOUT MINI最大速度高达10KM/H，专为前沿科学实验设计的全能型移动研究平台。">
+<meta name=application-name content="Anthony's blog">
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/scout_mini_sim/><link rel=prev href=https://anthonysun256.github.io/docker-proxy-complete-solution/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Scout mini 仿真指南","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/scout_mini_sim\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/scout_mini_sim\/images\/cover.jpg","width":1920,"height":754}],"genre":"posts","keywords":"ROS, xacro, 松灵机器人","wordcount":2178,"url":"https:\/\/anthonysun256.github.io\/scout_mini_sim\/","datePublished":"2022-04-10T04:37:48+00:00","dateModified":"2022-04-10T05:00:36+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="Anthony's Blog"><span class=header-title-pre><i class="fas fa-greater-than-equal"></i></span><span class=header-title-text>Anthony's blog</span></a><span class=header-subtitle>和你分享我的所见所闻</span></div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 所有文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><a class=menu-item href=/friends/ title=友情链接> 友链 </a><a class=menu-item href=/about/ title=博主简介> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="Anthony's Blog"><span class=header-title-pre><i class="fas fa-greater-than-equal"></i></span><span class=header-title-text>Anthony's blog</span></a><span class=header-subtitle>和你分享我的所见所闻</span></div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/friends/ title=友情链接>友链</a><a class=menu-item href=/about/ title=博主简介>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">Scout mini 仿真指南</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span></div>
+<div class=post-meta-line><span title="2022-04-10 04:37:48">
+<i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-10>2022-04-10</time>
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2178 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id=/scout_mini_sim/ class=leancloud_visitors data-flag-title="Scout mini 仿真指南">
+<i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+</span>&nbsp;</div>
+</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/scout_mini_sim/images/cover.jpg data-srcset="/scout_mini_sim/images/cover.jpg, /scout_mini_sim/images/cover.jpg 1.5x, /scout_mini_sim/images/cover.jpg 2x" data-sizes=auto alt=/scout_mini_sim/images/cover.jpg title=/scout_mini_sim/images/cover.jpg></div><div class="details toc" id=toc-static kept=false>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#1-开发环境配置>1. 开发环境配置</a></li>
+<li><a href=#2-仿真环境配置>2. 仿真环境配置</a></li>
+<li><a href=#3-添加自定义传感>3. 添加自定义传感</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><blockquote>
+<p>本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友</p>
+</blockquote>
+<p>SCOUT MINI 是一款全地形高速Mini UGV，具有四轮差速驱动、独立悬挂、原地差速自转等特点，得益于自主研发的轻量级动力系统解决方案，SCOUT MINI最大速度高达10KM/H，专为前沿科学实验设计的全能型移动研究平台。</p>
+<p>此外，松灵为用户提供了 SCOUT MINI 的完整 gazebo 仿真支持库，本文将带您逐步上手使用：</p>
+<blockquote>
+<p>仓库地址：https://github.com/agilexrobotics/ugv_gazebo_sim</p>
+</blockquote>
+<h2 id=1-开发环境配置>1. 开发环境配置</h2>
+<p>目前官方提供的仿真环境是 <code>ROS-melodic</code> + <code>gazebo9</code> ，<strong>如果您已配置好相关环境请跳过本节</strong>。</p>
+<p>编者这里使用的开发环境是 <code>docker</code> + <code>VSCode</code> ，这个组合的好处可以参考我的博客文章：<a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+<p>我们首先新建工作空间文件夹，并使用 <code>catkin</code> 初始化工作空间：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ mkdir scout_ws <span class=o>&amp;&amp;</span> <span class=nb>cd</span> scout_ws
+$ mkdir src .devcontainer
+$ <span class=nb>cd</span> ../.devcontainer
+</code></pre></td></tr></table>
+</div>
+</div><p>在 <code>.devcontainer</code> 中新建 <code>devcontainer.json</code> 和 <code>Dockerfile</code> 两个文件：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ gedit devcontainer.json <span class=c1># 也可以自行更换其他的编辑器</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 <code>devcontainer.json</code> 保存如下内容：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+	<span class=nt>&#34;dockerFile&#34;</span><span class=p>:</span> <span class=s2>&#34;Dockerfile&#34;</span><span class=p>,</span>
+	<span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=p>{</span>
+		<span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>{</span>
+			<span class=nt>&#34;WORKSPACE&#34;</span><span class=p>:</span> <span class=s2>&#34;${containerWorkspaceFolder}&#34;</span>
+		<span class=p>}</span>
+	<span class=p>},</span>
+	<span class=nt>&#34;remoteUser&#34;</span><span class=p>:</span> <span class=s2>&#34;ros&#34;</span><span class=p>,</span>
+	<span class=nt>&#34;runArgs&#34;</span><span class=p>:</span> <span class=p>[</span>
+		<span class=s2>&#34;--network=host&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--cap-add=SYS_PTRACE&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--security-opt=seccomp:unconfined&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--security-opt=apparmor:unconfined&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--volume=/tmp/.X11-unix:/tmp/.X11-unix&#34;</span>
+	<span class=p>],</span>
+	<span class=nt>&#34;containerEnv&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;DISPLAY&#34;</span><span class=p>:</span> <span class=s2>&#34;${localEnv:DISPLAY}&#34;</span> <span class=p>},</span>
+	<span class=c1>// Set *default* container specific settings.json values on container create.
+</span><span class=c1></span>	<span class=nt>&#34;settings&#34;</span><span class=p>:</span> <span class=p>{</span>
+		<span class=nt>&#34;terminal.integrated.profiles.linux&#34;</span><span class=p>:</span> <span class=p>{</span>
+			<span class=nt>&#34;bash&#34;</span><span class=p>:</span> <span class=p>{</span>
+				<span class=nt>&#34;path&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
+			<span class=p>},</span>
+		<span class=p>},</span>
+		<span class=nt>&#34;terminal.integrated.defaultProfile.linux&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
+	<span class=p>},</span>
+	<span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+		<span class=s2>&#34;dotjoshjohnson.xml&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;zachflower.uncrustify&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-azuretools.vscode-docker&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-iot.vscode-ros&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-python.python&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-vscode.cpptools&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;redhat.vscode-yaml&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;smilerobotics.urdf&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;streetsidesoftware.code-spell-checker&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;twxs.cmake&#34;</span><span class=p>,</span><span class=err>所有</span>
+		<span class=s2>&#34;yzhang.markdown-all-in-one&#34;</span>
+	<span class=p>]</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其中各个字段的具体含义可以参考我的博文 <a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+</blockquote>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ gedit Dockerfile
+</code></pre></td></tr></table>
+</div>
+</div><p>在 <code>Dockerfile</code> 中保存以下内容：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>FROM</span><span class=s> althack/ros:melodic-gazebo</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># Set up auto-source of workspace for ros user</span><span class=err>
+</span><span class=err></span><span class=k>ARG</span> WORKSPACE<span class=err>
+</span><span class=err></span><span class=k>RUN</span> <span class=nb>echo</span> <span class=s2>&#34;if [ -f </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash ]; then source </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash; fi&#34;</span> &gt;&gt; /home/ros/.bashrc<span class=err>
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其中各个字段的具体含义可以参考我的博文 <a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+</blockquote>
+<p>此时，目录结构如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>scout_ws
+├── .devcontainer
+│   ├── devcontainer.json
+│   └── Dockerfile
+└── src
+
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 VSC 在 docker 中打开文件夹：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nb>cd</span> scout_ws
+$ code .
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>后续具体操作请见：<a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+</blockquote>
+<p>最后，需要更新 <code>apt</code> 和 <code>rosdep database</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt update
+$ rosdep update
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=2-仿真环境配置>2. 仿真环境配置</h2>
+<p>将<code>https://github.com/agilexrobotics/ugv_gazebo_sim/tree/master/scout</code> 中的 <code>scout_control</code> 、<code>scout_description</code> 、<code>scout_gazebo_sim</code> 三个文件放到 <code>src</code>目录之中。</p>
+<p>安装如下 ROS 库：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get -y install --no-install-recommends <span class=se>\
+</span><span class=se></span>ros-melodic-ros-control <span class=se>\
+</span><span class=se></span>ros-melodic-ros-controllers <span class=se>\
+</span><span class=se></span>ros-melodic-gazebo-ros <span class=se>\
+</span><span class=se></span>ros-melodic-gazebo-ros-control <span class=se>\
+</span><span class=se></span>ros-melodic-joint-state-publisher-gui <span class=se>\
+</span><span class=se></span>ros-melodic-teleop-twist-keyboard
+</code></pre></td></tr></table>
+</div>
+</div><p>然后初始化工作空间并安装依赖：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nb>cd</span> scout_ws/src
+$ catkin_init_workspace
+$ <span class=nb>cd</span> ..
+$ rosdep install --from-paths src --ignore-src -r -y
+</code></pre></td></tr></table>
+</div>
+</div><p>即可正常编译与运行：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ catkin_make
+$ <span class=nb>source</span> devel/setup.bash
+</code></pre></td></tr></table>
+</div>
+</div><p><code>scout_description</code> 包主要为 <code>scout</code> 系列车型仿真模型，<code>display_xxx_.launch</code> 为不同车型在 Rviz 中的展示：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch scout_description display_mini_models.launch <span class=c1># 在 Rviz 中查看 scout mini 车型</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>scout_gazebo_sim</code> 包为 <code>scout</code> 系列车型在 <code>gazebo</code> 中的仿真，<code>scout_xxx_.launch</code> 为不同车型在 gazebo 中仿真展示</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch scout_gazebo_sim scout_mini_empty_world.launch <span class=c1># 在 gazebo 中使用空地图仿真 scout mini</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>使用 playpen 地图前需要补全 gazebo 的 models，不然会一直黑屏</div>
+</div>
+</div>
+<h2 id=3-添加自定义传感>3. 添加自定义传感</h2>
+<p>官方的仿真模型中并未添加现成传感器，这也很好理解——车辆上本来就没有，无故添加反而会在实际使用中让人疑惑。</p>
+<p>scout 系列车型的 urdf 描述文件位于 <code>scout_description/urdf</code> 中，在这里我们并未直接使用 urdf 文件进行描述，而是从 xacro （xml macro) 描述文件中生成 urdf 信息。使用 xacro 的好处在于我们可以像编程一样实现复用一些 urdf 节点以及将不同的组件拆分等功能。</p>
+<blockquote>
+<p>如果您不了解 xacro，可以先阅读 xacro 语法说明：http://wiki.ros.org/xacr</p>
+<p>其相当于扩展了 urdf 的语法，可以以更便捷的方式描述我们的机器人。</p>
+</blockquote>
+<p>下面我将带大家使用 xacro 为小车加上一个简易摄像头：</p>
+<p>首先在我们的 <code>scout_description/urdf</code> 中添加一个名为 <code>universal_sensor_adder.xacro</code> 的文件，其中保存如下内容：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=cp>&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+<span class=c>&lt;!-- 
+</span><span class=c>Author: AnthonySuen
+</span><span class=c>Date: 2020-4-8
+</span><span class=c>--&gt;</span>
+<span class=nt>&lt;robot</span> <span class=na>xmlns:xacro=</span><span class=s>&#34;http://www.ros.org/wiki/xacro&#34;</span> <span class=na>name=</span><span class=s>&#34;universal_sensor_adder&#34;</span><span class=nt>&gt;</span>
+    <span class=c>&lt;!-- 用于生成一个新的传感器节点, 
+</span><span class=c>    x_offset y_offset z_offset r p y对应于传感器和 base_link 的相对位置
+</span><span class=c>    sensor_config 为传感器的配置信息
+</span><span class=c>    sensor_plugin_config 为 gazebo 相关插件的配置内容 --&gt;</span>
+    <span class=nt>&lt;xacro:macro</span> <span class=na>name=</span><span class=s>&#34;add_sensor&#34;</span> <span class=na>params=</span><span class=s>&#34;sensor_name type x_offset y_offset z_offset r p y **sensor_config **sensor_plugin_config&#34;</span><span class=nt>&gt;</span>
+        <span class=nt>&lt;link</span> <span class=na>name=</span><span class=s>&#34;sensor_${sensor_name}&#34;</span><span class=nt>&gt;</span>
+            <span class=c>&lt;!-- 配置传感器视觉信息 --&gt;</span>
+            <span class=nt>&lt;visual&gt;</span>
+                <span class=nt>&lt;geometry&gt;</span>
+                    <span class=nt>&lt;box</span> <span class=na>size=</span><span class=s>&#34;0.03 0.05 0.05&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;/geometry&gt;</span>
+                <span class=nt>&lt;material</span> <span class=na>name=</span><span class=s>&#34;red&#34;</span><span class=nt>&gt;</span>
+                    <span class=nt>&lt;color</span> <span class=na>rgba=</span><span class=s>&#34;1.0 0.0 0.0 1.0&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;/material&gt;</span>
+            <span class=nt>&lt;/visual&gt;</span>
+            <span class=c>&lt;!-- 配置碰撞体积, 为gazebo仿真使用 --&gt;</span>
+            <span class=nt>&lt;collision&gt;</span>
+                <span class=nt>&lt;origin</span> <span class=na>xyz=</span><span class=s>&#34;0.0 0.0 0.0&#34;</span> <span class=na>rpy=</span><span class=s>&#34;0.0 0.0 0.0&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;geometry&gt;</span>
+                    <span class=nt>&lt;box</span> <span class=na>size=</span><span class=s>&#34;0.03 0.05 0.05&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;/geometry&gt;</span>
+            <span class=nt>&lt;/collision&gt;</span>
+            <span class=c>&lt;!-- 配置惯性矩阵, 用于 gazebo 仿真,这里我假设传感器很轻很小 --&gt;</span>
+            <span class=nt>&lt;inertial&gt;</span>
+                <span class=nt>&lt;origin</span> <span class=na>xyz=</span><span class=s>&#34;0.0 0.0 0.0&#34;</span> <span class=na>rpy=</span><span class=s>&#34;0.0 0.0 0.0&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;mass</span> <span class=na>value=</span><span class=s>&#34;1e-5&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;inertia</span> <span class=na>ixx=</span><span class=s>&#34;1e-6&#34;</span> <span class=na>ixy=</span><span class=s>&#34;1e-6&#34;</span> <span class=na>ixz=</span><span class=s>&#34;1e-6&#34;</span> <span class=na>iyy=</span><span class=s>&#34;1e-6&#34;</span> <span class=na>iyz=</span><span class=s>&#34;1e-6&#34;</span> <span class=na>izz=</span><span class=s>&#34;1e-6&#34;</span><span class=nt>/&gt;</span>
+            <span class=nt>&lt;/inertial&gt;</span>
+        <span class=nt>&lt;/link&gt;</span>
+        <span class=c>&lt;!-- 配置关节信息, 这里我默认传感器是固定在车上的 --&gt;</span>
+        <span class=nt>&lt;joint</span> <span class=na>name=</span><span class=s>&#34;sensor_${sensor_name}_joint&#34;</span> <span class=na>type=</span><span class=s>&#34;fixed&#34;</span><span class=nt>&gt;</span>
+            <span class=nt>&lt;parent</span> <span class=na>link=</span><span class=s>&#34;base_link&#34;</span><span class=nt>/&gt;</span>
+            <span class=nt>&lt;child</span> <span class=na>link=</span><span class=s>&#34;sensor_${sensor_name}&#34;</span><span class=nt>/&gt;</span>
+            <span class=nt>&lt;origin</span> <span class=na>xyz=</span><span class=s>&#34;${x_offset} ${y_offset} ${z_offset}&#34;</span> <span class=na>rpy=</span><span class=s>&#34;${r} ${p} ${y}&#34;</span><span class=nt>/&gt;</span>
+        <span class=nt>&lt;/joint&gt;</span>
+        <span class=c>&lt;!-- gazebo 配置仿真配置部分 --&gt;</span>
+        <span class=nt>&lt;gazebo</span> <span class=na>reference=</span><span class=s>&#34;sensor_${sensor_name}&#34;</span><span class=nt>&gt;</span>            <span class=c>&lt;!-- 此部分要与 传感器 link 名称保持一致 --&gt;</span>
+            <span class=nt>&lt;sensor</span> <span class=na>name=</span><span class=s>&#34;${sensor_name}&#34;</span> <span class=na>type=</span><span class=s>&#34;${type}&#34;</span><span class=nt>&gt;</span>
+                <span class=c>&lt;!-- 这里会插入传感器自身配置信息和相关插件的配置内容 --&gt;</span>
+                <span class=nt>&lt;xacro:insert_block</span> <span class=na>name=</span><span class=s>&#34;sensor_config&#34;</span><span class=nt>/&gt;</span>
+                <span class=nt>&lt;xacro:insert_block</span> <span class=na>name=</span><span class=s>&#34;sensor_plugin_config&#34;</span><span class=nt>/&gt;</span>
+            <span class=nt>&lt;/sensor&gt;</span>
+        <span class=nt>&lt;/gazebo&gt;</span>
+    <span class=nt>&lt;/xacro:macro&gt;</span>
+<span class=nt>&lt;/robot&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>请在使用时删除中文注释，xacro 无法解析非 ascii 字符！</div>
+</div>
+</div>
+<p>编辑 <code>empty.urdf</code> 文件，修改其中内容如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&lt;?xml version=&#34;1.0&#34;?&gt;
+&lt;!-- 
+Author: AnthonySuen
+Date: 2020-4-8
+--&gt;
+&lt;robot xmlns:xacro=&#34;http://www.ros.org/wiki/xacro&#34; name=&#34;sensors&#34;&gt;
+
+  &lt;!-- 加载我们之前编写的文件，之后可以使用其中相关内容 --&gt;
+  &lt;xacro:include filename=&#34;$(find scout_description)/urdf/universal_sensor_adder.xacro&#34; /&gt;
+  &lt;!-- 使用我们编写的函数，填入相关参数 --&gt;
+  &lt;xacro:add_sensor sensor_name=&#34;camera&#34; type=&#34;camera&#34; x_offset=&#34;0.1&#34; y_offset=&#34;0.0&#34; z_offset=&#34;0.085&#34; r=&#34;0.0&#34; p=&#34;0.0&#34; y=&#34;0.0&#34;&gt;
+  &lt;!-- 这部分会替换 &lt;xacro:insert_block name=&#34;sensor_config&#34;/&gt; 中的内容 --&gt;
+    &lt;sensor_config&gt;
+      &lt;update_rate&gt;30&lt;/update_rate&gt;
+      &lt;camera name=&#34;general_camera&#34;&gt;
+        &lt;image width=&#34;640&#34; height=&#34;480&#34; hfov=&#34;1.5708&#34; format=&#34;RGB8&#34; near=&#34;0.01&#34; far=&#34;50.0&#34;/&gt;
+      &lt;/camera&gt;
+    &lt;/sensor_config&gt;
+    &lt;!-- 这部分会替换 &lt;xacro:insert_block name=&#34;sensor_plugin_config&#34;/&gt; 中的内容 --&gt;
+    &lt;sensor_plugin_config&gt;
+      &lt;plugin name=&#34;general_camera_controller&#34; filename=&#34;libgazebo_ros_camera.so&#34;&gt;
+        &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+        &lt;updateRate&gt;36.0&lt;/updateRate&gt;
+        &lt;cameraName&gt;sensor_camera&lt;/cameraName&gt;
+        &lt;imageTopicName&gt;image_raw&lt;/imageTopicName&gt;
+        &lt;cameraInfoTopicName&gt;camera_info&lt;/cameraInfoTopicName&gt;
+        &lt;frameName&gt;sensor_camera&lt;/frameName&gt; &lt;!-- 需要与 传感器 link 名称保持一致 --&gt;
+        &lt;hackBaseline&gt;0.1&lt;/hackBaseline&gt;
+        &lt;distortionK1&gt;0.0&lt;/distortionK1&gt;
+        &lt;distortionK2&gt;0.0&lt;/distortionK2&gt;
+        &lt;distortionK3&gt;0.0&lt;/distortionK3&gt;
+        &lt;distortionT1&gt;0.0&lt;/distortionT1&gt;
+        &lt;distortionT2&gt;0.0&lt;/distortionT2&gt;
+      &lt;/plugin&gt;
+    &lt;/sensor_plugin_config&gt;
+  &lt;/xacro:add_sensor&gt;
+&lt;/robot&gt;
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>empty.urdf 会在我们模型生成的时候被 mini.xacro 等车辆描述文件加载，所以我们不用去更改其他模型文件，这样保持了开发的整洁性</p>
+</blockquote>
+<div class="details admonition note open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>请在使用时删除中文注释，xacro 无法解析非 ascii 字符</div>
+</div>
+</div>
+<p>之后运行一下 Rivz 查看我们修改后的模型：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch scout_description display_mini_models.launch
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到车辆头顶出了一个红色小方块，这就是我们的简易摄像头模型</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/1.png data-srcset="/scout_mini_sim/images/1.png, images/1.png 1.5x, /scout_mini_sim/images/1.png 2x" data-sizes=auto alt=/scout_mini_sim/images/1.png title="2022-04-08 17-46-36 的屏幕截图"></p>
+<p>也可以在 gazebo 中仿真并用 Rviz 接收图像：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch scout_gazebo_sim  scout_mini_playpen.launch
+</code></pre></td></tr></table>
+</div>
+</div><p><img class=lazyload src=/svg/loading.min.svg data-src=images/2.png data-srcset="/scout_mini_sim/images/2.png, images/2.png 1.5x, /scout_mini_sim/images/2.png 2x" data-sizes=auto alt=/scout_mini_sim/images/2.png title="2022-04-08 17-49-50 的屏幕截图"></p>
+<p>至此，便完成了添加传感器并进行仿真的全部流程，对于其他类型传感器，诸如 深度相机 激光雷达 imu 等，其添加方法一样方便，唯一不同点在我们编写的函数中 <code>sensor_config</code> 与 <code>sensor_plugin_config</code> 块中对于不同传感器的配置，简单修改即可适配不同传感器。</p></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span title="2022-04-10 05:00:36">更新于 2022-04-10</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/scout_mini_sim/ data-title="Scout mini 仿真指南" data-hashtags=ROS,xacro,松灵机器人><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/scout_mini_sim/ data-hashtag=ROS><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/scout_mini_sim/ data-title="Scout mini 仿真指南"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/scout_mini_sim/ data-title="Scout mini 仿真指南"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/scout_mini_sim/ data-title="Scout mini 仿真指南"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/ros/>ROS</a>,&nbsp;<a href=/tags/xacro/>xacro</a>,&nbsp;<a href=/tags/%E6%9D%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA/>松灵机器人</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/docker-proxy-complete-solution/ class=prev rel=prev title="Docker Container 代理配置一本通"><i class="fas fa-angle-left fa-fw"></i>Docker Container 代理配置一本通</a></div>
+</div>
+<div id=comments><div id=valine class=comment></div><noscript>
+Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.
+</noscript></div></article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/Lruihao/FixIt target=_blank rel="external nofollow noopener noreffer" title="FixIt 0.2.12"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://anthonysun256.github.io target=_blank>Anthony</a></span><span class=footer-divider></span><span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line>
+<span id=busuanzi_container_site_uv title=总访客数><i class="far fa-user"></i>
+<span id=busuanzi_value_site_uv><i class="fa fa-spinner fa-spin"></i></span></span><span class="site-time footer-divider" title="网站运行中 ..."><i class="fas fa-heartbeat animate-icon"></i>
+<span class=run-times>Loading...</span></span><span id=busuanzi_container_site_pv class=footer-divider title=总访问量><i class="far fa-eye"></i>
+<span id=busuanzi_value_site_pv><i class="fa fa-spinner fa-spin"></i></span></span>
+</div></div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/valine/valine.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.cd0d0b6e50ff01ff2f3a9a70d7cfb66a7c6cb9acf7a566325568be6d3bd31fc4.css integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q="><script type=text/javascript src=/lib/valine/Valine.min.99d5defc82c7a9a83c8b580b4c59d7917e394c5ce111efb7980900cce4798a5d.js integrity="sha256-mdXe/ILHqag8i1gLTFnXkX45TFzhEe+3mAkAzOR5il0="></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.ae2da1bd62c6469ee27770ad1cddf2e8296d8a7f6d85b091463e5200c5e320af.js integrity="sha256-ri2hvWLGRp7id3CtHN3y6Cltin9thbCRRj5SAMXjIK8=" defer></script><script type=text/javascript src=/lib/lunr/lunr.min.08a93c0120364b01159db3c287f39b2180bb740334472bda0675bd3f18981676.js integrity="sha256-CKk8ASA2SwEVnbPCh/ObIYC7dAM0RyvaBnW9PxiYFnY=" defer></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.115461812ca5b093f9bcc2f15d2693a6c90e8fe38dabf2375e5f18e1c348d97c.js integrity="sha256-EVRhgSylsJP5vMLxXSaTpskOj+ONq/I3Xl8Y4cNI2Xw=" defer></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.b3aab24bd69b746d28f433f4a82ecfa1556a75ba5ef9f4caa2bcc7ab8d327c14.js integrity="sha256-s6qyS9abdG0o9DP0qC7PoVVqdbpe+fTKorzHq40yfBQ=" defer></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.3d9120fa621da6d613c1698b7014ec6bdf4620366e8f2b7b547059f4b6f6272b.js integrity="sha256-PZEg+mIdptYTwWmLcBTsa99GIDZujyt7VHBZ9Lb2Jys=" async defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.11be927cda59c8b6019ebbea838285c5beaf21183ea4b83dbd4e4fbf9413ce4a.js integrity="sha256-Eb6SfNpZyLYBnrvqg4KFxb6vIRg+pLg9vU5Pv5QTzko=" defer></script><script type=text/javascript src=/lib/sharer/sharer.min.8fe10eb615eb163a20f795484430a012805ec7c8c11df52df54ddb7a46084254.js integrity="sha256-j+EOthXrFjog95VIRDCgEoBex8jBHfUt9U3bekYIQlQ=" async defer></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.e55842a856a6d829feca3c3ad736c136b6c7549e9247274f78aa296259e06e24.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" defer></script><script type=text/javascript src=/lib/pangu/pangu.min.8feca3e7a71d118d82c2456d1b2cf5f1f3726c51a930627c2711b7192c8edbe2.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" defer></script><script type=text/javascript src=/lib/watermark/watermark.min.3aa89adf18b45b2fd56d3fe0b68c097e06071ff23a7ece2c11eee3df23e5d3ae.js integrity="sha256-Oqia3xi0Wy/VbT/gtowJfgYHH/I6fs4sEe7j3yPl064="></script><script type=text/javascript src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js async defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{valine:{appId:"L0AFQlSlYUbwiUIuT0AbcLYy-gzGzoHsz",appKey:"QFEm66FGIgVefpWowUm89KBt",avatar:"mp",el:"#valine",emojiCDN:"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/",emojiMaps:{100:"1f4af.png",alien:"1f47d.png",anger:"1f4a2.png",angry:"1f620.png",anguished:"1f627.png",astonished:"1f632.png",black_heart:"1f5a4.png",blue_heart:"1f499.png",blush:"1f60a.png",bomb:"1f4a3.png",boom:"1f4a5.png",broken_heart:"1f494.png",brown_heart:"1f90e.png",clown_face:"1f921.png",cold_face:"1f976.png",cold_sweat:"1f630.png",confounded:"1f616.png",confused:"1f615.png",cry:"1f622.png",crying_cat_face:"1f63f.png",cupid:"1f498.png",dash:"1f4a8.png",disappointed:"1f61e.png",disappointed_relieved:"1f625.png",dizzy:"1f4ab.png",dizzy_face:"1f635.png",drooling_face:"1f924.png",exploding_head:"1f92f.png",expressionless:"1f611.png",face_vomiting:"1f92e.png",face_with_cowboy_hat:"1f920.png",face_with_hand_over_mouth:"1f92d.png",face_with_head_bandage:"1f915.png",face_with_monocle:"1f9d0.png",face_with_raised_eyebrow:"1f928.png",face_with_rolling_eyes:"1f644.png",face_with_symbols_on_mouth:"1f92c.png",face_with_thermometer:"1f912.png",fearful:"1f628.png",flushed:"1f633.png",frowning:"1f626.png",ghost:"1f47b.png",gift_heart:"1f49d.png",green_heart:"1f49a.png",grimacing:"1f62c.png",grin:"1f601.png",grinning:"1f600.png",hankey:"1f4a9.png",hear_no_evil:"1f649.png",heart:"2764-fe0f.png",heart_decoration:"1f49f.png",heart_eyes:"1f60d.png",heart_eyes_cat:"1f63b.png",heartbeat:"1f493.png",heartpulse:"1f497.png",heavy_heart_exclamation_mark_ornament:"2763-fe0f.png",hole:"1f573-fe0f.png",hot_face:"1f975.png",hugging_face:"1f917.png",hushed:"1f62f.png",imp:"1f47f.png",innocent:"1f607.png",japanese_goblin:"1f47a.png",japanese_ogre:"1f479.png",joy:"1f602.png",joy_cat:"1f639.png",kiss:"1f48b.png",kissing:"1f617.png",kissing_cat:"1f63d.png",kissing_closed_eyes:"1f61a.png",kissing_heart:"1f618.png",kissing_smiling_eyes:"1f619.png",laughing:"1f606.png",left_speech_bubble:"1f5e8-fe0f.png",love_letter:"1f48c.png",lying_face:"1f925.png",mask:"1f637.png",money_mouth_face:"1f911.png",nauseated_face:"1f922.png",nerd_face:"1f913.png",neutral_face:"1f610.png",no_mouth:"1f636.png",open_mouth:"1f62e.png",orange_heart:"1f9e1.png",partying_face:"1f973.png",pensive:"1f614.png",persevere:"1f623.png",pleading_face:"1f97a.png",pouting_cat:"1f63e.png",purple_heart:"1f49c.png",rage:"1f621.png",relaxed:"263a-fe0f.png",relieved:"1f60c.png",revolving_hearts:"1f49e.png",right_anger_bubble:"1f5ef-fe0f.png",robot_face:"1f916.png",rolling_on_the_floor_laughing:"1f923.png",scream:"1f631.png",scream_cat:"1f640.png",see_no_evil:"1f648.png",shushing_face:"1f92b.png",skull:"1f480.png",skull_and_crossbones:"2620-fe0f.png",sleeping:"1f634.png",sleepy:"1f62a.png",slightly_frowning_face:"1f641.png",slightly_smiling_face:"1f642.png",smile:"1f604.png",smile_cat:"1f638.png",smiley:"1f603.png",smiley_cat:"1f63a.png",smiling_face_with_3_hearts:"1f970.png",smiling_imp:"1f608.png",smirk:"1f60f.png",smirk_cat:"1f63c.png",sneezing_face:"1f927.png",sob:"1f62d.png",space_invader:"1f47e.png",sparkling_heart:"1f496.png",speak_no_evil:"1f64a.png",speech_balloon:"1f4ac.png","star-struck":"1f929.png",stuck_out_tongue:"1f61b.png",stuck_out_tongue_closed_eyes:"1f61d.png",stuck_out_tongue_winking_eye:"1f61c.png",sunglasses:"1f60e.png",sweat:"1f613.png",sweat_drops:"1f4a6.png",sweat_smile:"1f605.png",thinking_face:"1f914.png",thought_balloon:"1f4ad.png",tired_face:"1f62b.png",triumph:"1f624.png",two_hearts:"1f495.png",unamused:"1f612.png",upside_down_face:"1f643.png",weary:"1f629.png",white_frowning_face:"2639-fe0f.png",white_heart:"1f90d.png",wink:"1f609.png",woozy_face:"1f974.png",worried:"1f61f.png",yawning_face:"1f971.png",yellow_heart:"1f49b.png",yum:"1f60b.png",zany_face:"1f92a.png",zipper_mouth_face:"1f910.png",zzz:"1f4a4.png"},enableQQ:!0,highlight:!0,lang:"zh-cn",meta:["nick","mail","link"],pageSize:10,placeholder:"(●ˇ∀ˇ●)有事请留言！\n如果有什么意见或者都可以在评论区给出哟~\n请留下您的邮箱地址，我会通过邮件回复您的",recordIP:!0,visitor:!0}},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.fe29c18e9d6ddc75e3809a910c657b11f9e814dbf25b1bd7986f9e36bbd6e184.js integrity="sha256-/inBjp1t3HXjgJqRDGV7EfnoFNvyWxvXmG+eNrvW4YQ=" defer></script><script type=text/javascript src=/js/_custom.min.df739882b37cc196454b7351badaba231d4b8976f594d0791315131bea716700.js integrity="sha256-33OYgrN8wZZFS3NRutq6Ix1LiXb1lNB5ExUTG+pxZwA=" defer></script><script type=text/javascript>function createTime(){let d=new Date,e=new Date("2022-01-24T11:00:00+08:00"),b=(d-e)/1e3,a=Math.floor(b/60/60/24),c=Math.floor(b/60/60-24*a),f=Math.floor(b/60-24*60*a-60*c),g=Math.floor((d-e)/1e3-24*60*60*a-60*60*c-60*f);document.querySelector(".run-times").innerHTML=`${a},${String(c).padStart(2,0)}:${String(f).padStart(2,0)}:${String(g).padStart(2,0)}`}(()=>{'serviceWorker'in navigator&&(navigator.serviceWorker.register('/service-worker.min.js',{scope:'/'}).then(function(a){}).catch(function(a){console.error('error: ',a)}),navigator.serviceWorker.ready.then(function(a){})),new Watermark({content:'\u003ci class="fa-stack fa-xs logo-icon"\u003e\u003ci class="fas fa-bug fa-stack-1x"\u003e\u003c/i\u003e\u003ci class="fas fa-ban fa-stack-2x"\u003e\u003c/i\u003e\u003c/i\u003e Author: AnthonySuen'||'<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',appendTo:null||'.wrapper>.main',opacity:.02,width:null,height:23,rowSpacing:null,colSpacing:null,rotate:null,fontSize:null});var a=setInterval("createTime()",500);document.addEventListener("visibilitychange",()=>{if(document.hidden)return clearInterval(a);var a=setInterval("createTime()",500)}),document.addEventListener('DOMContentLoaded',()=>{pangu.autoSpacingPage()})})()</script>
+</body>
+</html>
