@@ -16,7 +16,7 @@
 
 {{< admonition >}}
 本节使用 Ubuntu + docker2作为教程环境，其余发行版请参考[官方安装指南](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker[)
-{{< /admonition >}}
+{{< /admonition >}}需要注意的是，在已经构建好的 容器 中改变这些环境变量不会有任何效果，如果您需要梗概配置还请 重新构建容器。
 
 ### 添加 GPG key 和 源
 
@@ -106,7 +106,7 @@ $ docker run --rm --runtime=nvidia \
     nvidia/cuda nvidia-smi
 ```
 
-{{< admonition 提示>}}
+{{< admonition title="注意">}}
 需要注意的是，在已经构建好的 容器 中改变这些环境变量不会有任何效果，如果您需要梗概配置还请 重新构建容器。
 {{< /admonition >}}
 
