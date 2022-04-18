@@ -1,0 +1,323 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>在 Docker 中使用 Nvidia 显卡 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
+<meta name=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
+<meta name=keywords content="Nvidia,Docker,Ubuntu"><meta itemprop=name content="在 Docker 中使用 Nvidia 显卡">
+<meta itemprop=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡"><meta itemprop=datePublished content="2022-04-18T07:27:08+00:00">
+<meta itemprop=dateModified content="2022-04-18T08:34:32+00:00">
+<meta itemprop=wordCount content="1027"><meta itemprop=image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
+<meta itemprop=keywords content="Nvidia,Docker,Ubuntu,"><meta property="og:title" content="在 Docker 中使用 Nvidia 显卡">
+<meta property="og:description" content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://anthonysun256.github.io/docker_with_nvidia/"><meta property="og:image" content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-04-18T07:27:08+00:00">
+<meta property="article:modified_time" content="2022-04-18T08:34:32+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
+<meta name=twitter:title content="在 Docker 中使用 Nvidia 显卡">
+<meta name=twitter:description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
+<meta name=application-name content="Anthony's blog">
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=prev href=https://anthonysun256.github.io/scout_mini_sim/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在 Docker 中使用 Nvidia 显卡","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/images\/cover.png","width":522,"height":369}],"genre":"posts","keywords":"Nvidia, Docker, Ubuntu","wordcount":1027,"url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/","datePublished":"2022-04-18T07:27:08+00:00","dateModified":"2022-04-18T08:34:32+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="Anthony's Blog"><span class=header-title-pre><i class="fas fa-greater-than-equal"></i></span><span class=header-title-text>Anthony's blog</span></a><span class=header-subtitle>和你分享我的所见所闻</span></div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 所有文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><a class=menu-item href=/friends/ title=友情链接> 友链 </a><a class=menu-item href=/about/ title=博主简介> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="Anthony's Blog"><span class=header-title-pre><i class="fas fa-greater-than-equal"></i></span><span class=header-title-text>Anthony's blog</span></a><span class=header-subtitle>和你分享我的所见所闻</span></div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/friends/ title=友情链接>友链</a><a class=menu-item href=/about/ title=博主简介>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX">在 Docker 中使用 Nvidia 显卡</h1><h2 class=single-subtitle>在 Docker 中使用 Nvidia 显卡加速计算</h2><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/><i class="far fa-folder fa-fw"></i>环境配置</a></span></div>
+<div class=post-meta-line><span title="2022-04-18 07:27:08">
+<i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-18>2022-04-18</time>
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1027 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id=/docker_with_nvidia/ class=leancloud_visitors data-flag-title="在 Docker 中使用 Nvidia 显卡">
+<i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+</span>&nbsp;</div>
+</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/docker_with_nvidia/images/cover.png data-srcset="/docker_with_nvidia/images/cover.png, /docker_with_nvidia/images/cover.png 1.5x, /docker_with_nvidia/images/cover.png 2x" data-sizes=auto alt=/docker_with_nvidia/images/cover.png title=/docker_with_nvidia/images/cover.png></div><div class="details toc" id=toc-static kept=false>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#1-查看安装专有驱动>1. 查看安装专有驱动</a></li>
+<li><a href=#2-安装-nvidia-docker>2. 安装 Nvidia-docker</a>
+<ul>
+<li><a href=#添加-gpg-key-和-源>添加 GPG key 和 源</a></li>
+<li><a href=#安装-nvidia-docker>安装 Nvidia-docker</a></li>
+</ul>
+</li>
+<li><a href=#3-使用说明>3. 使用说明</a></li>
+<li><a href=#结语>结语</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><p>作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡</p>
+<h2 id=1-查看安装专有驱动>1. 查看安装专有驱动</h2>
+<p>想要使用 Nvidia 显卡，我们必须先要安装 Nvidia 官方驱动（默认情况下我们使用的是 开源驱动）</p>
+<blockquote>
+<p>安装流程：<a href=https://zhuanlan.zhihu.com/p/388970072 target=_blank rel="noopener noreffer">https://zhuanlan.zhihu.com/p/388970072</a></p>
+</blockquote>
+<h2 id=2-安装-nvidia-docker>2. 安装 Nvidia-docker</h2>
+<blockquote>
+<p>官方仓库：<a href=https://github.com/NVIDIA/nvidia-docker target=_blank rel="noopener noreffer">https://github.com/NVIDIA/nvidia-docker</a></p>
+<p>安装指南：<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker</a></p>
+</blockquote>
+<div class="details admonition note open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>本节使用 Ubuntu + docker2作为教程环境，其余发行版请参考<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker[ target=_blank rel="noopener noreffer">官方安装指南</a></div>
+</div>
+</div>
+<h3 id=添加-gpg-key-和-源>添加 GPG key 和 源</h3>
+<p>在终端执行如下指令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nv>distribution</span><span class=o>=</span><span class=k>$(</span>. /etc/os-release<span class=p>;</span><span class=nb>echo</span> <span class=nv>$ID$VERSION_ID</span><span class=k>)</span> <span class=se>\
+</span><span class=se></span>      <span class=o>&amp;&amp;</span> curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg <span class=se>\
+</span><span class=se></span>      <span class=o>&amp;&amp;</span> curl -s -L https://nvidia.github.io/libnvidia-container/<span class=nv>$distribution</span>/libnvidia-container.list <span class=p>|</span> <span class=se>\
+</span><span class=se></span>            sed <span class=s1>&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span> <span class=p>|</span> <span class=se>\
+</span><span class=se></span>            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+</code></pre></td></tr></table>
+</div>
+</div><p>之后更新 apt:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get update
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=安装-nvidia-docker>安装 Nvidia-docker</h3>
+<p>使用如下指令安装：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get install -y nvidia-docker2
+</code></pre></td></tr></table>
+</div>
+</div><p>成功后重启 docker：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo systemctl restart docker
+</code></pre></td></tr></table>
+</div>
+</div><p>之后可以进行测试：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+</code></pre></td></tr></table>
+</div>
+</div><p>应当能看到输出：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 450.51.06    Driver Version: 450.51.06    CUDA Version: 11.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
+| N/A   34C    P8     9W /  70W |      0MiB / 15109MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=3-使用说明>3. 使用说明</h2>
+<blockquote>
+<p>官方文档：<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration</a></p>
+</blockquote>
+<p>与未使用 nvidia 显卡的容器不同之处在于 nvidia-docker 多了一个 <code>--gpus </code> 参数，这个参数标明我们容器中可以使用哪些显卡（如果你的机器上有多张显卡的话）</p>
+<p>一般情况下我们使用 <code>docker --gpus all</code> 即可，如果需要特别指名使用哪几张显卡，则可以使用类似 <code>--gpus 0,1</code> 指明使用 GPU UUID 为 0、1 的显卡</p>
+<p>此外，根据不同情景需要我们还需要指名要在容器中安装哪些驱动程序或支持库，完整的列表见： <a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#driver-capabilities target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#driver-capabilities</a></p>
+<p>比如我们需要 <code>CUDA</code> 和 <code>nvidia-smi+NVML</code> 支持，则需要这样</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ docker run --rm --gpus <span class=s1>&#39;all,&#34;capabilities=compute,utility&#34;&#39;</span> <span class=se>\
+</span><span class=se></span>    nvidia/cuda:11.0-base nvidia-smi
+</code></pre></td></tr></table>
+</div>
+</div><p>或者这样：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 传递环境变量的方式</span>
+$ docker run --rm --runtime<span class=o>=</span>nvidia <span class=se>\
+</span><span class=se></span>    -e <span class=nv>NVIDIA_VISIBLE_DEVICES</span><span class=o>=</span>2,3 <span class=se>\
+</span><span class=se></span>    -e <span class=nv>NVIDIA_DRIVER_CAPABILITIES</span><span class=o>=</span>compute,utility <span class=se>\
+</span><span class=se></span>    nvidia/cuda nvidia-smi
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition 提示 open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i><i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>需要注意的是，在已经构建好的 容器 中改变这些环境变量不会有任何效果，如果您需要梗概配置还请 重新构建容器。</div>
+</div>
+</div>
+<h2 id=结语>结语</h2>
+<p>至此，在 Docker 中使用 nvidia 显卡的方法就介绍完毕了，如果您需要在 容器 中使用 Nvidia 相关支持库或者其他功能，则请参考官方文档。</p></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span title="2022-04-18 08:34:32">更新于 2022-04-18</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡" data-hashtags=Nvidia,Docker,Ubuntu><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-hashtag=Nvidia><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i class="fab fa-weibo fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/nvidia/>Nvidia</a>,&nbsp;<a href=/tags/docker/>Docker</a>,&nbsp;<a href=/tags/ubuntu/>Ubuntu</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/scout_mini_sim/ class=prev rel=prev title="Scout mini 仿真指南"><i class="fas fa-angle-left fa-fw"></i>Scout mini 仿真指南</a></div>
+</div>
+<div id=comments><div id=valine class=comment></div><noscript>
+Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.
+</noscript></div></article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/Lruihao/FixIt target=_blank rel="external nofollow noopener noreffer" title="FixIt 0.2.12"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://anthonysun256.github.io target=_blank>Anthony</a></span><span class=footer-divider></span><span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line>
+<span id=busuanzi_container_site_uv title=总访客数><i class="far fa-user"></i>
+<span id=busuanzi_value_site_uv><i class="fa fa-spinner fa-spin"></i></span></span><span class="site-time footer-divider" title="网站运行中 ..."><i class="fas fa-heartbeat animate-icon"></i>
+<span class=run-times>Loading...</span></span><span id=busuanzi_container_site_pv class=footer-divider title=总访问量><i class="far fa-eye"></i>
+<span id=busuanzi_value_site_pv><i class="fa fa-spinner fa-spin"></i></span></span>
+</div></div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/valine/valine.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.cd0d0b6e50ff01ff2f3a9a70d7cfb66a7c6cb9acf7a566325568be6d3bd31fc4.css integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q="><script type=text/javascript src=/lib/valine/Valine.min.99d5defc82c7a9a83c8b580b4c59d7917e394c5ce111efb7980900cce4798a5d.js integrity="sha256-mdXe/ILHqag8i1gLTFnXkX45TFzhEe+3mAkAzOR5il0="></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.ae2da1bd62c6469ee27770ad1cddf2e8296d8a7f6d85b091463e5200c5e320af.js integrity="sha256-ri2hvWLGRp7id3CtHN3y6Cltin9thbCRRj5SAMXjIK8=" defer></script><script type=text/javascript src=/lib/lunr/lunr.min.08a93c0120364b01159db3c287f39b2180bb740334472bda0675bd3f18981676.js integrity="sha256-CKk8ASA2SwEVnbPCh/ObIYC7dAM0RyvaBnW9PxiYFnY=" defer></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.115461812ca5b093f9bcc2f15d2693a6c90e8fe38dabf2375e5f18e1c348d97c.js integrity="sha256-EVRhgSylsJP5vMLxXSaTpskOj+ONq/I3Xl8Y4cNI2Xw=" defer></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.b3aab24bd69b746d28f433f4a82ecfa1556a75ba5ef9f4caa2bcc7ab8d327c14.js integrity="sha256-s6qyS9abdG0o9DP0qC7PoVVqdbpe+fTKorzHq40yfBQ=" defer></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.3d9120fa621da6d613c1698b7014ec6bdf4620366e8f2b7b547059f4b6f6272b.js integrity="sha256-PZEg+mIdptYTwWmLcBTsa99GIDZujyt7VHBZ9Lb2Jys=" async defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.11be927cda59c8b6019ebbea838285c5beaf21183ea4b83dbd4e4fbf9413ce4a.js integrity="sha256-Eb6SfNpZyLYBnrvqg4KFxb6vIRg+pLg9vU5Pv5QTzko=" defer></script><script type=text/javascript src=/lib/sharer/sharer.min.8fe10eb615eb163a20f795484430a012805ec7c8c11df52df54ddb7a46084254.js integrity="sha256-j+EOthXrFjog95VIRDCgEoBex8jBHfUt9U3bekYIQlQ=" async defer></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.e55842a856a6d829feca3c3ad736c136b6c7549e9247274f78aa296259e06e24.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" defer></script><script type=text/javascript src=/lib/pangu/pangu.min.8feca3e7a71d118d82c2456d1b2cf5f1f3726c51a930627c2711b7192c8edbe2.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" defer></script><script type=text/javascript src=/lib/watermark/watermark.min.3aa89adf18b45b2fd56d3fe0b68c097e06071ff23a7ece2c11eee3df23e5d3ae.js integrity="sha256-Oqia3xi0Wy/VbT/gtowJfgYHH/I6fs4sEe7j3yPl064="></script><script type=text/javascript src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js async defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{valine:{appId:"L0AFQlSlYUbwiUIuT0AbcLYy-gzGzoHsz",appKey:"QFEm66FGIgVefpWowUm89KBt",avatar:"mp",el:"#valine",emojiCDN:"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/",emojiMaps:{100:"1f4af.png",alien:"1f47d.png",anger:"1f4a2.png",angry:"1f620.png",anguished:"1f627.png",astonished:"1f632.png",black_heart:"1f5a4.png",blue_heart:"1f499.png",blush:"1f60a.png",bomb:"1f4a3.png",boom:"1f4a5.png",broken_heart:"1f494.png",brown_heart:"1f90e.png",clown_face:"1f921.png",cold_face:"1f976.png",cold_sweat:"1f630.png",confounded:"1f616.png",confused:"1f615.png",cry:"1f622.png",crying_cat_face:"1f63f.png",cupid:"1f498.png",dash:"1f4a8.png",disappointed:"1f61e.png",disappointed_relieved:"1f625.png",dizzy:"1f4ab.png",dizzy_face:"1f635.png",drooling_face:"1f924.png",exploding_head:"1f92f.png",expressionless:"1f611.png",face_vomiting:"1f92e.png",face_with_cowboy_hat:"1f920.png",face_with_hand_over_mouth:"1f92d.png",face_with_head_bandage:"1f915.png",face_with_monocle:"1f9d0.png",face_with_raised_eyebrow:"1f928.png",face_with_rolling_eyes:"1f644.png",face_with_symbols_on_mouth:"1f92c.png",face_with_thermometer:"1f912.png",fearful:"1f628.png",flushed:"1f633.png",frowning:"1f626.png",ghost:"1f47b.png",gift_heart:"1f49d.png",green_heart:"1f49a.png",grimacing:"1f62c.png",grin:"1f601.png",grinning:"1f600.png",hankey:"1f4a9.png",hear_no_evil:"1f649.png",heart:"2764-fe0f.png",heart_decoration:"1f49f.png",heart_eyes:"1f60d.png",heart_eyes_cat:"1f63b.png",heartbeat:"1f493.png",heartpulse:"1f497.png",heavy_heart_exclamation_mark_ornament:"2763-fe0f.png",hole:"1f573-fe0f.png",hot_face:"1f975.png",hugging_face:"1f917.png",hushed:"1f62f.png",imp:"1f47f.png",innocent:"1f607.png",japanese_goblin:"1f47a.png",japanese_ogre:"1f479.png",joy:"1f602.png",joy_cat:"1f639.png",kiss:"1f48b.png",kissing:"1f617.png",kissing_cat:"1f63d.png",kissing_closed_eyes:"1f61a.png",kissing_heart:"1f618.png",kissing_smiling_eyes:"1f619.png",laughing:"1f606.png",left_speech_bubble:"1f5e8-fe0f.png",love_letter:"1f48c.png",lying_face:"1f925.png",mask:"1f637.png",money_mouth_face:"1f911.png",nauseated_face:"1f922.png",nerd_face:"1f913.png",neutral_face:"1f610.png",no_mouth:"1f636.png",open_mouth:"1f62e.png",orange_heart:"1f9e1.png",partying_face:"1f973.png",pensive:"1f614.png",persevere:"1f623.png",pleading_face:"1f97a.png",pouting_cat:"1f63e.png",purple_heart:"1f49c.png",rage:"1f621.png",relaxed:"263a-fe0f.png",relieved:"1f60c.png",revolving_hearts:"1f49e.png",right_anger_bubble:"1f5ef-fe0f.png",robot_face:"1f916.png",rolling_on_the_floor_laughing:"1f923.png",scream:"1f631.png",scream_cat:"1f640.png",see_no_evil:"1f648.png",shushing_face:"1f92b.png",skull:"1f480.png",skull_and_crossbones:"2620-fe0f.png",sleeping:"1f634.png",sleepy:"1f62a.png",slightly_frowning_face:"1f641.png",slightly_smiling_face:"1f642.png",smile:"1f604.png",smile_cat:"1f638.png",smiley:"1f603.png",smiley_cat:"1f63a.png",smiling_face_with_3_hearts:"1f970.png",smiling_imp:"1f608.png",smirk:"1f60f.png",smirk_cat:"1f63c.png",sneezing_face:"1f927.png",sob:"1f62d.png",space_invader:"1f47e.png",sparkling_heart:"1f496.png",speak_no_evil:"1f64a.png",speech_balloon:"1f4ac.png","star-struck":"1f929.png",stuck_out_tongue:"1f61b.png",stuck_out_tongue_closed_eyes:"1f61d.png",stuck_out_tongue_winking_eye:"1f61c.png",sunglasses:"1f60e.png",sweat:"1f613.png",sweat_drops:"1f4a6.png",sweat_smile:"1f605.png",thinking_face:"1f914.png",thought_balloon:"1f4ad.png",tired_face:"1f62b.png",triumph:"1f624.png",two_hearts:"1f495.png",unamused:"1f612.png",upside_down_face:"1f643.png",weary:"1f629.png",white_frowning_face:"2639-fe0f.png",white_heart:"1f90d.png",wink:"1f609.png",woozy_face:"1f974.png",worried:"1f61f.png",yawning_face:"1f971.png",yellow_heart:"1f49b.png",yum:"1f60b.png",zany_face:"1f92a.png",zipper_mouth_face:"1f910.png",zzz:"1f4a4.png"},enableQQ:!0,highlight:!0,lang:"zh-cn",meta:["nick","mail","link"],pageSize:10,placeholder:"(●ˇ∀ˇ●)有事请留言！\n如果有什么意见或者都可以在评论区给出哟~\n请留下您的邮箱地址，我会通过邮件回复您的",recordIP:!0,visitor:!0}},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.fe29c18e9d6ddc75e3809a910c657b11f9e814dbf25b1bd7986f9e36bbd6e184.js integrity="sha256-/inBjp1t3HXjgJqRDGV7EfnoFNvyWxvXmG+eNrvW4YQ=" defer></script><script type=text/javascript src=/js/_custom.min.df739882b37cc196454b7351badaba231d4b8976f594d0791315131bea716700.js integrity="sha256-33OYgrN8wZZFS3NRutq6Ix1LiXb1lNB5ExUTG+pxZwA=" defer></script><script type=text/javascript>function createTime(){let d=new Date,e=new Date("2022-01-24T11:00:00+08:00"),b=(d-e)/1e3,a=Math.floor(b/60/60/24),c=Math.floor(b/60/60-24*a),f=Math.floor(b/60-24*60*a-60*c),g=Math.floor((d-e)/1e3-24*60*60*a-60*60*c-60*f);document.querySelector(".run-times").innerHTML=`${a},${String(c).padStart(2,0)}:${String(f).padStart(2,0)}:${String(g).padStart(2,0)}`}(()=>{'serviceWorker'in navigator&&(navigator.serviceWorker.register('/service-worker.min.js',{scope:'/'}).then(function(a){}).catch(function(a){console.error('error: ',a)}),navigator.serviceWorker.ready.then(function(a){})),new Watermark({content:'\u003ci class="fa-stack fa-xs logo-icon"\u003e\u003ci class="fas fa-bug fa-stack-1x"\u003e\u003c/i\u003e\u003ci class="fas fa-ban fa-stack-2x"\u003e\u003c/i\u003e\u003c/i\u003e Author: AnthonySuen'||'<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',appendTo:null||'.wrapper>.main',opacity:.02,width:null,height:23,rowSpacing:null,colSpacing:null,rotate:null,fontSize:null});var a=setInterval("createTime()",500);document.addEventListener("visibilitychange",()=>{if(document.hidden)return clearInterval(a);var a=setInterval("createTime()",500)}),document.addEventListener('DOMContentLoaded',()=>{pangu.autoSpacingPage()})})()</script>
+</body>
+</html>
