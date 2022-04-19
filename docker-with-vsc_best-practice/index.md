@@ -254,34 +254,48 @@ Dockerfile 在 [Docker 学习]({{<relref "#docker-学习">}}) 章节已经讲过
 
 首先我们在 **devcontainer.json** 中的 `runArgs` 字段中添加 `"--volume=/tmp/.X11-unix:/tmp/.X11-unix"` 表示挂载 x11 相关目录到容器中
 
-`containerEnv` 字段中添加 `"DISPLAY": "${localEnv:DISPLAY}" `  表示设定容器中的 `DISPLAY` 环境变量与本地 `DISPLAY` 为一样的值
+`containerEnv` 字段中添加 `"DISPLAY": "${localEnv:DISPLAY}" `  表示设定容器中的 `DISPLAY` 环境变量与本地 `DISPLAY` 为一样的值，例如：
 
-在 Dockerfile 中添加如下内容：
-
-```dockerfile
-# 来源：https://github.com/athackst/dockerfiles/blob/main/ros2/foxy.Dockerfile
-################
-# Expose the nvidia driver to allow opengl 
-# Dependencies for glvnd and X11.
-################
-RUN apt-get update \
- && apt-get install -y -qq --no-install-recommends \
-  libglvnd0 \
-  libgl1 \
-  libglx0 \
-  libegl1 \
-  libxext6 \
-  libx11-6
-
-# Env vars for the nvidia-container-runtime.
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
-ENV QT_X11_NO_MITSHM 1
+```json
+{
+	"dockerFile": "Dockerfile",
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+		}
+	},
+	"remoteUser": "ros",
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		// "--gpus" "all", // 取消注释使用 GPU 功能
+	],
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" },
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "bash"
+			},
+		},
+		"terminal.integrated.defaultProfile.linux": "bash"
+	}
 ```
+
+最后，在我们的主机中打开一个命令行，输入：
+
+```shell
+$ xhost +
+```
+
+来允许我们的容器在宿主机上显示窗口。
 
 至此即可完成将容器中 GUI 显示在宿主机的操作！
 
 ## 结语
 
-至此 Docker 配合 VSCode 开发的内容就讲解完毕了，如果大家觉得有哪里需要改进或者拓展的地方还请在评论区提出，我会及时回复
+至此 Docker 配合 VSCode 开发的内容就讲解完毕了，如果大家觉得有哪里需要改进或者拓展的地方还请在评论区提出，我会及时回复.
 

@@ -10,22 +10,22 @@
 <meta name=keywords content="ROS,VSCode,Docker"><meta itemprop=name content="我的 ROS 开发环境">
 <meta itemprop=description content="本文主要介绍我所使用的 ROS 开发环境
 我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html"><meta itemprop=datePublished content="2022-04-18T08:51:43+00:00">
-<meta itemprop=dateModified content="2022-04-19T07:24:58+00:00">
-<meta itemprop=wordCount content="280"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
+<meta itemprop=dateModified content="2022-04-19T07:50:28+00:00">
+<meta itemprop=wordCount content="993"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
 <meta itemprop=keywords content="ROS,VSCode,Docker,"><meta property="og:title" content="我的 ROS 开发环境">
 <meta property="og:description" content="本文主要介绍我所使用的 ROS 开发环境
 我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://anthonysun256.github.io/my_ros_env/"><meta property="og:image" content="https://anthonysun256.github.io/logo.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-04-18T08:51:43+00:00">
-<meta property="article:modified_time" content="2022-04-19T07:24:58+00:00">
+<meta property="article:modified_time" content="2022-04-19T07:50:28+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://anthonysun256.github.io/logo.png">
 <meta name=twitter:title content="我的 ROS 开发环境">
 <meta name=twitter:description content="本文主要介绍我所使用的 ROS 开发环境
 我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/my_ros_env/><link rel=prev href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的 ROS 开发环境","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/my_ros_env\/"},"genre":"posts","keywords":"ROS, VSCode, Docker","wordcount":280,"url":"https:\/\/anthonysun256.github.io\/my_ros_env\/","datePublished":"2022-04-18T08:51:43+00:00","dateModified":"2022-04-19T07:24:58+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/my_ros_env/><link rel=prev href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的 ROS 开发环境","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/my_ros_env\/"},"genre":"posts","keywords":"ROS, VSCode, Docker","wordcount":993,"url":"https:\/\/anthonysun256.github.io\/my_ros_env\/","datePublished":"2022-04-18T08:51:43+00:00","dateModified":"2022-04-19T07:50:28+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -93,8 +93,8 @@
 <div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/><i class="far fa-folder fa-fw"></i>环境配置</a></span></div>
 <div class=post-meta-line><span title="2022-04-18 08:51:43">
 <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-18>2022-04-18</time>
-</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 280 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id=/my_ros_env/ class=leancloud_visitors data-flag-title="我的 ROS 开发环境">
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 993 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id=/my_ros_env/ class=leancloud_visitors data-flag-title="我的 ROS 开发环境">
 <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
 </span>&nbsp;</div>
 </div><div class="details toc" id=toc-static kept=false>
@@ -106,7 +106,12 @@
 <ul>
 <li>
 <ul>
-<li><a href=#1-设置-devcontainer>1. 设置 .devcontainer</a></li>
+<li><a href=#0-新建目录>0. 新建目录</a></li>
+<li><a href=#1-选取开发镜像>1. 选取开发镜像</a></li>
+<li><a href=#2-配置-dockerfile>2. 配置 dockerfile</a></li>
+<li><a href=#3-配置-devcontainerjson>3. 配置 devcontainer.json</a></li>
+<li><a href=#4-构建镜像>4. 构建镜像</a></li>
+<li><a href=#5-显示-容器-中的窗口>5. 显示 容器 中的窗口</a></li>
 </ul>
 </li>
 </ul>
@@ -115,11 +120,231 @@
 我采用这个模式进行开发是受到了这篇文章的启发：<a href=https://www.allisonthackston.com/articles/vscode-docker-ros2.html target=_blank rel="noopener noreffer">https://www.allisonthackston.com/articles/vscode-docker-ros2.html</a></p>
 <p>如果您用过 ROS 就会发现配置这玩意儿的开发环境是一件非常麻烦的事情，经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT开发、ROS1、ROS2）则会更糟糕。
 这个时候我们就有必要使用 Docker 进行开发，关于如何使用 <code>VSCode + Docker</code> 进行开发的流程已经写在：<a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a>，本文主要介绍如何配置 ROS 相关开发环境</p>
-<h2 id=1-设置-devcontainer>1. 设置 .devcontainer</h2></div><div class=post-footer id=post-footer>
+<blockquote>
+<p>如果您不会使用 docker 或者没有尝试过类似的操作，请您先阅读 <a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+</blockquote>
+<p>如果您使用 <code>ROS-foxy</code> 可以直接使用 <a href=https://github.com/athackst/vscode_ros2_workspace target=_blank rel="noopener noreffer">https://github.com/athackst/vscode_ros2_workspace</a> 作为您的工作目录，如果您需要使用 GPU 加速计算，则选择 带有 <code>foxy-nvidia</code> 的分支即可</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/1.png data-srcset="/my_ros_env/images/1.png, images/1.png 1.5x, /my_ros_env/images/1.png 2x" data-sizes=auto alt=/my_ros_env/images/1.png title=1></p>
+<p><strong>下面我将带您从头配置相关文件</strong></p>
+<h2 id=0-新建目录>0. 新建目录</h2>
+<p>VSCode 会自动读取 <code>.devcontainer</code> 中的配置文件，目录结构如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>.
+├── .devcontainer
+│   ├── devcontainer.json
+│   └── Dockerfile
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=1-选取开发镜像>1. 选取开发镜像</h2>
+<p>这里我一直使用的是 <a href=https://hub.docker.com/u/althack target=_blank rel="noopener noreffer">https://hub.docker.com/u/althack</a> 的镜像。</p>
+<blockquote>
+<p>dockerfile 源码：<a href=https://github.com/athackst/dockerfiles target=_blank rel="noopener noreffer">https://github.com/athackst/dockerfiles</a></p>
+</blockquote>
+<p>例如我最近需要使用 <code>ROS-melodic</code> + <code>Gazebo</code> 则会选择 <a href=https://hub.docker.com/r/althack/ros target=_blank rel="noopener noreffer">https://hub.docker.com/r/althack/ros</a> 中带有 <code>melodic-gazebo</code> 标签的镜像。</p>
+<h2 id=2-配置-dockerfile>2. 配置 dockerfile</h2>
+<p>我们使用如下脚本</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=c># 改编自 https://github.com/athackst/vscode_ros2_workspace</span><span class=err>
+</span><span class=err></span><span class=k>FROM</span><span class=s> althack/ros:melodic-gazebo as gazebo # 我使用的镜像</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># ** [可选] 取消注释安装其他组件 **</span><span class=err>
+</span><span class=err></span><span class=c>#</span><span class=err>
+</span><span class=err></span><span class=c># ENV DEBIAN_FRONTEND=noninteractive</span><span class=err>
+</span><span class=err></span><span class=c># RUN apt-get update \</span><span class=err>
+</span><span class=err></span><span class=c>#    &amp;&amp; apt-get -y install --no-install-recommends &lt;your-package-list-here&gt; \</span><span class=err>
+</span><span class=err></span><span class=c>#    #</span><span class=err>
+</span><span class=err></span><span class=c>#    # Clean up</span><span class=err>
+</span><span class=err></span><span class=c>#    &amp;&amp; apt-get autoremove -y \</span><span class=err>
+</span><span class=err></span><span class=c>#    &amp;&amp; apt-get clean -y \</span><span class=err>
+</span><span class=err></span><span class=c>#    &amp;&amp; rm -rf /var/lib/apt/lists/*</span><span class=err>
+</span><span class=err></span><span class=c># ENV DEBIAN_FRONTEND=dialog</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># 为 ros 用户配置自动 source</span><span class=err>
+</span><span class=err></span><span class=k>ARG</span> WORKSPACE<span class=err>
+</span><span class=err></span><span class=k>RUN</span> <span class=nb>echo</span> <span class=s2>&#34;if [ -f </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash ]; then source </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash; fi&#34;</span> &gt;&gt; /home/ros/.bashrc<span class=err>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如果需要 GPU 支持（需要安装 nvidia-docker) 则在上述脚本之后追加如下指令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>RUN</span> apt-get update <span class=se>\
+</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get install -y -qq --no-install-recommends <span class=se>\
+</span><span class=se></span>    libglvnd0 <span class=se>\
+</span><span class=se></span>    libgl1 <span class=se>\
+</span><span class=se></span>    libglx0 <span class=se>\
+</span><span class=se></span>    libegl1 <span class=se>\
+</span><span class=se></span>    libxext6 <span class=se>\
+</span><span class=se></span>    libx11-6 <span class=se>\
+</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get autoremove -y <span class=se>\
+</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get clean -y <span class=se>\
+</span><span class=se></span>    <span class=o>&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=err>
+</span><span class=err></span><span class=k>ENV</span> <span class=nv>DEBIAN_FRONTEND</span><span class=o>=</span>dialog
+
+<span class=c># Nvidia 运行时变量.</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> NVIDIA_VISIBLE_DEVICES all<span class=err>
+</span><span class=err></span><span class=k>ENV</span> NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> <span class=nv>QT_X11_NO_MITSHM</span><span class=o>=</span><span class=m>1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=3-配置-devcontainerjson>3. 配置 devcontainer.json</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// 改编自 https://github.com/athackst/vscode_ros2_workspace
+</span><span class=c1>// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+</span><span class=c1></span><span class=p>{</span>
+	<span class=nt>&#34;dockerFile&#34;</span><span class=p>:</span> <span class=s2>&#34;Dockerfile&#34;</span><span class=p>,</span>
+	<span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=p>{</span>
+		<span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>{</span>
+			<span class=nt>&#34;WORKSPACE&#34;</span><span class=p>:</span> <span class=s2>&#34;${containerWorkspaceFolder}&#34;</span>
+		<span class=p>}</span>
+	<span class=p>},</span>
+	<span class=nt>&#34;remoteUser&#34;</span><span class=p>:</span> <span class=s2>&#34;ros&#34;</span><span class=p>,</span>
+	<span class=nt>&#34;runArgs&#34;</span><span class=p>:</span> <span class=p>[</span>
+		<span class=s2>&#34;--network=host&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--cap-add=SYS_PTRACE&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--security-opt=seccomp:unconfined&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--security-opt=apparmor:unconfined&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;--volume=/tmp/.X11-unix:/tmp/.X11-unix&#34;</span><span class=p>,</span>
+		<span class=c1>// &#34;--gpus&#34; &#34;all&#34;, // 取消该注释使用 GPU 功能
+</span><span class=c1></span>	<span class=p>],</span>
+	<span class=nt>&#34;containerEnv&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;DISPLAY&#34;</span><span class=p>:</span> <span class=s2>&#34;${localEnv:DISPLAY}&#34;</span> <span class=p>},</span>
+	<span class=c1>// Set *default* container specific settings.json values on container create.
+</span><span class=c1></span>	<span class=nt>&#34;settings&#34;</span><span class=p>:</span> <span class=p>{</span>
+		<span class=nt>&#34;terminal.integrated.profiles.linux&#34;</span><span class=p>:</span> <span class=p>{</span>
+			<span class=nt>&#34;bash&#34;</span><span class=p>:</span> <span class=p>{</span>
+				<span class=nt>&#34;path&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
+			<span class=p>},</span>
+		<span class=p>},</span>
+		<span class=nt>&#34;terminal.integrated.defaultProfile.linux&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
+	<span class=p>},</span>
+    <span class=c1>// 推荐安装的插件
+</span><span class=c1></span>	<span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+		<span class=s2>&#34;dotjoshjohnson.xml&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;zachflower.uncrustify&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-azuretools.vscode-docker&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-iot.vscode-ros&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-python.python&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;ms-vscode.cpptools&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;redhat.vscode-yaml&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;smilerobotics.urdf&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;streetsidesoftware.code-spell-checker&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;twxs.cmake&#34;</span><span class=p>,</span>
+		<span class=s2>&#34;yzhang.markdown-all-in-one&#34;</span>
+	<span class=p>]</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=4-构建镜像>4. 构建镜像</h2>
+<p>我们使用 VSCode 打开文件夹，并且 <code>Reopen in docker</code> 即可（不要自己只使用 Dockerfile 进行构建，因为在 devcontainer.json 中我们还挂载了一些目录，添加了一些参数）</p>
+<h2 id=5-显示-容器-中的窗口>5. 显示 容器 中的窗口</h2>
+<p>在宿主机中打开一个新的终端，输入：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ xhost +
+</code></pre></td></tr></table>
+</div>
+</div><p>之后再运行类似 <code>Gazebo</code> 等图形程序，其界面就会直接在我们的宿主机中显示出来。</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2022-04-19 07:24:58">更新于 2022-04-19</span>
+<span title="2022-04-19 07:50:28">更新于 2022-04-19</span>
 </div>
 <div class=post-info-license></div>
 </div>
