@@ -4,28 +4,36 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>我的 ROS 开发环境 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
-<meta name=description content="本文主要介绍我所使用的 ROS 开发环境
-我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html">
-<meta name=keywords content="ROS,VSCode,Docker"><meta itemprop=name content="我的 ROS 开发环境">
-<meta itemprop=description content="本文主要介绍我所使用的 ROS 开发环境
-我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html"><meta itemprop=datePublished content="2022-04-18T08:51:43+00:00">
+<title>limo 仿真指南 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
+<meta name=description content="
+本文适合有 ROS1 基础和对 Gazebo 有了解的朋友
+
+松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。">
+<meta name=keywords content="limo,ROS1,Gazebo,仿真"><meta itemprop=name content="limo 仿真指南">
+<meta itemprop=description content="
+本文适合有 ROS1 基础和对 Gazebo 有了解的朋友
+
+松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。"><meta itemprop=datePublished content="2022-04-18T07:07:07+00:00">
 <meta itemprop=dateModified content="2022-04-19T09:39:05+00:00">
-<meta itemprop=wordCount content="993"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
-<meta itemprop=keywords content="ROS,VSCode,Docker,"><meta property="og:title" content="我的 ROS 开发环境">
-<meta property="og:description" content="本文主要介绍我所使用的 ROS 开发环境
-我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html">
+<meta itemprop=wordCount content="1144"><meta itemprop=image content="https://anthonysun256.github.io/limo_setup/images/cover.jpg">
+<meta itemprop=keywords content="limo,ROS1,Gazebo,仿真,"><meta property="og:title" content="limo 仿真指南">
+<meta property="og:description" content="
+本文适合有 ROS1 基础和对 Gazebo 有了解的朋友
+
+松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://anthonysun256.github.io/my_ros_env/"><meta property="og:image" content="https://anthonysun256.github.io/logo.png"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-04-18T08:51:43+00:00">
+<meta property="og:url" content="https://anthonysun256.github.io/limo_setup/"><meta property="og:image" content="https://anthonysun256.github.io/limo_setup/images/cover.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-04-18T07:07:07+00:00">
 <meta property="article:modified_time" content="2022-04-19T09:39:05+00:00">
 <meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://anthonysun256.github.io/logo.png">
-<meta name=twitter:title content="我的 ROS 开发环境">
-<meta name=twitter:description content="本文主要介绍我所使用的 ROS 开发环境
-我采用这个模式进行开发是受到了这篇文章的启发：https://www.allisonthackston.com/articles/vscode-docker-ros2.html">
+<meta name=twitter:image content="https://anthonysun256.github.io/limo_setup/images/cover.jpg">
+<meta name=twitter:title content="limo 仿真指南">
+<meta name=twitter:description content="
+本文适合有 ROS1 基础和对 Gazebo 有了解的朋友
+
+松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/my_ros_env/><link rel=prev href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的 ROS 开发环境","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/my_ros_env\/"},"genre":"posts","keywords":"ROS, VSCode, Docker","wordcount":993,"url":"https:\/\/anthonysun256.github.io\/my_ros_env\/","datePublished":"2022-04-18T08:51:43+00:00","dateModified":"2022-04-19T09:39:05+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/limo_setup/><link rel=prev href=https://anthonysun256.github.io/scout_mini_sim/><link rel=next href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"limo 仿真指南","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/limo_setup\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/limo_setup\/images\/cover.jpg","width":750,"height":375}],"genre":"posts","keywords":"limo, ROS1, Gazebo, 仿真","wordcount":1144,"url":"https:\/\/anthonysun256.github.io\/limo_setup\/","datePublished":"2022-04-18T07:07:07+00:00","dateModified":"2022-04-19T09:39:05+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -89,15 +97,15 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">我的 ROS 开发环境</h1><h2 class=single-subtitle>使用 Docker + VSCode 进行高效 ROS 开发</h2><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/><i class="far fa-folder fa-fw"></i>环境配置</a></span></div>
-<div class=post-meta-line><span title="2022-04-18 08:51:43">
+</div><article class="page single"><h1 class="single-title animated flipInX">limo 仿真指南</h1><h2 class=single-subtitle>使用 Gazebo 进行 limo 仿真</h2><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E6%9D%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA/><i class="far fa-folder fa-fw"></i>松灵机器人</a></span></div>
+<div class=post-meta-line><span title="2022-04-18 07:07:07">
 <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-18>2022-04-18</time>
-</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 993 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id=/my_ros_env/ class=leancloud_visitors data-flag-title="我的 ROS 开发环境">
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1144 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id=/limo_setup/ class=leancloud_visitors data-flag-title="limo 仿真指南">
 <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
 </span>&nbsp;</div>
-</div><div class="details toc" id=toc-static kept=false>
+</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/limo_setup/images/cover.jpg data-srcset="/limo_setup/images/cover.jpg, /limo_setup/images/cover.jpg 1.5x, /limo_setup/images/cover.jpg 2x" data-sizes=auto alt=/limo_setup/images/cover.jpg title=/limo_setup/images/cover.jpg></div><div class="details toc" id=toc-static kept=false>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -106,50 +114,50 @@
 <ul>
 <li>
 <ul>
-<li><a href=#0-新建目录>0. 新建目录</a></li>
-<li><a href=#1-选取开发镜像>1. 选取开发镜像</a></li>
-<li><a href=#2-配置-dockerfile>2. 配置 dockerfile</a></li>
-<li><a href=#3-配置-devcontainerjson>3. 配置 devcontainer.json</a></li>
-<li><a href=#4-构建镜像>4. 构建镜像</a></li>
-<li><a href=#5-显示-容器-中的窗口>5. 显示 容器 中的窗口</a></li>
+<li><a href=#0-工作目录>0. 工作目录</a></li>
+<li><a href=#1-环境配置>1. 环境配置</a></li>
+<li><a href=#2-初始化仿真环境>2. 初始化仿真环境</a></li>
 </ul>
 </li>
 </ul>
 </nav></div>
-</div><div class=content id=content><p>本文主要介绍我所使用的 ROS 开发环境
-我采用这个模式进行开发是受到了这篇文章的启发：<a href=https://www.allisonthackston.com/articles/vscode-docker-ros2.html target=_blank rel="noopener noreffer">https://www.allisonthackston.com/articles/vscode-docker-ros2.html</a></p>
-<p>如果您用过 ROS 就会发现配置这玩意儿的开发环境是一件非常麻烦的事情，经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT开发、ROS1、ROS2）则会更糟糕。
-这个时候我们就有必要使用 Docker 进行开发，关于如何使用 <code>VSCode + Docker</code> 进行开发的流程已经写在：<a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a>，本文主要介绍如何配置 ROS 相关开发环境</p>
-<blockquote>
-<p>如果您不会使用 docker 或者没有尝试过类似的操作，请您先阅读 <a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+</div><div class=content id=content><blockquote>
+<p>本文适合有 ROS1 基础和对 Gazebo 有了解的朋友</p>
 </blockquote>
-<p>如果您使用 <code>ROS-foxy</code> 可以直接使用 <a href=https://github.com/athackst/vscode_ros2_workspace target=_blank rel="noopener noreffer">https://github.com/athackst/vscode_ros2_workspace</a> 作为您的工作目录，如果您需要使用 GPU 加速计算，则选择 带有 <code>foxy-nvidia</code> 的分支即可</p>
-<p><img class=lazyload src=/svg/loading.min.svg data-src=images/1.png data-srcset="/my_ros_env/images/1.png, images/1.png 1.5x, /my_ros_env/images/1.png 2x" data-sizes=auto alt=/my_ros_env/images/1.png title=1></p>
-<p><strong>下面我将带您从头配置相关文件</strong></p>
-<h2 id=0-新建目录>0. 新建目录</h2>
-<p>VSCode 会自动读取 <code>.devcontainer</code> 中的配置文件，目录结构如下：</p>
+<p>松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。</p>
+<p>此外，松灵为用户提供了 limo 的完整 gazebo 仿真支持库，本文将带您逐步上手使用：</p>
+<blockquote>
+<p>仓库地址：<a href=https://github.com/agilexrobotics/ugv_gazebo_sim target=_blank rel="noopener noreffer">https://github.com/agilexrobotics/ugv_gazebo_sim</a></p>
+</blockquote>
+<h2 id=0-工作目录>0. 工作目录</h2>
+<p>我们从 官方仓库 下载仿真包，进入<code> limo</code> 目录复制其中的文件，按照如下方式组织我们的工作空间（这里的 <code>.devcontianer</code> 是因为我使用了 <code>Docker</code> 的原因，如果您未用到可以忽略，具体请看 下一节 内容）</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
 </span></code></pre></td>
 <td class=lntd>
 <pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>.
-├── .devcontainer
-│   ├── devcontainer.json
-│   └── Dockerfile
+├── limo
+│   ├── .devcontainer
+│        ├── devcontainer.json
+│        └── Dockerfile
+│   └── src
+│       ├── limo_description
+│       └── limo_gazebo_sim
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=1-选取开发镜像>1. 选取开发镜像</h2>
-<p>这里我一直使用的是 <a href=https://hub.docker.com/u/althack target=_blank rel="noopener noreffer">https://hub.docker.com/u/althack</a> 的镜像。</p>
-<blockquote>
-<p>dockerfile 源码：<a href=https://github.com/athackst/dockerfiles target=_blank rel="noopener noreffer">https://github.com/athackst/dockerfiles</a></p>
-</blockquote>
-<p>例如我最近需要使用 <code>ROS-melodic</code> + <code>Gazebo</code> 则会选择 <a href=https://hub.docker.com/r/althack/ros target=_blank rel="noopener noreffer">https://hub.docker.com/r/althack/ros</a> 中带有 <code>melodic-gazebo</code> 标签的镜像。</p>
-<h2 id=2-配置-dockerfile>2. 配置 dockerfile</h2>
-<p>我们使用如下脚本</p>
+</div><h2 id=1-环境配置>1. 环境配置</h2>
+<p><code>limo</code> 使用 <code>ROS-melodic</code> + <code>Gazebo9</code> 作为仿真环境，如果您已经拥有此环境请跳过此节</p>
+<p>这里推荐使用 docker 作为开发环境，具体请移步 <a href=https://anthonysun256.github.io/my_ros_env/>我的 ROS 开发环境</a> 和 <a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/>Docker 配合 VSC 开发最佳实践</a></p>
+<p>如果启用 <code>GPU</code> 可以查看 <a href=https://anthonysun256.github.io/docker_with_nvidia/>在 Docker 中使用 Nvidia 显卡</a></p>
+<p>此处我们使用的 Dockerfile 文件如下：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -170,72 +178,43 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=c># 改编自 https://github.com/athackst/vscode_ros2_workspace</span><span class=err>
-</span><span class=err></span><span class=k>FROM</span><span class=s> althack/ros:melodic-gazebo as gazebo # 我使用的镜像</span><span class=err>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>FROM</span><span class=s> althack/ros:melodic-gazebo as gazebo</span><span class=err>
 </span><span class=err>
-</span><span class=err></span><span class=c># ** [可选] 取消注释安装其他组件 **</span><span class=err>
-</span><span class=err></span><span class=c>#</span><span class=err>
-</span><span class=err></span><span class=c># ENV DEBIAN_FRONTEND=noninteractive</span><span class=err>
-</span><span class=err></span><span class=c># RUN apt-get update \</span><span class=err>
-</span><span class=err></span><span class=c>#    &amp;&amp; apt-get -y install --no-install-recommends &lt;your-package-list-here&gt; \</span><span class=err>
-</span><span class=err></span><span class=c>#    #</span><span class=err>
-</span><span class=err></span><span class=c>#    # Clean up</span><span class=err>
-</span><span class=err></span><span class=c>#    &amp;&amp; apt-get autoremove -y \</span><span class=err>
-</span><span class=err></span><span class=c>#    &amp;&amp; apt-get clean -y \</span><span class=err>
-</span><span class=err></span><span class=c>#    &amp;&amp; rm -rf /var/lib/apt/lists/*</span><span class=err>
-</span><span class=err></span><span class=c># ENV DEBIAN_FRONTEND=dialog</span><span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=c># 为 ros 用户配置自动 source</span><span class=err>
+</span><span class=err></span><span class=c># Set up auto-source of workspace for ros user</span><span class=err>
 </span><span class=err></span><span class=k>ARG</span> WORKSPACE<span class=err>
 </span><span class=err></span><span class=k>RUN</span> <span class=nb>echo</span> <span class=s2>&#34;if [ -f </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash ]; then source </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash; fi&#34;</span> &gt;&gt; /home/ros/.bashrc<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># 如果启用 GPU 支持则取消下面的注释</span><span class=err>
+</span><span class=err></span><span class=c># RUN apt-get update \</span><span class=err>
+</span><span class=err></span><span class=c>#     &amp;&amp; apt-get install -y -qq --no-install-recommends \</span><span class=err>
+</span><span class=err></span><span class=c>#     libglvnd0 \</span><span class=err>
+</span><span class=err></span><span class=c>#     libgl1 \</span><span class=err>
+</span><span class=err></span><span class=c>#     libglx0 \</span><span class=err>
+</span><span class=err></span><span class=c>#     libegl1 \</span><span class=err>
+</span><span class=err></span><span class=c>#     libxext6 \</span><span class=err>
+</span><span class=err></span><span class=c>#     libx11-6 \</span><span class=err>
+</span><span class=err></span><span class=c>#     &amp;&amp; apt-get autoremove -y \</span><span class=err>
+</span><span class=err></span><span class=c>#     &amp;&amp; apt-get clean -y \</span><span class=err>
+</span><span class=err></span><span class=c>#     &amp;&amp; rm -rf /var/lib/apt/lists/*</span><span class=err>
+</span><span class=err></span><span class=c># ENV DEBIAN_FRONTEND=dialog</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># # Env vars for the nvidia-container-runtime.</span><span class=err>
+</span><span class=err></span><span class=c># ENV NVIDIA_VISIBLE_DEVICES all</span><span class=err>
+</span><span class=err></span><span class=c># ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># ENV QT_X11_NO_MITSHM=1</span><span class=err>
 </span></code></pre></td></tr></table>
 </div>
-</div><p>如果需要 GPU 支持（需要安装 nvidia-docker) 则在上述脚本之后追加如下指令：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>RUN</span> apt-get update <span class=se>\
-</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get install -y -qq --no-install-recommends <span class=se>\
-</span><span class=se></span>    libglvnd0 <span class=se>\
-</span><span class=se></span>    libgl1 <span class=se>\
-</span><span class=se></span>    libglx0 <span class=se>\
-</span><span class=se></span>    libegl1 <span class=se>\
-</span><span class=se></span>    libxext6 <span class=se>\
-</span><span class=se></span>    libx11-6 <span class=se>\
-</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get autoremove -y <span class=se>\
-</span><span class=se></span>    <span class=o>&amp;&amp;</span> apt-get clean -y <span class=se>\
-</span><span class=se></span>    <span class=o>&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=err>
-</span><span class=err></span><span class=k>ENV</span> <span class=nv>DEBIAN_FRONTEND</span><span class=o>=</span>dialog
-
-<span class=c># Nvidia 运行时变量.</span><span class=err>
-</span><span class=err></span><span class=k>ENV</span> NVIDIA_VISIBLE_DEVICES all<span class=err>
-</span><span class=err></span><span class=k>ENV</span> NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute<span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=k>ENV</span> <span class=nv>QT_X11_NO_MITSHM</span><span class=o>=</span><span class=m>1</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=3-配置-devcontainerjson>3. 配置 devcontainer.json</h2>
+</div><p>devcontainer.json 内容如下：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -280,11 +259,9 @@
 </span><span class=lnt>40
 </span><span class=lnt>41
 </span><span class=lnt>42
-</span><span class=lnt>43
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// 改编自 https://github.com/athackst/vscode_ros2_workspace
-</span><span class=c1>// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// See https://aka.ms/vscode-remote/devcontainer.json for format details.
 </span><span class=c1></span><span class=p>{</span>
 	<span class=nt>&#34;dockerFile&#34;</span><span class=p>:</span> <span class=s2>&#34;Dockerfile&#34;</span><span class=p>,</span>
 	<span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -299,7 +276,7 @@
 		<span class=s2>&#34;--security-opt=seccomp:unconfined&#34;</span><span class=p>,</span>
 		<span class=s2>&#34;--security-opt=apparmor:unconfined&#34;</span><span class=p>,</span>
 		<span class=s2>&#34;--volume=/tmp/.X11-unix:/tmp/.X11-unix&#34;</span><span class=p>,</span>
-		<span class=c1>// &#34;--gpus&#34; &#34;all&#34;, // 取消该注释使用 GPU 功能
+		<span class=c1>//&#34;--gpus&#34; &#34;all&#34;, //取消注释开启 GPU 功能
 </span><span class=c1></span>	<span class=p>],</span>
 	<span class=nt>&#34;containerEnv&#34;</span><span class=p>:</span> <span class=p>{</span> <span class=nt>&#34;DISPLAY&#34;</span><span class=p>:</span> <span class=s2>&#34;${localEnv:DISPLAY}&#34;</span> <span class=p>},</span>
 	<span class=c1>// Set *default* container specific settings.json values on container create.
@@ -311,8 +288,7 @@
 		<span class=p>},</span>
 		<span class=nt>&#34;terminal.integrated.defaultProfile.linux&#34;</span><span class=p>:</span> <span class=s2>&#34;bash&#34;</span>
 	<span class=p>},</span>
-    <span class=c1>// 推荐安装的插件
-</span><span class=c1></span>	<span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
+	<span class=nt>&#34;extensions&#34;</span><span class=p>:</span> <span class=p>[</span>
 		<span class=s2>&#34;dotjoshjohnson.xml&#34;</span><span class=p>,</span>
 		<span class=s2>&#34;zachflower.uncrustify&#34;</span><span class=p>,</span>
 		<span class=s2>&#34;ms-azuretools.vscode-docker&#34;</span><span class=p>,</span>
@@ -326,21 +302,110 @@
 		<span class=s2>&#34;yzhang.markdown-all-in-one&#34;</span>
 	<span class=p>]</span>
 <span class=p>}</span>
+
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=4-构建镜像>4. 构建镜像</h2>
-<p>我们使用 VSCode 打开文件夹，并且 <code>Reopen in docker</code> 即可（不要自己只使用 Dockerfile 进行构建，因为在 devcontainer.json 中我们还挂载了一些目录，添加了一些参数）</p>
-<h2 id=5-显示-容器-中的窗口>5. 显示 容器 中的窗口</h2>
-<p>在宿主机中打开一个新的终端，输入：</p>
+</div><h2 id=2-初始化仿真环境>2. 初始化仿真环境</h2>
+<p>首先更新 <code>apt</code> 和 <code>rosdep database</code> 保持最新</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt update
+$ rosdep update
+</code></pre></td></tr></table>
+</div>
+</div><p>然后安装仿真依赖库：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get -y install --no-install-recommends <span class=se>\
+</span><span class=se></span>ros-melodic-ros-control <span class=se>\
+</span><span class=se></span>ros-melodic-ros-controllers <span class=se>\
+</span><span class=se></span>ros-melodic-gazebo-ros <span class=se>\
+</span><span class=se></span>ros-melodic-gazebo-ros-control <span class=se>\
+</span><span class=se></span>ros-melodic-joint-state-publisher-gui <span class=se>\
+</span><span class=se></span>ros-melodic-teleop-twist-keyboard
+</code></pre></td></tr></table>
+</div>
+</div><p>下一步初始化工作空间并安装依赖：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nb>cd</span> limo/src
+$ catkin_init_workspace
+$ <span class=nb>cd</span> ..
+$ rosdep install --from-paths src --ignore-src -r -y
+</code></pre></td></tr></table>
+</div>
+</div><p>即可正常编译与运行：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ catkin_make
+$ <span class=nb>source</span> devel/setup.bash
+</code></pre></td></tr></table>
+</div>
+</div><p><code>limo_description</code> 包主要为 <code>limo</code> 仿真模型，<code>display_models.launch</code> 为车辆在<code> Rviz</code> 中的展示：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ xhost +
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch limo_description display_models.launch# 在 Rviz 中查看
 </code></pre></td></tr></table>
 </div>
-</div><p>之后再运行类似 <code>Gazebo</code> 等图形程序，其界面就会直接在我们的宿主机中显示出来。</p></div><div class=post-footer id=post-footer>
+</div><p>可以得到如下界面：</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/1.png data-srcset="/limo_setup/images/1.png, images/1.png 1.5x, /limo_setup/images/1.png 2x" data-sizes=auto alt=/limo_setup/images/1.png title=1></p>
+<p><code>limo_gazebo_sim</code> 包为 <code>limo</code> 车型在 <code>gazebo</code> 中的仿真，<code>limo_xxx_.launch</code> 为车型在不同模式下于 <code>gazebo</code> 中仿真展示</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ roslaunch limo_gazebo_sim limo_ackerman.launch <span class=c1># 在 gazebo 中使用 阿卡曼 模式运动</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到 Gazebo 中出现了我们的小车</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/2.png data-srcset="/limo_setup/images/2.png, images/2.png 1.5x, /limo_setup/images/2.png 2x" data-sizes=auto alt=/limo_setup/images/2.png title=2></p>
+<p>并且 <code>Rviz</code> 中出现了 传感器 信息</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=images/3.png data-srcset="/limo_setup/images/3.png, images/3.png 1.5x, /limo_setup/images/3.png 2x" data-sizes=auto alt=/limo_setup/images/3.png title="2022-04-19 17-30-59 的屏幕截图"></p>
+<p>这时，我们新开启一个终端运行：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+</code></pre></td></tr></table>
+</div>
+</div><p>则可以使用键盘控制 limo 进行移动</p>
+<div class="details admonition note open">
+<div class="details-summary admonition-title">
+<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>使用其他地图前需要补全 gazebo 的 models，不然会一直黑屏</div>
+</div>
+</div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
@@ -351,17 +416,18 @@
 <div class=post-info-line>
 <div class=post-info-md></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/my_ros_env/ data-title="我的 ROS 开发环境" data-hashtags=ROS,VSCode,Docker><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/my_ros_env/ data-hashtag=ROS><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/my_ros_env/ data-title="我的 ROS 开发环境"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/my_ros_env/ data-title="我的 ROS 开发环境"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/my_ros_env/ data-title="我的 ROS 开发环境"><i class="fab fa-weibo fa-fw"></i></a></span>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/limo_setup/ data-title="limo 仿真指南" data-hashtags=limo,ROS1,Gazebo,仿真><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/limo_setup/ data-hashtag=limo><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/limo_setup/ data-title="limo 仿真指南"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/limo_setup/ data-title="limo 仿真指南"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/limo_setup/ data-title="limo 仿真指南"><i class="fab fa-weibo fa-fw"></i></a></span>
 </div>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/ros/>ROS</a>,&nbsp;<a href=/tags/vscode/>VSCode</a>,&nbsp;<a href=/tags/docker/>Docker</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/limo/>limo</a>,&nbsp;<a href=/tags/ros1/>ROS1</a>,&nbsp;<a href=/tags/gazebo/>Gazebo</a>,&nbsp;<a href=/tags/%E4%BB%BF%E7%9C%9F/>仿真</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/docker_with_nvidia/ class=prev rel=prev title="在 Docker 中使用 Nvidia 显卡"><i class="fas fa-angle-left fa-fw"></i>在 Docker 中使用 Nvidia 显卡</a></div>
+<div class=post-nav><a href=/scout_mini_sim/ class=prev rel=prev title="Scout mini 仿真指南"><i class="fas fa-angle-left fa-fw"></i>Scout mini 仿真指南</a>
+<a href=/docker_with_nvidia/ class=next rel=next title="在 Docker 中使用 Nvidia 显卡">在 Docker 中使用 Nvidia 显卡<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id=comments><div id=valine class=comment></div><noscript>
 Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.
