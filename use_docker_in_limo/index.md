@@ -1,4 +1,4 @@
-# 在 limo 中安安装 docker
+# 在 limo 中安装 docker
 
 
 ## 1. 安装 Docker 引擎
