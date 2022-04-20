@@ -69,7 +69,7 @@ $ gedit devcontainer.json # 也可以自行更换其他的编辑器
 		"redhat.vscode-yaml",
 		"smilerobotics.urdf",
 		"streetsidesoftware.code-spell-checker",
-		"twxs.cmake",所有
+		"twxs.cmake",
 		"yzhang.markdown-all-in-one"
 	]
 }
