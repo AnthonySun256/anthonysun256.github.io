@@ -4,24 +4,24 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>在 Docker 中使用 Nvidia 显卡 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
-<meta name=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
-<meta name=keywords content="Nvidia,Docker,Ubuntu"><meta itemprop=name content="在 Docker 中使用 Nvidia 显卡">
-<meta itemprop=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡"><meta itemprop=datePublished content="2022-04-18T07:27:08+00:00">
+<title>在 limo 中安安装 docker - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
+<meta name=description content="1. 安装 Docker 引擎 首先清除旧版本 Docker： 1 $ sudo apt-get remove docker docker-engine docker.io containerd runc 之后使用官方安装脚本进行安装： 1 2 $ curl -fsSL https://get.docker.com -o get-docker.sh $ sudo sh get-docker.sh 将当前用户添加到 docker 用户组，">
+<meta name=keywords content="limo,nano,arm,Docker,Jetson"><meta itemprop=name content="在 limo 中安安装 docker">
+<meta itemprop=description content="1. 安装 Docker 引擎 首先清除旧版本 Docker： 1 $ sudo apt-get remove docker docker-engine docker.io containerd runc 之后使用官方安装脚本进行安装： 1 2 $ curl -fsSL https://get.docker.com -o get-docker.sh $ sudo sh get-docker.sh 将当前用户添加到 docker 用户组，"><meta itemprop=datePublished content="2022-04-20T06:14:19+00:00">
 <meta itemprop=dateModified content="2022-04-20T08:22:41+00:00">
-<meta itemprop=wordCount content="1080"><meta itemprop=image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
-<meta itemprop=keywords content="Nvidia,Docker,Ubuntu,"><meta property="og:title" content="在 Docker 中使用 Nvidia 显卡">
-<meta property="og:description" content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
+<meta itemprop=wordCount content="318"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
+<meta itemprop=keywords content="limo,nano,arm,Docker,Jetson,"><meta property="og:title" content="在 limo 中安安装 docker">
+<meta property="og:description" content="1. 安装 Docker 引擎 首先清除旧版本 Docker： 1 $ sudo apt-get remove docker docker-engine docker.io containerd runc 之后使用官方安装脚本进行安装： 1 2 $ curl -fsSL https://get.docker.com -o get-docker.sh $ sudo sh get-docker.sh 将当前用户添加到 docker 用户组，">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://anthonysun256.github.io/docker_with_nvidia/"><meta property="og:image" content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-04-18T07:27:08+00:00">
+<meta property="og:url" content="https://anthonysun256.github.io/use_docker_in_limo/"><meta property="og:image" content="https://anthonysun256.github.io/logo.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-04-20T06:14:19+00:00">
 <meta property="article:modified_time" content="2022-04-20T08:22:41+00:00">
 <meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
-<meta name=twitter:title content="在 Docker 中使用 Nvidia 显卡">
-<meta name=twitter:description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
+<meta name=twitter:image content="https://anthonysun256.github.io/logo.png">
+<meta name=twitter:title content="在 limo 中安安装 docker">
+<meta name=twitter:description content="1. 安装 Docker 引擎 首先清除旧版本 Docker： 1 $ sudo apt-get remove docker docker-engine docker.io containerd runc 之后使用官方安装脚本进行安装： 1 2 $ curl -fsSL https://get.docker.com -o get-docker.sh $ sudo sh get-docker.sh 将当前用户添加到 docker 用户组，">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=prev href=https://anthonysun256.github.io/limo_setup/><link rel=next href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在 Docker 中使用 Nvidia 显卡","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/images\/cover.png","width":522,"height":369}],"genre":"posts","keywords":"Nvidia, Docker, Ubuntu","wordcount":1080,"url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/","datePublished":"2022-04-18T07:27:08+00:00","dateModified":"2022-04-20T08:22:41+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/use_docker_in_limo/><link rel=prev href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在 limo 中安安装 docker","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/use_docker_in_limo\/"},"genre":"posts","keywords":"limo, nano, arm, Docker, Jetson","wordcount":318,"url":"https:\/\/anthonysun256.github.io\/use_docker_in_limo\/","datePublished":"2022-04-20T06:14:19+00:00","dateModified":"2022-04-20T08:22:41+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -85,15 +85,15 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">在 Docker 中使用 Nvidia 显卡</h1><h2 class=single-subtitle>在 Docker 中使用 Nvidia 显卡加速计算</h2><div class=post-meta>
+</div><article class="page single"><h1 class="single-title animated flipInX">在 limo 中安安装 docker</h1><h2 class=single-subtitle>在 Jetson nano 中安装 docker 和 docker-compose</h2><div class=post-meta>
 <div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw"></i>Anthony</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/><i class="far fa-folder fa-fw"></i>环境配置</a></span></div>
-<div class=post-meta-line><span title="2022-04-18 07:27:08">
-<i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-18>2022-04-18</time>
-</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1080 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id=/docker_with_nvidia/ class=leancloud_visitors data-flag-title="在 Docker 中使用 Nvidia 显卡">
+<div class=post-meta-line><span title="2022-04-20 06:14:19">
+<i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-04-20>2022-04-20</time>
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 318 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id=/use_docker_in_limo/ class=leancloud_visitors data-flag-title="在 limo 中安安装 docker">
 <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
 </span>&nbsp;</div>
-</div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/docker_with_nvidia/images/cover.png data-srcset="/docker_with_nvidia/images/cover.png, /docker_with_nvidia/images/cover.png 1.5x, /docker_with_nvidia/images/cover.png 2x" data-sizes=auto alt=/docker_with_nvidia/images/cover.png title=/docker_with_nvidia/images/cover.png></div><div class="details toc" id=toc-static kept=false>
+</div><div class="details toc" id=toc-static kept=false>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -102,40 +102,45 @@
 <ul>
 <li>
 <ul>
-<li><a href=#1-查看安装专有驱动>1. 查看安装专有驱动</a></li>
-<li><a href=#2-安装-nvidia-docker>2. 安装 Nvidia-docker</a>
-<ul>
-<li><a href=#添加-gpg-key-和-源>添加 GPG key 和 源</a></li>
-<li><a href=#安装-nvidia-docker>安装 Nvidia-docker</a></li>
-</ul>
-</li>
-<li><a href=#3-使用说明>3. 使用说明</a></li>
-<li><a href=#结语>结语</a></li>
+<li><a href=#1-安装-docker-引擎>1. 安装 Docker 引擎</a></li>
+<li><a href=#2-安装-docker-compose-插件>2. 安装 docker-compose 插件</a></li>
 </ul>
 </li>
 </ul>
 </nav></div>
-</div><div class=content id=content><p>作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡</p>
-<h2 id=1-查看安装专有驱动>1. 查看安装专有驱动</h2>
-<p>想要使用 Nvidia 显卡，我们必须先要安装 Nvidia 官方驱动（默认情况下我们使用的是 开源驱动）</p>
-<blockquote>
-<p>安装流程：<a href=https://zhuanlan.zhihu.com/p/388970072 target=_blank rel="noopener noreffer">https://zhuanlan.zhihu.com/p/388970072</a></p>
-</blockquote>
-<h2 id=2-安装-nvidia-docker>2. 安装 Nvidia-docker</h2>
-<blockquote>
-<p>官方仓库：<a href=https://github.com/NVIDIA/nvidia-docker target=_blank rel="noopener noreffer">https://github.com/NVIDIA/nvidia-docker</a></p>
-<p>安装指南：<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker</a></p>
-</blockquote>
-<p><div class="details admonition note open">
-<div class="details-summary admonition-title">
-<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+</div><div class=content id=content><h2 id=1-安装-docker-引擎>1. 安装 Docker 引擎</h2>
+<p>首先清除旧版本 Docker：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get remove docker docker-engine docker.io containerd runc
+</code></pre></td></tr></table>
 </div>
-<div class=details-content>
-<div class=admonition-content>本节使用 Ubuntu + docker2作为教程环境，其余发行版请参考<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker[ target=_blank rel="noopener noreffer">官方安装指南</a></div>
+</div><p>之后使用官方安装脚本进行安装：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh
+</code></pre></td></tr></table>
 </div>
-</div>需要注意的是，在已经构建好的 容器 中改变这些环境变量不会有任何效果，如果您需要梗概配置还请 重新构建容器。</p>
-<h3 id=添加-gpg-key-和-源>添加 GPG key 和 源</h3>
-<p>在终端执行如下指令：</p>
+</div><p>将当前用户添加到 docker 用户组，使非 root 用户也能使用 Docker（<strong>使用 root 登陆用户跳过此步骤</strong>）:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>sudo systemctl restart dockersudo systemctl restart docker$ sudo usermod -aG docker <span class=si>${</span><span class=nv>USER</span><span class=si>}</span>
+$ sudo systemctl restart docker
+</code></pre></td></tr></table>
+</div>
+</div><p>更换 docker 源为国内源：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -143,142 +148,82 @@
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nv>distribution</span><span class=o>=</span><span class=k>$(</span>. /etc/os-release<span class=p>;</span><span class=nb>echo</span> <span class=nv>$ID$VERSION_ID</span><span class=k>)</span> <span class=se>\
-</span><span class=se></span>      <span class=o>&amp;&amp;</span> curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg <span class=se>\
-</span><span class=se></span>      <span class=o>&amp;&amp;</span> curl -s -L https://nvidia.github.io/libnvidia-container/<span class=nv>$distribution</span>/libnvidia-container.list <span class=p>|</span> <span class=se>\
-</span><span class=se></span>            sed <span class=s1>&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span> <span class=p>|</span> <span class=se>\
-</span><span class=se></span>            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo mkdir -p /etc/docker
+$ sudo tee /etc/docker/daemon.json <span class=s>&lt;&lt;-&#39;EOF&#39;
+</span><span class=s>{
+</span><span class=s>  &#34;registry-mirrors&#34;: [&#34;https://ustc-edu-cn.mirror.aliyuncs.com/&#34;]
+</span><span class=s>}
+</span><span class=s>EOF</span>
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
 </code></pre></td></tr></table>
 </div>
-</div><p>之后更新 apt:</p>
+</div><p>后续如果需要更改镜像地址，自行编辑 <code>/etc/docker/daemon.json</code> 即可。</p>
+<p>重新登陆系统，测试 docker：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get update
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ docker run --rm hello-world
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=安装-nvidia-docker>安装 Nvidia-docker</h3>
-<p>使用如下指令安装：</p>
+</div><p>1得到以下输出证明安装成功：</p>
+<p>sudo systemctl restart docker<img class=lazyload src=/svg/loading.min.svg data-src=images/1.png data-srcset="/use_docker_in_limo/images/1.png, images/1.png 1.5x, /use_docker_in_limo/images/1.png 2x" data-sizes=auto alt=/use_docker_in_limo/images/1.png title=1></p>
+<h2 id=2-安装-docker-compose-插件>2. 安装 docker-compose 插件</h2>
+<p>下载官方插件文件（这里使用了 Github 加速服务）：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo apt-get install -y nvidia-docker2
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo curl -L <span class=s2>&#34;https://ghproxy.com/https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-aarch64&#34;</span> -o /usr/local/bin/docker-compose
 </code></pre></td></tr></table>
 </div>
-</div><p>成功后重启 docker：</p>
+</div><blockquote>
+<p>如果无法下载，使用以下指令：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo systemctl restart docker
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo curl -L <span class=s2>&#34;https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-aarch64&#34;</span> -o /usr/local/bin/docker-compose
 </code></pre></td></tr></table>
 </div>
-</div><p>之后可以进行测试：</p>
+</div></blockquote>
+<p>授予插件执行权限：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ sudo chmod +x /usr/local/bin/docker-compose
 </code></pre></td></tr></table>
 </div>
-</div><p>应当能看到输出：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 450.51.06    Driver Version: 450.51.06    CUDA Version: 11.0     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  Tesla T4            On   | 00000000:00:1E.0 Off |                    0 |
-| N/A   34C    P8     9W /  70W |      0MiB / 15109MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|  No running processes found                                                 |
-+-----------------------------------------------------------------------------+
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=3-使用说明>3. 使用说明</h2>
-<blockquote>
-<p>官方文档：<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration</a></p>
-</blockquote>
-<p>与未使用 nvidia 显卡的容器不同之处在于 nvidia-docker 多了一个 <code>--gpus </code> 参数，这个参数标明我们容器中可以使用哪些显卡（如果你的机器上有多张显卡的话）</p>
-<p>一般情况下我们使用 <code>docker --gpus all</code> 即可，如果需要特别指名使用哪几张显卡，则可以使用类似 <code>--gpus 0,1</code> 指明使用 GPU UUID 为 0、1 的显卡</p>
-<p>此外，根据不同情景需要我们还需要指名要在容器中安装哪些驱动程序或支持库，完整的列表见： <a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#driver-capabilities target=_blank rel="noopener noreffer">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#driver-capabilities</a></p>
-<p>比如我们需要 <code>CUDA</code> 和 <code>nvidia-smi+NVML</code> 支持，则需要这样</p>
+</div><p>完成后执行：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ docker run --rm --gpus <span class=s1>&#39;all,&#34;capabilities=compute,utility&#34;&#39;</span> <span class=se>\
-</span><span class=se></span>    nvidia/cuda:11.0-base nvidia-smi
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell> $ docker-compose --version
 </code></pre></td></tr></table>
 </div>
-</div><p>或者这样：</p>
+</div><p>输出版本信息即为成功：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 传递环境变量的方式</span>
-$ docker run --rm --runtime<span class=o>=</span>nvidia <span class=se>\
-</span><span class=se></span>    -e <span class=nv>NVIDIA_VISIBLE_DEVICES</span><span class=o>=</span>2,3 <span class=se>\
-</span><span class=se></span>    -e <span class=nv>NVIDIA_DRIVER_CAPABILITIES</span><span class=o>=</span>compute,utility <span class=se>\
-</span><span class=se></span>    nvidia/cuda nvidia-smi
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Docker Compose version v2.4.1
 </code></pre></td></tr></table>
 </div>
-</div><div class="details admonition note open">
-<div class="details-summary admonition-title">
-<i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
-</div>
-<div class=details-content>
-<div class=admonition-content>需要注意的是，在已经构建好的 容器 中改变这些环境变量不会有任何效果，如果您需要梗概配置还请 重新构建容器。</div>
-</div>
-</div>
-<h2 id=结语>结语</h2>
-<p>至此，在 Docker 中使用 nvidia 显卡的方法就介绍完毕了，如果您需要在 容器 中使用 Nvidia 相关支持库或者其他功能，则请参考官方文档。</p></div><div class=post-footer id=post-footer>
+</div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
@@ -289,18 +234,17 @@ $ docker run --rm --runtime<span class=o>=</span>nvidia <span class=se>\
 <div class=post-info-line>
 <div class=post-info-md></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡" data-hashtags=Nvidia,Docker,Ubuntu><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-hashtag=Nvidia><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/docker_with_nvidia/ data-title="在 Docker 中使用 Nvidia 显卡"><i class="fab fa-weibo fa-fw"></i></a></span>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/use_docker_in_limo/ data-title="在 limo 中安安装 docker" data-hashtags=limo,nano,arm,Docker,Jetson><i class="fab fa-twitter fa-fw"></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/use_docker_in_limo/ data-hashtag=limo><i class="fab fa-facebook-square fa-fw"></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/use_docker_in_limo/ data-title="在 limo 中安安装 docker"><i class="fab fa-hacker-news fa-fw"></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/use_docker_in_limo/ data-title="在 limo 中安安装 docker"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/use_docker_in_limo/ data-title="在 limo 中安安装 docker"><i class="fab fa-weibo fa-fw"></i></a></span>
 </div>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/nvidia/>Nvidia</a>,&nbsp;<a href=/tags/docker/>Docker</a>,&nbsp;<a href=/tags/ubuntu/>Ubuntu</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/limo/>limo</a>,&nbsp;<a href=/tags/nano/>nano</a>,&nbsp;<a href=/tags/arm/>arm</a>,&nbsp;<a href=/tags/docker/>Docker</a>,&nbsp;<a href=/tags/jetson/>Jetson</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/limo_setup/ class=prev rel=prev title="limo 仿真指南"><i class="fas fa-angle-left fa-fw"></i>limo 仿真指南</a>
-<a href=/my_ros_env/ class=next rel=next title="我的 ROS 开发环境">我的 ROS 开发环境<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/my_ros_env/ class=prev rel=prev title="我的 ROS 开发环境"><i class="fas fa-angle-left fa-fw"></i>我的 ROS 开发环境</a></div>
 </div>
 <div id=comments><div id=valine class=comment></div><noscript>
 Please enable JavaScript to view the comments powered by <a href=https://valine.js.org/>Valine</a>.

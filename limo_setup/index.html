@@ -14,7 +14,7 @@
 本文适合有 ROS1 基础和对 Gazebo 有了解的朋友
 
 松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。"><meta itemprop=datePublished content="2022-04-18T07:07:07+00:00">
-<meta itemprop=dateModified content="2022-04-19T09:39:05+00:00">
+<meta itemprop=dateModified content="2022-04-20T08:22:41+00:00">
 <meta itemprop=wordCount content="1144"><meta itemprop=image content="https://anthonysun256.github.io/limo_setup/images/cover.jpg">
 <meta itemprop=keywords content="limo,ROS1,Gazebo,仿真,"><meta property="og:title" content="limo 仿真指南">
 <meta property="og:description" content="
@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://anthonysun256.github.io/limo_setup/"><meta property="og:image" content="https://anthonysun256.github.io/limo_setup/images/cover.jpg"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-04-18T07:07:07+00:00">
-<meta property="article:modified_time" content="2022-04-19T09:39:05+00:00">
+<meta property="article:modified_time" content="2022-04-20T08:22:41+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://anthonysun256.github.io/limo_setup/images/cover.jpg">
 <meta name=twitter:title content="limo 仿真指南">
@@ -33,7 +33,7 @@
 
 松灵机器人LIMO是全球首款集四种运动模态于一体的ROS开发平台，提供了适应场景更广泛、更符合行业应用要求的学习平台，适用于机器人教育、功能研发、产品开发。通过创新性的机械设计，能实现四轮差速、阿克曼、履带型、麦克纳姆轮运动模式的快速切换，可在配套的专业沙盘中快速建立多场景实拟教学和测试，LIMO搭载NVIDIA Jeston Nano、EAI XL2激光雷达、深度相机等高性能传感器配置，可实现精确的自主定位、SLAM建图、路线规划和自主避障、自主倒车入库、红绿灯识别等丰富功能。">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/limo_setup/><link rel=prev href=https://anthonysun256.github.io/scout_mini_sim/><link rel=next href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"limo 仿真指南","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/limo_setup\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/limo_setup\/images\/cover.jpg","width":750,"height":375}],"genre":"posts","keywords":"limo, ROS1, Gazebo, 仿真","wordcount":1144,"url":"https:\/\/anthonysun256.github.io\/limo_setup\/","datePublished":"2022-04-18T07:07:07+00:00","dateModified":"2022-04-19T09:39:05+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/limo_setup/><link rel=prev href=https://anthonysun256.github.io/scout_mini_sim/><link rel=next href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"limo 仿真指南","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/limo_setup\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/limo_setup\/images\/cover.jpg","width":750,"height":375}],"genre":"posts","keywords":"limo, ROS1, Gazebo, 仿真","wordcount":1144,"url":"https:\/\/anthonysun256.github.io\/limo_setup\/","datePublished":"2022-04-18T07:07:07+00:00","dateModified":"2022-04-20T08:22:41+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -409,7 +409,7 @@ $ <span class=nb>source</span> devel/setup.bash
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2022-04-19 09:39:05">更新于 2022-04-19</span>
+<span title="2022-04-20 08:22:41">更新于 2022-04-20</span>
 </div>
 <div class=post-info-license></div>
 </div>
