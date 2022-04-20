@@ -80,4 +80,47 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 Docker Compose version v2.4.1
 ```
 
+## 3. 安装需要添加 Nvidia 支持
+
+首先添加 仓库 和 GPG key：
+
+```shell
+$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+      && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+      && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+
+然后更新源：
+
+```shell
+$ sudo apt-get update
+```
+
+安装 nvidia-docker：
+
+```shell
+$ sudo apt-get install -y nvidia-docker2
+```
+
+在提示界面选择 `Y`
+
+![2](images/2.png)
+
+> 这里会覆盖之前填写的 docker 镜像地址等配置，需要重新编辑  ``/etc/docker/daemon.json`` 
+
+然后重启 docker 服务：
+
+```shell
+$ sudo systemctl restart docker
+```
+
+最后运行：
+
+```shell
+$ docker run --rm -it --gpus all nvcr.io/nvidia/l4t-base:r34.1
+```
+
+成功启动即代表配置成功
 
