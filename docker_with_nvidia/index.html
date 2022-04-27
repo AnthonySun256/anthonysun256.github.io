@@ -8,20 +8,20 @@
 <meta name=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
 <meta name=keywords content="Nvidia,Docker,Ubuntu"><meta itemprop=name content="在 Docker 中使用 Nvidia 显卡">
 <meta itemprop=description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡"><meta itemprop=datePublished content="2022-04-18T07:27:08+00:00">
-<meta itemprop=dateModified content="2022-04-21T10:12:00+00:00">
+<meta itemprop=dateModified content="2022-04-27T07:21:14+00:00">
 <meta itemprop=wordCount content="1080"><meta itemprop=image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
 <meta itemprop=keywords content="Nvidia,Docker,Ubuntu,"><meta property="og:title" content="在 Docker 中使用 Nvidia 显卡">
 <meta property="og:description" content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://anthonysun256.github.io/docker_with_nvidia/"><meta property="og:image" content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-04-18T07:27:08+00:00">
-<meta property="article:modified_time" content="2022-04-21T10:12:00+00:00">
+<meta property="article:modified_time" content="2022-04-27T07:21:14+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://anthonysun256.github.io/docker_with_nvidia/images/cover.png">
 <meta name=twitter:title content="在 Docker 中使用 Nvidia 显卡">
 <meta name=twitter:description content="作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=prev href=https://anthonysun256.github.io/limo_setup/><link rel=next href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在 Docker 中使用 Nvidia 显卡","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/images\/cover.png","width":522,"height":369}],"genre":"posts","keywords":"Nvidia, Docker, Ubuntu","wordcount":1080,"url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/","datePublished":"2022-04-18T07:27:08+00:00","dateModified":"2022-04-21T10:12:00+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/docker_with_nvidia/><link rel=prev href=https://anthonysun256.github.io/gazebo_simulation/><link rel=next href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH+KuXHiZWODptY5K8NF4="><link rel=stylesheet href=/css/style.min.4a293a418a8009ab5b7270f7682f9840cc99ba7f2d39b614e0e4e605dda3e275.css integrity="sha256-Sik6QYqACatbcnD3aC+YQMyZun8tObYU4OTmBd2j4nU="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在 Docker 中使用 Nvidia 显卡","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/"},"image":[{"@type":"ImageObject","url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/images\/cover.png","width":522,"height":369}],"genre":"posts","keywords":"Nvidia, Docker, Ubuntu","wordcount":1080,"url":"https:\/\/anthonysun256.github.io\/docker_with_nvidia\/","datePublished":"2022-04-18T07:27:08+00:00","dateModified":"2022-04-27T07:21:14+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -282,7 +282,7 @@ $ docker run --rm --runtime<span class=o>=</span>nvidia <span class=se>\
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2022-04-21 10:12:00">更新于 2022-04-21</span>
+<span title="2022-04-27 07:21:14">更新于 2022-04-27</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -299,7 +299,7 @@ $ docker run --rm --runtime<span class=o>=</span>nvidia <span class=se>\
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/limo_setup/ class=prev rel=prev title="limo 仿真指南"><i class="fas fa-angle-left fa-fw"></i>limo 仿真指南</a>
+<div class=post-nav><a href=/gazebo_simulation/ class=prev rel=prev title="limo 仿真指南"><i class="fas fa-angle-left fa-fw"></i>limo 仿真指南</a>
 <a href=/my_ros_env/ class=next rel=next title="我的 ROS 开发环境">我的 ROS 开发环境<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id=comments><div id=valine class=comment></div><noscript>
