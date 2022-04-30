@@ -2,7 +2,7 @@
 我采用这个模式进行开发是受到了这篇文章的启发：&lt;a
 href="https://www.allisonthackston.com/articles/vscode-docker-ros2.html"
 target="_blank"
-rel="noopener noreffer"
+rel="external nofollow noopener noreffer"
 >https://www.allisonthackston.com/articles/vscode-docker-ros2.html&lt;/a>&lt;/p></description></item><item><title>在 Docker 中使用 Nvidia 显卡</title><link>https://anthonysun256.github.io/docker_with_nvidia/</link><pubDate>Mon, 18 Apr 2022 07:27:08 +0000</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/docker_with_nvidia/</guid><description>&lt;p>作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡&lt;/p></description></item><item><title>limo 仿真指南</title><link>https://anthonysun256.github.io/gazebo_simulation/</link><pubDate>Mon, 18 Apr 2022 07:07:07 +0000</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/gazebo_simulation/</guid><description><![CDATA[<blockquote>
 <p>本文适合有 ROS1 基础和对 Gazebo 有了解的朋友</p>
 </blockquote>

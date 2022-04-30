@@ -2,5 +2,5 @@
 我采用这个模式进行开发是受到了这篇文章的启发：&lt;a
 href="https://www.allisonthackston.com/articles/vscode-docker-ros2.html"
 target="_blank"
-rel="noopener noreffer"
+rel="external nofollow noopener noreffer"
 >https://www.allisonthackston.com/articles/vscode-docker-ros2.html&lt;/a>&lt;/p></description></item><item><title>Docker配合VSC开发最佳实践</title><link>https://anthonysun256.github.io/docker-with-vsc_best-practice/</link><pubDate>Sun, 23 Jan 2022 16:28:25 +0800</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/docker-with-vsc_best-practice/</guid><description>前言 为什么我们需要虚拟环境？ 很长时间以来最让我头疼的事情就是配置开发环境，最简单的一个例子是配置深度学习使用的 Python 环境。如果在本机上直接配置 Python</description></item></channel></rss>

@@ -2,7 +2,7 @@
 我采用这个模式进行开发是受到了这篇文章的启发：&lt;a
 href="https://www.allisonthackston.com/articles/vscode-docker-ros2.html"
 target="_blank"
-rel="noopener noreffer"
+rel="external nofollow noopener noreffer"
 >https://www.allisonthackston.com/articles/vscode-docker-ros2.html&lt;/a>&lt;/p></description></item><item><title>Scout mini 仿真指南</title><link>https://anthonysun256.github.io/scout_mini_sim/</link><pubDate>Sun, 10 Apr 2022 04:37:48 +0000</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/scout_mini_sim/</guid><description><![CDATA[<blockquote>
 <p>本文适合有 ROS1 基础与了解 urdf语法 和 gazebo 的朋友</p>
 </blockquote>

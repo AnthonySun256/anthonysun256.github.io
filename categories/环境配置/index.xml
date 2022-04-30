@@ -2,5 +2,5 @@
 我采用这个模式进行开发是受到了这篇文章的启发：&lt;a
 href="https://www.allisonthackston.com/articles/vscode-docker-ros2.html"
 target="_blank"
-rel="noopener noreffer"
+rel="external nofollow noopener noreffer"
 >https://www.allisonthackston.com/articles/vscode-docker-ros2.html&lt;/a>&lt;/p></description></item><item><title>在 Docker 中使用 Nvidia 显卡</title><link>https://anthonysun256.github.io/docker_with_nvidia/</link><pubDate>Mon, 18 Apr 2022 07:27:08 +0000</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/docker_with_nvidia/</guid><description>&lt;p>作为一名炼丹师，我们经常需要使用 Nvidia 显卡辅助我们加速计算，但是 Docker 并不直接支持访问 Nvidia 显卡，但好在 Nvidia 官方提供了提供了相关 Docker 插件可以让我们直接在容器中访问 Nvidia 显卡&lt;/p></description></item><item><title>Docker Container 代理配置一本通</title><link>https://anthonysun256.github.io/docker-proxy-complete-solution/</link><pubDate>Wed, 26 Jan 2022 06:47:15 +0800</pubDate><author>Anthony</author><guid>https://anthonysun256.github.io/docker-proxy-complete-solution/</guid><description>&lt;p>由于一些原因，我们常常需要在开发中使用代理，但是在实践过程中我们发现在 Container 中我们无法直接使用主机配置好的代理。本文将给出不同平台下配置 Container 中的代理的方法。&lt;/p></description></item></channel></rss>
