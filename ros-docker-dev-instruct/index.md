@@ -101,50 +101,51 @@ ENV QT_X11_NO_MITSHM=1
 // 改编自 https://github.com/athackst/vscode_ros2_workspace
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"dockerFile": "Dockerfile",
-	"build": {
-		"args": {
-			"WORKSPACE": "${containerWorkspaceFolder}"
-		}
-	},
-	"remoteUser": "ros",
-	"runArgs": [
-		"--network=host",
-		"--cap-add=SYS_PTRACE",
-        " --cap-add=SYS_RAWIO",
+    "dockerFile": "Dockerfile",
+    "build": {
+        "args": {
+            "WORKSPACE": "${containerWorkspaceFolder}"
+        }
+    },
+    "remoteUser": "ros",
+    "runArgs": [
+        "--network=host",
+        "--cap-add=SYS_PTRACE",
+        "--cap-add=SYS_RAWIO",
         "--privileged=true",
-		"--security-opt=seccomp:unconfined",
-		"--security-opt=apparmor:unconfined", 
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
-		// "--gpus" "all", // 取消该注释使用 GPU 功能
-        // "--device=/dev/bus/usb:/dev/bus/usb", // 挂载外部硬件，比如摄像头，根据需要修改路径
-	],
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" },
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"bash": {
-				"path": "bash"
-			},
-		},
-		"terminal.integrated.defaultProfile.linux": "bash"
-	},
+        "--security-opt=seccomp:unconfined",
+        "--security-opt=apparmor:unconfined",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+        // "--gpus" "all", // 取消该注释使用 GPU 功能
+        "--device=/dev/bus/usb:/dev/bus/usb", // 挂载外部硬件，比如摄像头，根据需要修改路径
+    ],
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "bash"
+            },
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
     // 推荐安装的插件
-	"extensions": [
-		"dotjoshjohnson.xml",
-		"zachflower.uncrustify",
-		"ms-azuretools.vscode-docker",
-		"ms-iot.vscode-ros",
-		"ms-python.python",
-		"ms-vscode.cpptools",
-		"redhat.vscode-yaml",
-		"smilerobotics.urdf",
-		"streetsidesoftware.code-spell-checker",
-		"twxs.cmake",
-		"yzhang.markdown-all-in-one"
-	]
+    "extensions": [
+        "dotjoshjohnson.xml",
+        "zachflower.uncrustify",
+        "ms-azuretools.vscode-docker",
+        "ms-iot.vscode-ros",
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        "redhat.vscode-yaml",
+        "smilerobotics.urdf",
+        "streetsidesoftware.code-spell-checker",
+        "twxs.cmake",
+        "yzhang.markdown-all-in-one"
+    ]
 }
-
 ```
 
 ## 3. 启动开发环境
