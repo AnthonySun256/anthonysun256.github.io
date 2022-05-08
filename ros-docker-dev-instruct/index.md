@@ -206,3 +206,109 @@ python 同理：
 
 至此我们就能愉快的进行开发了，而且您还能保存自己的开发环境、推送到云端或者整理成压缩包进行分享，让团队中的所有人都能在几分钟之内拥有一致的开发环境，最重要的是还不会搞坏电脑本身的环境！
 
+## 7. 远程开发实战
+
+本节我们将运用上面所讲的知识，在松灵极其人 limo 套件上使用 docker 进行远程开发！
+
+首先运行docker 环境（docker 在默认系统中已经安装，这里我们不使用图形界面，不需要开启显卡支持）
+
+```shell
+$ mkdir limo_foxy_dev && cd limo_foxy_dev
+$ docker run --network=host  --cap-add=SYS_PTRACE --cap-add=SYS_RAWIO --security-opt=seccomp:unconfined --security-opt=apparmor:unconfined --volume=/tmp/.X11-unix:/tmp/.X11-unix --runtime=nvidia --device /dev/ttyTHS1:/dev/ttyTHS1 --device /dev/ttyUSB0:/dev/ydlidar --device /dev/bus/usb/:/dev/bus/usb -v $(pwd)/：workspace --name limo-foxy-dev  -w /workspace -id ros:foxy
+$ docker exec -it limo-foxy-dev /bin/bash
+```
+
+这里我们挂载了底盘通信接口、激光雷达、USB 设备到我们的容器之中，以及将本地的 `limo_foxy_dev` 文件夹挂载到了容器中的 `/workspace` 之中并开启了一些相应的权限。
+
+之后等待 docker 启动（第一次需要拉取远程镜像，速度稍慢，再次启动无需等待）进入之后可以看到如下界面：
+
+![13](images/13.png)
+
+接下来我们换源，提升下载速度：
+
+```shell
+# 更换系统源
+$ sed -i "s/ports.ubuntu.com/mirrors.ustc.edu.cn/g" /etc/apt/sources.list
+# 更换 ros2 源
+$ sed -i "s/packages.ros.org/repo.huaweicloud.com/g" /etc/apt/sources.list.d/ros2-latest.list
+$ apt update
+```
+
+安装 `rosdepc` 提升 `rosdep` 下载速度（注意这俩不是一个东西，多了个 `c`）：
+
+```shell
+$ apt install -y python3-pip
+$ pip install rosdepc
+$ rosdepc init && rosdepc update
+```
+
+安装远程开发必备组件：
+
+```shell
+$ apt install openssh-server systemctl udev
+$ systemctl start ssh
+$ echo -e "Port 10022\nPermitRootLogin yes\nPermitEmptyPasswords yes" >> /etc/ssh/sshd_config.d/dev.conf
+$ systemctl enable ssh && systemctl restart ssh
+```
+
+> 如果容器重启后 ssh 无法连接请重新在容器中运行 ``systemctl start ssh``
+
+设定密码：
+
+```shell
+$ passwd # 之后输入新的密码（在这个过程中不会显示文字，输入完成按回车即可）
+```
+
+
+
+之后我们离开镜像，保证我们的小车和电脑在同一个局域网中，在本地电脑中打开 VSCode 使用 Remote ssh 插件连接镜像：
+
+![14](images/14.png)
+
+![15](images/15.png)
+
+任选一个文件进行编辑：
+
+![16](images/16.png)
+
+Host 名称自定义，HostName 是 limo 在局域网中的 ip，Port 是 ssh-server 连接的端口，用户是 root
+
+保存退出。
+
+![17](images/17.png)
+
+重新打开 `哦年呢题材他Connect to Host` 选项，选择我们刚刚保存的条目进行连接：
+
+![18](images/18.png)
+
+之后会弹出一个新的窗口，在那里输入我们之前设定的密码:
+
+![19](images/19.png)
+
+之后打开我们挂载的 `workspace` 文件夹，这里会再次要求我们输入密码：
+
+![20](images/20.png)
+
+选择信任：
+
+![21](images/21.png)
+
+这里我在远程安装了如下插件方便我的开发：
+
+![22](images/22.png)
+
+![23](images/23.png)
+
+
+
+![23](images/24.png)
+
+之后打开命令行（快捷键 `Shift+Ctrl+~`)下载 limo 的 ROS2 镜像：
+
+```shell
+$ git clone https://ghproxy.com/https://github.com/agilexrobotics/limo_ros2.git src
+```
+
+打开我们本地的开发环境（根据上文所讲，使用的是 https://github.com/athackst/vscode_ros2_workspace 的模板，并开启了 GPU 加速）
+
+
