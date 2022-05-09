@@ -252,9 +252,9 @@ $ rosdepc init && rosdepc update
 
 ```shell
 $ apt install openssh-server systemctl udev swig # 分别为 远程连接组件 服务控制组件 驱动控制组件 雷达驱动组件
-$ systemctl start ssh
+$ service  ssh start
 $ echo -e "Port 10022\nPermitRootLogin yes\nPermitEmptyPasswords yes" >> /etc/ssh/sshd_config.d/dev.conf
-$ systemctl enable ssh && systemctl restart ssh
+$ service ssh restart
 ```
 
 > 重要！：如果容器重启后 ssh 无法连接请重新在容器中运行 ``service ssh start``
@@ -346,12 +346,11 @@ f_optvalue = 12.f;
 f_optvalue = 8.f;
 ```
 
-安装必要的支持库并编译：
+安装必要的支持库并编译（当前目录`/workspace`）：
 
 ```shell
-$ cd src
 $ rosdepc install --from-paths src --ignore-src -r -y
-$colcon build --symlink-install # 使用符号链接节省空间，如果要删除源码，则使用 --merge-install
+$ colcon build --symlink-install # 使用符号链接节省空间，如果要删除源码，则使用 --merge-install
 ```
 
 ![25](images/25.png)
