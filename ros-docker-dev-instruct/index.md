@@ -31,7 +31,7 @@ Docker 官方镜像服务器上有很多的 ROS 开发镜像，这里我们可�
 
 ![image-20220506114202505](images/3.png)
 
-![4](images/4.png)98
+![4](images/4.png)
 
 > althack 提供了 VSCode 的开发工作环境模板：https://github.com/athackst/vscode_ros2_workspace
 >
@@ -214,7 +214,7 @@ python 同理：
 
 ## 7. 远程开发实战
 
-本节我们将运用上面所讲的知识，在松灵机器人 LIMO 上使用 docker 进行开发！
+本节我们将运用上面所讲的知识，在松灵 LIMO 上使用 docker 进行开发！
 
 首先运行 docker 环境（ docker 在默认系统中已经安装，这里我们不使用图形界面，不需要开启显卡支持）
 
@@ -331,7 +331,7 @@ $ cd .. && rm -r YDLidar-SDK # 删除 SDK 源码防止影响之后构建
 
 > 请注意命令中 `.` 与 `..` 的区别不要敲错了
 
-下载 limo 的 ROS2 镜像（当前目录 `/workspace`）：
+下载 LIMO 的 ROS2 镜像（当前目录 `/workspace`）：
 
 ```shell
 $ git clone --recursive https://ghproxy.com/https://github.com/agilexrobotics/limo_ros2.git src # 使用了ghproxy.com 加速
@@ -384,7 +384,7 @@ $ rviz2
 
 ![27](images/27.png)
 
-即可看到 limo 远程发来的雷达信息：
+即可看到 LIMO 远程发来的雷达信息：
 
 ![24](images/24.png)
 
