@@ -79,7 +79,7 @@ ARG WORKSPACE
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 ```
 
-如果需要 GPU 支持（需要安装 nvidia-docker [ https://anthonysun256.github.io/docker_with_nvidia/ ] ）（Jetson 平台不要用这个指导！！请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 `sudo install nvidia-docker2` （使用 l42 的源）则在上述脚本之后追加如下指令：
+如果需要 GPU 支持（需要安装 nvidia-docker [  https://anthonysun256.github.io/docker_with_nvidia/  ] ）（Jetson 平台不要用这个指导！！请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 `sudo install nvidia-docker2` （使用 l4t2 的源）则在上述脚本之后追加如下指令：
 
 ```dockerfile
 RUN apt-get update \
@@ -114,7 +114,7 @@ ENV QT_X11_NO_MITSHM=1
         }
     },
     "remoteUser": "ros",
-    "runArgs": [
+    "runA虽然模板是 ROS2 但是只要简单修改 Dockerfile 中引用的镜像名称即可改成 ROS1 环境rgs": [
         "--network=host",
         "--cap-add=SYS_PTRACE",
         "--cap-add=SYS_RAWIO",
@@ -214,7 +214,7 @@ python 同理：
 
 ## 7. 远程开发实战
 
-本节我们将运用上面所讲的知识，在松灵极其人 limo 套件上使用 docker 进行远程开发！
+本节我们将运用上面所讲的知识，在松灵机器人的 limo 套件上使用 docker 进行远程开发！
 
 首先运行docker 环境（docker 在默认系统中已经安装，这里我们不使用图形界面，不需要开启显卡支持）
 
@@ -388,7 +388,7 @@ $ rviz2
 
 ![24](images/24.png)
 
-至此，我们便掌握了机器人远程开发的基础操作！熟悉这种方法可以极大的提升我们工作效率，降低机器人开发复杂度。
+至此，我们便掌握了机器人远程开发的基础操作！熟悉这种方法可以极大的提升我们工作效率，降低机器人开发复杂度。并且您也可以将刚才的开发环境提交到 Docker 的服务器之上或者输出成压缩包供他人使用，让我们能够快速大批量的部署完全相同的开发环境！
 
 最后，感谢您的阅读！如果您喜欢本文请点赞分享，如有任何疑问请在官方仓库或者评论区进行提问。
 
