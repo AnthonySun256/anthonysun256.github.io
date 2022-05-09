@@ -234,6 +234,12 @@ $ sed -i "s/packages.ros.org/repo.huaweicloud.com/g" /etc/apt/sources.list.d/ros
 $ apt update
 ```
 
+设置一下自动 source
+
+```shell
+$ echo "source /opt/ros/foxy/setup.bash" >> /etc/bash.bashrc
+```
+
 安装 `rosdepc` 提升 `rosdep` 下载速度（注意这俩不是一个东西，多了个 `c`）：
 
 ```shell
@@ -245,21 +251,19 @@ $ rosdepc init && rosdepc update
 安装远程开发必备组件：
 
 ```shell
-$ apt install openssh-server systemctl udev
+$ apt install openssh-server systemctl udev swig # 分别为 远程连接组件 服务控制组件 驱动控制组件 雷达驱动组件
 $ systemctl start ssh
 $ echo -e "Port 10022\nPermitRootLogin yes\nPermitEmptyPasswords yes" >> /etc/ssh/sshd_config.d/dev.conf
 $ systemctl enable ssh && systemctl restart ssh
 ```
 
-> 如果容器重启后 ssh 无法连接请重新在容器中运行 ``systemctl start ssh``
+> 重要！：如果容器重启后 ssh 无法连接请重新在容器中运行 ``service ssh start``
 
 设定密码：
 
 ```shell
 $ passwd # 之后输入新的密码（在这个过程中不会显示文字，输入完成按回车即可）
 ```
-
-
 
 之后我们离开镜像，保证我们的小车和电脑在同一个局域网中，在本地电脑中打开 VSCode 使用 Remote ssh 插件连接镜像：
 
@@ -271,13 +275,15 @@ $ passwd # 之后输入新的密码（在这个过程中不会显示文字，输
 
 ![16](images/16.png)
 
-Host 名称自定义，HostName 是 limo 在局域网中的 ip，Port 是 ssh-server 连接的端口，用户是 root
+`Host` 名称自定义，`HostName` 是 limo 在局域网中的 ip，`Port` 是 ssh-server 连接的端口，用户是 root
 
 保存退出。
 
 ![17](images/17.png)
 
-重新打开 `哦年呢题材他Connect to Host` 选项，选择我们刚刚保存的条目进行连接：
+> 如果大家不想使用 root 登陆请注意自定义用户组的权限，不然可能无法访问硬件（如雷达等）
+
+重新打开 `Connect to Host` 选项，选择我们刚刚保存的条目进行连接：
 
 ![18](images/18.png)
 
@@ -301,14 +307,83 @@ Host 名称自定义，HostName 是 limo 在局域网中的 ip，Port 是 ssh-se
 
 
 
-![23](images/24.png)
 
-之后打开命令行（快捷键 `Shift+Ctrl+~`)下载 limo 的 ROS2 镜像：
+
+之后打开命令行（快捷键 `Shift+Ctrl+~`)下载 ydlidar 的驱动并编译安装（当前目录 `/workspace`）
 
 ```shell
-$ git clone https://ghproxy.com/https://github.com/agilexrobotics/limo_ros2.git src
+$ git clone https://ghproxy.com/https://github.com/YDLIDAR/YDLidar-SDK.git # 使用了ghproxy.com 加速
+$ mkdir -p YDLidar-SDK/build
+$ cd YDLidar-SDK/build
+$ cmake ..
+$ make
+$ make install # 安装 C/C++ 支持
+$ cd ..
+$ pip install . # 安装 py 支持
+$ cd .. && rm -r YDLidar-SDK # 删除 SDK 源码防止影响之后构建
 ```
 
-打开我们本地的开发环境（根据上文所讲，使用的是 https://github.com/athackst/vscode_ros2_workspace 的模板，并开启了 GPU 加速）
+> 请注意命令中 `.` 与 `..` 的区别不要敲错了
 
+下载 limo 的 ROS2 镜像（当前目录 `/workspace`）：
+
+```shell
+$ git clone --recursive https://ghproxy.com/https://github.com/agilexrobotics/limo_ros2.git src # 使用了ghproxy.com 加速
+```
+
+修改 `/workspace/src/ydlidar_ros2/src/ydlidar_ros2_driver_node.cpp` 中源码参数：
+
+```c++
+# 61 行
+int optval = 115200;
+# 76 行
+optval = 3;
+# 108 行
+b_optvalue = true;
+# 134 行
+f_optvalue = 12.f;
+# 143 行
+f_optvalue = 8.f;
+```
+
+安装必要的支持库并编译：
+
+```shell
+$ cd src
+$ rosdepc install --from-paths src --ignore-src -r -y
+$colcon build --symlink-install # 使用符号链接节省空间，如果要删除源码，则使用 --merge-install
+```
+
+![25](images/25.png)
+
+会发现有一些标准错误输出，是正常的，不需要管。
+
+之后 `source` 安装并启动雷达节点
+
+```shell
+$ source install/setup.bash
+$ ros2 launch limo_bringup limo_start.launch.py
+```
+
+然后在我们本地的电脑上打开我们本地的开发环境（也是在 Docker 中，根据上文所讲，使用的是 https://github.com/athackst/vscode_ros2_workspace 的模板）
+
+在本地开发环境的终端中启动 rviz:
+
+```shell
+$ rviz2
+```
+
+然后订阅雷达节点，按照图示进行配置
+
+![26](images/26.png)
+
+![27](images/27.png)
+
+即可看到 limo 远程发来的雷达信息：
+
+![24](images/24.png)
+
+至此，我们便掌握了机器人远程开发的基础操作！熟悉这种方法可以极大的提升我们工作效率，降低机器人开发复杂度。
+
+最后，感谢您的阅读！如果您喜欢本文请点赞分享，如有任何疑问请在官方仓库或者评论区进行提问。
 
