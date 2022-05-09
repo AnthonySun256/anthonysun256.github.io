@@ -4,24 +4,28 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>一步到位解决开发环境一致性问题 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
-<meta name=description content="在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
-<meta name=keywords content="极客,开发"><meta itemprop=name content="一步到位解决开发环境一致性问题">
-<meta itemprop=description content="在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发"><meta itemprop=datePublished content="2022-05-06T01:57:10+00:00">
-<meta itemprop=dateModified content="2022-05-09T06:03:00+00:00">
-<meta itemprop=wordCount content="3262"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
-<meta itemprop=keywords content><meta property="og:title" content="一步到位解决开发环境一致性问题">
-<meta property="og:description" content="在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
+<title>在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发 - Anthony's Blog</title><meta name=author content="Anthony: https://anthonysun256.github.io">
+<meta name=description content="截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。
+此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
+<meta name=keywords content="极客,开发"><meta itemprop=name content="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发">
+<meta itemprop=description content="截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。
+此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发"><meta itemprop=datePublished content="2022-05-06T01:57:10+00:00">
+<meta itemprop=dateModified content="2022-05-09T06:25:07+00:00">
+<meta itemprop=wordCount content="3495"><meta itemprop=image content="https://anthonysun256.github.io/logo.png">
+<meta itemprop=keywords content><meta property="og:title" content="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发">
+<meta property="og:description" content="截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。
+此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://anthonysun256.github.io/ros-docker-dev-instruct/"><meta property="og:image" content="https://anthonysun256.github.io/logo.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-05-06T01:57:10+00:00">
-<meta property="article:modified_time" content="2022-05-09T06:03:00+00:00">
+<meta property="article:modified_time" content="2022-05-09T06:25:07+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://anthonysun256.github.io/logo.png">
-<meta name=twitter:title content="一步到位解决开发环境一致性问题">
-<meta name=twitter:description content="在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
+<meta name=twitter:title content="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发">
+<meta name=twitter:description content="截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。
+此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，尤其是一台电脑上需要做多种任务的情况（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发">
 <meta name=application-name content="Anthony's blog">
-<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/ros-docker-dev-instruct/><link rel=prev href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.77404aa50bdc968c26098e2498be1ac46b23bfa8081babe46b883d24208df795.css integrity="sha256-d0BKpQvclowmCY4kmL4axGsjv6gIG6vka4g9JCCN95U="><link rel=stylesheet href=/css/style.min.e36432078f1a625594fcbcb0059424858a7468d619cbf8f907f57df788b0a078.css integrity="sha256-42QyB48aYlWU/LywBZQkhYp0aNYZy/j5B/V994iwoHg="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css integrity="sha256-X7rrn44l1+AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"一步到位解决开发环境一致性问题","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/ros-docker-dev-instruct\/"},"genre":"posts","wordcount":3262,"url":"https:\/\/anthonysun256.github.io\/ros-docker-dev-instruct\/","datePublished":"2022-05-06T01:57:10+00:00","dateModified":"2022-05-09T06:03:00+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
+<meta name=apple-mobile-web-app-title content="Anthony's blog"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel=canonical href=https://anthonysun256.github.io/ros-docker-dev-instruct/><link rel=prev href=https://anthonysun256.github.io/my_ros_env/><link rel=stylesheet href=/lib/normalize/normalize.min.77404aa50bdc968c26098e2498be1ac46b23bfa8081babe46b883d24208df795.css integrity="sha256-d0BKpQvclowmCY4kmL4axGsjv6gIG6vka4g9JCCN95U="><link rel=stylesheet href=/css/style.min.e36432078f1a625594fcbcb0059424858a7468d619cbf8f907f57df788b0a078.css integrity="sha256-42QyB48aYlWU/LywBZQkhYp0aNYZy/j5B/V994iwoHg="><link rel=stylesheet href=/lib/fontawesome-free/all.min.14cbd9b866a9b092e3a2e03a93b128da5baca005fd8b44a1956146eaab7b48b7.css integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc="><link rel=stylesheet href=/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css integrity="sha256-X7rrn44l1+AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/anthonysun256.github.io\/ros-docker-dev-instruct\/"},"genre":"posts","wordcount":3495,"url":"https:\/\/anthonysun256.github.io\/ros-docker-dev-instruct\/","datePublished":"2022-05-06T01:57:10+00:00","dateModified":"2022-05-09T06:25:07+00:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"Anthony"},"author":{"@type":"Person","name":"Anthony"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -91,12 +95,12 @@
 <div class=toc-content id=toc-content-auto></div></aside>
 <aside class=aside-custom>
 </aside>
-<article class="page single"><h1 class="single-title animate__animated animate__flipInX">一步到位解决开发环境一致性问题</h1><h2 class=single-subtitle>使用 docker 进行跨平台 ROS 开发"</h2><div class=post-meta>
+<article class="page single"><h1 class="single-title animate__animated animate__flipInX">在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发</h1><h2 class=single-subtitle>“解决 Jetson 平台 ROS2 开发问题"</h2><div class=post-meta>
 <div class=post-meta-line><span class=post-author><a href=https://anthonysun256.github.io title=作者 target=_blank rel="external nofollow noopener noreffer author" class=author><img class="lazyload avatar" src=/svg/loading.min.svg data-src=/images/avatar.png data-srcset="/images/avatar.png, /images/avatar.png 1.5x, /images/avatar.png 2x" data-sizes=auto alt=Anthony title=Anthony>&nbsp;Anthony</a></span></div>
 <div class=post-meta-line><span title="2022-05-06 01:57:10">
 <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-05-06>2022-05-06</time>
-</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3262 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;<span id=/ros-docker-dev-instruct/ class=leancloud_visitors data-flag-title=一步到位解决开发环境一致性问题>
+</span>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3495 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;<span id=/ros-docker-dev-instruct/ class=leancloud_visitors data-flag-title="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发">
 <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count>-</span>&nbsp;次阅读
 </span>&nbsp;</div>
 </div><div class="details toc" id=toc-static kept=false>
@@ -119,7 +123,9 @@
 </li>
 </ul>
 </nav></div>
-</div><div class=content id=content><p>在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，<strong>尤其是一台电脑上需要做多种任务的情况</strong>（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发</p>
+</div><div class=content id=content><p>截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，<strong>让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境</strong>，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。</p>
+<p>此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，<strong>尤其是一台电脑上需要做多种任务的情况</strong>（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发</p>
+<p>本文分为两部分，<code>1-6</code>节讲解 使用 Docker+VSCode 开发方式，<code>7</code> 节将带领大家在 LIMO 平台进行实战</p>
 <p>无论您之前使用什么样的方式进行开发，笔者在这里都推荐您尝试 Docker + VSCode，虽然这可能需要两三个下午的时间进行学习，但请相信这一切都是值得的！</p>
 <blockquote>
 <p>如果您不会使用 docker 或者没有尝试过类似的操作，请您先阅读 《Docker 配合 VSC 开发最佳实践》(<a href=https://anthonysun256.github.io/docker-with-vsc_best-practice/ target=_blank rel="external nofollow noopener noreffer">https://anthonysun256.github.io/docker-with-vsc_best-practice/</a>)</p>
@@ -207,7 +213,7 @@
 </span><span class=err></span><span class=k>RUN</span> <span class=nb>echo</span> <span class=s2>&#34;if [ -f </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash ]; then source </span><span class=si>${</span><span class=nv>WORKSPACE</span><span class=si>}</span><span class=s2>/install/setup.bash; fi&#34;</span> &gt;&gt; /home/ros/.bashrc<span class=err>
 </span></code></pre></td></tr></table>
 </div>
-</div><p>如果需要 GPU 支持（需要安装 nvidia-docker [ https://anthonysun256.github.io/docker_with_nvidia/ ] 则在上述脚本之后追加如下指令：</p>
+</div><p>如果需要 GPU 支持（需要安装 nvidia-docker [ https://anthonysun256.github.io/docker_with_nvidia/ ] ）（Jetson 平台不要用这个指导！！请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 <code>sudo install nvidia-docker2</code> （使用 l42 的源）则在上述脚本之后追加如下指令：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -469,7 +475,7 @@ $ service ssh restart
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>重要！：如果容器重启后 ssh 无法连接请重新在容器中运行 <code>service ssh start</code></p>
+<p>重要！：容器重启后 ssh 会无法连接，请重新在容器中运行 <code>service ssh start</code></p>
 </blockquote>
 <p>设定密码：</p>
 <div class=highlight><div class=chroma>
@@ -610,18 +616,18 @@ $ ros2 launch limo_bringup limo_start.launch.py
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2022-05-09 06:03:00">更新于 2022-05-09</span>
+<span title="2022-05-09 06:25:07">更新于 2022-05-09</span>
 </div>
 <div class=post-info-license></div>
 </div>
 <div class=post-info-line>
 <div class=post-info-md></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title=一步到位解决开发环境一致性问题><i class="fab fa-twitter fa-fw"></i></a>
+<span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发"><i class="fab fa-twitter fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/><i class="fab fa-facebook-square fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title=一步到位解决开发环境一致性问题><i class="fab fa-hacker-news fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title=一步到位解决开发环境一致性问题><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a>
-<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title=一步到位解决开发环境一致性问题><i class="fab fa-weibo fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发"><i class="fab fa-hacker-news fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://anthonysun256.github.io/ros-docker-dev-instruct/ data-title="在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发"><i class="fab fa-weibo fa-fw"></i></a>
 </span>
 </div>
 </div>

@@ -1,9 +1,15 @@
-# 一步到位解决开发环境一致性问题
+# 在松灵 LIMO 开发套件上使用 Docker 进行 ROS2 远程开发
 
 
-在 ROS 开发过程中（尤其是在多人团队中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，**尤其是一台电脑上需要做多种任务的情况**（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发
+
+
+截至目前，Jetson Nano 平台官方仍不提供 Ubuntu 20.04 固件，所以使用 Jetson Nano 平台开发 ROS2 存在巨大的困难，但是好在 Docker 提供的容器技术，**让我们能非常方便的虚拟出一个 Ubuntu 20.04 环境进行 ROS2 开发并通过云端快速分享自己的开发环境**，本文我将以松灵 LIMO 机器人套件为例向大家演示如何使用 Docker 进行 ROS2 远程开发以及这种开发模式的优越性。
+
+此外，在 ROS 开发过程中（尤其是在多人团队协同中）你一定遇到过这样的问题：需要快速（在不同架构机器上）部署相同开发环境、别人电脑上可以编译但到了自己这里就会报错、无法复现别人的 Bug、经常会出现缺少支持库或者支持库冲突的情况，**尤其是一台电脑上需要做多种任务的情况**（比如 深度学习、QT 开发、ROS1、ROS2）则会更糟糕…… 这个时候我们就有必要使用 Docker 进行开发
 
 <!--more-->
+
+本文分为两部分，`1-6`节讲解 使用 Docker+VSCode 开发方式，`7` 节将带领大家在 LIMO 平台进行实战
 
 无论您之前使用什么样的方式进行开发，笔者在这里都推荐您尝试 Docker + VSCode，虽然这可能需要两三个下午的时间进行学习，但请相信这一切都是值得的！
 
@@ -73,7 +79,7 @@ ARG WORKSPACE
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 ```
 
-如果需要 GPU 支持（需要安装 nvidia-docker [ https://anthonysun256.github.io/docker_with_nvidia/ ] 则在上述脚本之后追加如下指令：
+如果需要 GPU 支持（需要安装 nvidia-docker [ https://anthonysun256.github.io/docker_with_nvidia/ ] ）（Jetson 平台不要用这个指导！！请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 `sudo install nvidia-docker2` （使用 l42 的源）则在上述脚本之后追加如下指令：
 
 ```dockerfile
 RUN apt-get update \
@@ -257,7 +263,7 @@ $ echo -e "Port 10022\nPermitRootLogin yes\nPermitEmptyPasswords yes" >> /etc/ss
 $ service ssh restart
 ```
 
-> 重要！：如果容器重启后 ssh 无法连接请重新在容器中运行 ``service ssh start``
+> 重要！：容器重启后 ssh 会无法连接，请重新在容器中运行 ``service ssh start``
 
 设定密码：
 
