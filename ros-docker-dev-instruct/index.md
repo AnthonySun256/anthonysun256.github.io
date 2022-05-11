@@ -79,7 +79,7 @@ ARG WORKSPACE
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 ```
 
-如果需要 GPU 支持（需要安装 nvidia-docker [  https://anthonysun256.github.io/docker_with_nvidia/  ] ）（Jetson 平台不要用这个指导！！请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 `sudo install nvidia-docker2` （使用 l4t2 的源）则在上述脚本之后追加如下指令：
+如果需要 GPU 支持（需要安装 nvidia-docker [  https://anthonysun256.github.io/docker_with_nvidia/  ] ）（**Jetson 平台不要用这个指导！！**请使用 Jetpack 套件固件自带的 nvidia-docker2 或者直接进行安装 `sudo install nvidia-docker2` （使用 l4t2 的源）则在上述脚本之后追加如下指令：
 
 ```dockerfile
 RUN apt-get update \
@@ -114,7 +114,7 @@ ENV QT_X11_NO_MITSHM=1
         }
     },
     "remoteUser": "ros",
-    "runA虽然模板是 ROS2 但是只要简单修改 Dockerfile 中引用的镜像名称即可改成 ROS1 环境rgs": [
+    "runArgs": [
         "--network=host",
         "--cap-add=SYS_PTRACE",
         "--cap-add=SYS_RAWIO",
