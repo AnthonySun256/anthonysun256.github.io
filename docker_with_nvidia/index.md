@@ -114,3 +114,8 @@ $ docker run --rm --runtime=nvidia \
 
 至此，在 Docker 中使用 nvidia 显卡的方法就介绍完毕了，如果您需要在 容器 中使用 Nvidia 相关支持库或者其他功能，则请参考官方文档。
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/docker_with_nvidia/

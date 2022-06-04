@@ -299,3 +299,8 @@ $ xhost +
 
 至此 Docker 配合 VSCode 开发的内容就讲解完毕了，如果大家觉得有哪里需要改进或者拓展的地方还请在评论区提出，我会及时回复.
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/docker-with-vsc_best-practice/

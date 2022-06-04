@@ -310,3 +310,8 @@ $ roslaunch scout_gazebo_sim  scout_mini_playpen.launch
 
 至此，便完成了添加传感器并进行仿真的全部流程，对于其他类型传感器，诸如 深度相机 激光雷达 imu 等，其添加方法一样方便，唯一不同点在我们编写的函数中 `sensor_config` 与 `sensor_plugin_config` 块中对于不同传感器的配置，简单修改即可适配不同传感器。
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/scout_mini_sim/

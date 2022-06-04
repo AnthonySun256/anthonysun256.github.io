@@ -18,3 +18,8 @@
 >
 >    3. 那些不尊重他人劳动成果，转载不加出处的，或恶意行为的网站，还请您不要来进行交换了。
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/friends/

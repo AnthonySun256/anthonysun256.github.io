@@ -392,3 +392,8 @@ $ rviz2
 
 最后，感谢您的阅读！如果您喜欢本文请点赞分享，如有任何疑问请在官方仓库或者评论区进行提问。
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/ros-docker-dev-instruct/

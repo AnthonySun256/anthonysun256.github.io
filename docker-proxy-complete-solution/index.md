@@ -210,3 +210,8 @@ $ export https_proxy="https://172.17.0.1:7890"
 ## 结语
 
 以上就是配置 Docker 容器代理的全部方法，经过实践真实可用
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/docker-proxy-complete-solution/

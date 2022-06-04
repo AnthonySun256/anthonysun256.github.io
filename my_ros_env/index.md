@@ -146,3 +146,8 @@ $ xhost +
 之后再运行类似 `Gazebo` 等图形程序，其界面就会直接在我们的宿主机中显示出来。
 
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/my_ros_env/

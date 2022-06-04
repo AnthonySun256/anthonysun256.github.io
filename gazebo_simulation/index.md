@@ -165,3 +165,8 @@ $ roslaunch limo_bringup limo_navigation_ackerman.launch # 阿卡曼模式
 
 至此，关于 ``limo`` 的仿真教程就结束了，如果您有任何疑问或者问题，欢迎在官方课程仓库提出 `issu`。
 
+
+---
+
+> 作者: Anthony  
+> https://anthonysun256.github.io/gazebo_simulation/
