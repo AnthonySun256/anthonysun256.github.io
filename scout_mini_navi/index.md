@@ -1,4 +1,4 @@
-# Scout_mini_navi
+# Scout mini 建图导航仿真指南
 
 
 在之前的文章中我们介绍了如何在 Gazebo 中仿真 scout mini 以及如何添加自定义传感器，本章笔者将带领大家进行 scout mini 的建图与导航仿真。本文首先带领大家运行已配置好的仿真例程，然后为大家介绍所用的 Gazebo 插件和 ROS 库以及其配置过程。
@@ -13,7 +13,7 @@
 
 下载教程素材：
 
-> 素材地址：https://gitee.com/agent-explorer/robotics/scout_mini_navigation
+> 素材地址：https://gitee.com/agent-explorer/robotics/tree/master/scout_mini_navigation
 
 进入 ``scout_mini_navigation`` 目录。确保 `ROS-melodic` 已经配置成功后运行 `setup.sh` 脚本会自动安装相关环境。之后即可正常编译与运行：
 
@@ -235,7 +235,7 @@ occupied_thresh: 0.65 # 占用概率大于此阈值的像素被认为是完全�
 free_thresh: 0.196 # 用概率小于此阈值的像素被认为是自由的
 ```
 
-当作为 `map_server` 使用时创建爱你一个 `map_server` 节点，利用从磁盘读取的地图数据提供 ROS 服务。`map_server` 的当前实现将MAP 图像数据中的颜色值转换为三元占用值：Free（0），占用（100）和未知（-1）。
+当作为 `map_server` 使用时创建一个 `map_server` 节点，利用从磁盘读取的地图数据提供 ROS 服务。`map_server` 的当前实现将MAP 图像数据中的颜色值转换为三元占用值：Free（0），占用（100）和未知（-1）。
 
 一个简单的 launch 例子如下：
 
